@@ -58,7 +58,7 @@ public class HoaDonForm extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1190, 850));
+        setPreferredSize(new java.awt.Dimension(1110, 850));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 153, 153));
@@ -72,15 +72,15 @@ public class HoaDonForm extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(152, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("HÓA ĐƠN");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 362, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 1010, -1));
 
         jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1100, 14));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1010, 14));
 
         jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 1100, 17));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 1010, 17));
 
         jButton16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_detail.png"))); // NOI18N
@@ -90,7 +90,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 jButton16ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, 170, 41));
+        jPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, 170, 41));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
@@ -104,7 +104,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 cbxLuachon1ActionPerformed(evt);
             }
         });
-        jPanel4.add(cbxLuachon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 130, 40));
+        jPanel4.add(cbxLuachon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 150, 40));
 
         txtSearch1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSearch1.addInputMethodListener(new java.awt.event.InputMethodListener() {
@@ -132,7 +132,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 txtSearch1KeyReleased(evt);
             }
         });
-        jPanel4.add(txtSearch1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 340, 40));
+        jPanel4.add(txtSearch1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 300, 40));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -140,9 +140,9 @@ public class HoaDonForm extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 40, 40));
+        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 40, 40));
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 592, 90));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 570, 90));
 
         jButton17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_xls.png"))); // NOI18N
@@ -152,7 +152,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 jButton17ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 160, 170, 41));
+        jPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 160, 170, 41));
 
         jButton18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_update.png"))); // NOI18N
@@ -163,7 +163,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 jButton18ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 100, 170, 41));
+        jPanel2.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 170, 41));
 
         jButton19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
@@ -173,7 +173,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 jButton19ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, 170, 41));
+        jPanel2.add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 170, 41));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,7 +188,7 @@ public class HoaDonForm extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1100, 480));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1010, 480));
 
         jTabbedPane1.addTab("Hóa đơn", jPanel2);
 
@@ -199,15 +199,15 @@ public class HoaDonForm extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(152, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("HÓA ĐƠN PHẠT");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 28, 362, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 1010, -1));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 75, 1100, 14));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1010, 14));
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 1100, 17));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 1010, 17));
 
         jButton10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_add.png"))); // NOI18N
@@ -217,7 +217,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 135, 41));
+        jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 120, 41));
 
         jButton11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_detail.png"))); // NOI18N
@@ -227,7 +227,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, 174, 41));
+        jPanel1.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 174, 41));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
@@ -269,7 +269,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 txtSearchKeyReleased(evt);
             }
         });
-        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 340, 40));
+        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 300, 40));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -277,9 +277,9 @@ public class HoaDonForm extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 40, 40));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 40, 40));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 610, 90));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 570, 90));
 
         jButton12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_xls.png"))); // NOI18N
@@ -289,7 +289,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 jButton12ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 160, 173, 41));
+        jPanel1.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 173, 41));
 
         jButton13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_update.png"))); // NOI18N
@@ -300,7 +300,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 jButton13ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 100, 135, 41));
+        jPanel1.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 120, 41));
 
         jButton14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
@@ -310,7 +310,7 @@ public class HoaDonForm extends javax.swing.JFrame {
                 jButton14ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, 135, 41));
+        jPanel1.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 100, 120, 41));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -325,7 +325,7 @@ public class HoaDonForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1100, 480));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1010, 480));
 
         jTabbedPane1.addTab("Hóa đơn phạt", jPanel1);
 

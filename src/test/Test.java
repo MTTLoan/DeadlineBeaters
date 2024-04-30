@@ -9,5 +9,7 @@ package test;
  * @author ASUS
  */
 public class Test {
-    
+    public static void main(String[] args) {
+        
+    }
 }
