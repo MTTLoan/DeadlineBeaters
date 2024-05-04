@@ -15,6 +15,7 @@ public class HoaDonForm extends javax.swing.JPanel {
      */
     public HoaDonForm() {
         initComponents();
+        setVisible(true);
     }
 
     /**

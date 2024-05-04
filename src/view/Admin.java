@@ -4,7 +4,11 @@
  */
 package view;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import model.TaiKhoan;
 /**
@@ -49,6 +53,11 @@ public class Admin extends javax.swing.JFrame {
     public TaiKhoan getCurrentAcc() {
         return currentAcc;
     }
+    
+    public void setCurrentAcc(TaiKhoan currentAcc) {
+        this.currentAcc = currentAcc;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,8 +92,12 @@ public class Admin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(1460, 850));
-        setPreferredSize(new java.awt.Dimension(1440, 820));
+        setMinimumSize(new java.awt.Dimension(1380, 850));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         NavbarMenu.setBackground(new java.awt.Color(152, 0, 0));
@@ -115,7 +128,7 @@ public class Admin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -190,7 +203,7 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(DatXeLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         DatXeLayout.setVerticalGroup(
             DatXeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +310,7 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(HoaDonLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         HoaDonLayout.setVerticalGroup(
             HoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +345,7 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(HopDongLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         HopDongLayout.setVerticalGroup(
             HopDongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,7 +381,7 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(DanhGiaLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         DanhGiaLayout.setVerticalGroup(
             DanhGiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,7 +417,7 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(ThongKeLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         ThongKeLayout.setVerticalGroup(
             ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,19 +432,20 @@ public class Admin extends javax.swing.JFrame {
         getContentPane().add(NavbarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         MainContent.setBackground(new java.awt.Color(255, 255, 255));
+        MainContent.setPreferredSize(new java.awt.Dimension(1100, 820));
 
         javax.swing.GroupLayout MainContentLayout = new javax.swing.GroupLayout(MainContent);
         MainContent.setLayout(MainContentLayout);
         MainContentLayout.setHorizontalGroup(
             MainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1180, Short.MAX_VALUE)
+            .addGap(0, 1100, Short.MAX_VALUE)
         );
         MainContentLayout.setVerticalGroup(
             MainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 820, Short.MAX_VALUE)
         );
 
-        getContentPane().add(MainContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 1180, 820));
+        getContentPane().add(MainContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 1100, 820));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -522,50 +536,98 @@ public class Admin extends javax.swing.JFrame {
 
     private void DangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DangXuatMousePressed
         // TODO add your handling code here:
-        DatXe.setBackground(DefaultColor);
-        HoaDon.setBackground(DefaultColor);
-        HopDong.setBackground(DefaultColor);
-        DanhGia.setBackground(DefaultColor);
-        ThongKe.setBackground(DefaultColor);
-        TaiKhoan.setBackground(DefaultColor);
-        ThongTin.setBackground(DefaultColor);
-        DangXuat.setBackground(ClickedColor);
+        
     }//GEN-LAST:event_DangXuatMousePressed
 
     private void DatXeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DatXeMouseClicked
         // TODO add your handling code here:
         MainContent.removeAll();
         DatXeForm dx = new DatXeForm();
+        MainContent.setLayout(new BorderLayout());
         MainContent.add(dx).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
     }//GEN-LAST:event_DatXeMouseClicked
 
     private void HoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonMouseClicked
         // TODO add your handling code here:
+        MainContent.removeAll();
+        HoaDonForm hd = new HoaDonForm();
+        MainContent.add(hd).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
     }//GEN-LAST:event_HoaDonMouseClicked
 
     private void HopDongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HopDongMouseClicked
         // TODO add your handling code here:
+        MainContent.removeAll();
+        HopDongForm hd = new HopDongForm();
+        MainContent.add(hd).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
     }//GEN-LAST:event_HopDongMouseClicked
 
     private void DanhGiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DanhGiaMouseClicked
         // TODO add your handling code here:
+        MainContent.removeAll();
+        DanhGiaForm dg = new DanhGiaForm();
+        MainContent.add(dg).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
     }//GEN-LAST:event_DanhGiaMouseClicked
 
     private void ThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThongKeMouseClicked
         // TODO add your handling code here:
+        MainContent.removeAll();
+        ThongKeForm tk = new ThongKeForm();
+        MainContent.add(tk).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
     }//GEN-LAST:event_ThongKeMouseClicked
 
     private void TaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TaiKhoanMouseClicked
         // TODO add your handling code here:
+        MainContent.removeAll();
+        TaiKhoanForm tk = new TaiKhoanForm();
+        MainContent.add(tk).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
     }//GEN-LAST:event_TaiKhoanMouseClicked
 
     private void ThongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThongTinMouseClicked
         // TODO add your handling code here:
+        MainContent.removeAll();
+        ThongTinTKForm tt = new ThongTinTKForm();
+        MainContent.add(tt).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
     }//GEN-LAST:event_ThongTinMouseClicked
 
     private void DangXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DangXuatMouseClicked
         // TODO add your handling code here:
+        int relly = JOptionPane.showConfirmDialog(
+                null,
+                "Bạn muốn thoát khỏi chương trình ?",
+                "Xác nhận",
+                JOptionPane.YES_NO_OPTION);
+        if (relly == JOptionPane.YES_OPTION) {
+            this.dispose();
+            DangNhapFrom a = new DangNhapFrom();
+            a.setVisible(true);
+        } else {
+            DangXuat.setBackground(DefaultColor);
+        }
     }//GEN-LAST:event_DangXuatMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        int resp = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn thoát ?", "Exit?", JOptionPane.YES_NO_OPTION);
+        if (resp == JOptionPane.YES_OPTION) {
+            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        } else {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -577,32 +639,22 @@ public class Admin extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel( new FlatLightLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
         }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Admin().setVisible(true);
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DangXuat;
     private javax.swing.JPanel DanhGia;
