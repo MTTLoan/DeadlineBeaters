@@ -65,6 +65,7 @@ public class ThongKeForm extends javax.swing.JPanel {
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 153, 153));
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+        jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTabbedPane1.setMinimumSize(new java.awt.Dimension(1100, 745));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
