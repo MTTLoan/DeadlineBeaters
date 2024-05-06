@@ -29,10 +29,12 @@ public class Admin extends javax.swing.JFrame {
         UIManager.put("Table.showHorizontalLines", true);
         initComponents();
         setLocationRelativeTo(null);
-        DatXeForm dx = new DatXeForm();
-        MainContent.add(dx).setVisible(true);
         DefaultColor = new Color(152, 0, 0);
         ClickedColor = new Color(27,121, 30);
+        DatXeForm dx = new DatXeForm();
+        MainContent.add(dx).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
         DatXe.setBackground(ClickedColor);
     }
     
@@ -47,6 +49,8 @@ public class Admin extends javax.swing.JFrame {
         ClickedColor = new Color(27,121, 30);
         DatXeForm dx = new DatXeForm();
         MainContent.add(dx).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
         DatXe.setBackground(ClickedColor);
     }
     

@@ -51,6 +51,8 @@ public class ThongTinTKForm extends javax.swing.JPanel {
         jSeparator4 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(1100, 820));
+        setPreferredSize(new java.awt.Dimension(1100, 820));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));

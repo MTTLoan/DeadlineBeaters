@@ -26,21 +26,349 @@ public class DatXeForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3 = new javax.swing.JPanel();
+        cbxlLuaChon = new javax.swing.JComboBox<>();
+        txtSearchForm = new javax.swing.JTextField();
+        btnReset = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
-        );
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1100, 820));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cbxlLuaChon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbxlLuaChon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã xe", "Tên xe", "Loại xe", "Đơn giá" }));
+        jPanel3.add(cbxlLuaChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 90, 40));
+
+        txtSearchForm.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSearchForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchFormActionPerformed(evt);
+            }
+        });
+        txtSearchForm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchFormKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchFormKeyReleased(evt);
+            }
+        });
+        jPanel3.add(txtSearchForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 300, 40));
+
+        btnReset.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 40, 40));
+
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 520, 90));
+
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã xe", "Tên xe", "Loại xe", "Đơn giá"
+            }
+        ));
+        jTable1.setRowHeight(30);
+        jScrollPane1.setViewportView(jTable1);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 520, 630));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Mã HD:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 60, 30));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Chú thích:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, 70, 30));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Ngày trả:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 260, 80, 30));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Giờ nhận:");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, -1, 30));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("Ngày nhận:");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 220, 80, 30));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setText("Người tạo:");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 70, 30));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setText("Giờ trả:");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 60, 30));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Mã xe", "Đơn giá", "Số giờ", "Số tiền"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 380, 460, 290));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(152, 0, 0));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("HÓA ĐƠN");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 460, -1));
+
+        jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 460, 10));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel11.setText("Tiền cọc:");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 680, 70, 30));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel12.setText("Tổng tiền:");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 680, 80, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("0đ");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 680, 120, 30));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("0đ");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 680, 120, 30));
+
+        jButton1.setBackground(new java.awt.Color(27, 121, 30));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText(" Thanh toán");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 730, 140, 40));
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
+        jButton2.setText(" Xóa xe");
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 730, 130, 40));
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_print.png"))); // NOI18N
+        jButton3.setText(" In hóa đơn");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 730, -1, 40));
+
+        jTextField2.setEditable(false);
+        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 360, 30));
+
+        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 220, 90, 30));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane3.setViewportView(jTextArea1);
+
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 360, 60));
+
+        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+        add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 180, 360, 30));
+
+        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 220, 170, 30));
+
+        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, 170, 30));
+
+        jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, 90, 30));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel13.setText("Mã KH:");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 60, 30));
+
+        jTextField8.setEditable(false);
+        jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
+        add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 360, 30));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtSearchFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchFormActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchFormActionPerformed
+
+    private void txtSearchFormKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchFormKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchFormKeyPressed
+
+    private void txtSearchFormKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchFormKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchFormKeyReleased
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReset;
+    private javax.swing.JComboBox<String> cbxlLuaChon;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField txtSearchForm;
     // End of variables declaration//GEN-END:variables
 }
