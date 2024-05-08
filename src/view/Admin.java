@@ -31,11 +31,8 @@ public class Admin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         DefaultColor = new Color(152, 0, 0);
         ClickedColor = new Color(27,121, 30);
-        DatXeForm dx = new DatXeForm();
-        MainContent.add(dx).setVisible(true);
         MainContent.validate();
         MainContent.repaint();
-        DatXe.setBackground(ClickedColor);
     }
     
     public Admin(TaiKhoan t) {
@@ -47,11 +44,8 @@ public class Admin extends javax.swing.JFrame {
         this.currentAcc = t;
         DefaultColor = new Color(152, 0, 0);
         ClickedColor = new Color(27,121, 30);
-        DatXeForm dx = new DatXeForm();
-        MainContent.add(dx).setVisible(true);
         MainContent.validate();
         MainContent.repaint();
-        DatXe.setBackground(ClickedColor);
     }
     
     public TaiKhoan getCurrentAcc() {
@@ -86,8 +80,6 @@ public class Admin extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         HoaDon = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        HopDong = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
         DanhGia = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         ThongKe = new javax.swing.JPanel();
@@ -116,7 +108,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logo.png"))); // NOI18N
         jLabel1.setText("jLabel1");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 22)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("GOGO WHEELS ");
 
@@ -162,7 +154,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_add_account.png"))); // NOI18N
         jLabel4.setText(" TÀI KHOẢN");
@@ -173,8 +165,8 @@ public class Admin extends javax.swing.JFrame {
             TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TaiKhoanLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel4)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         TaiKhoanLayout.setVerticalGroup(
             TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +176,7 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        NavbarMenu.add(TaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 531, 250, -1));
+        NavbarMenu.add(TaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 250, -1));
 
         DatXe.setBackground(new java.awt.Color(152, 0, 0));
         DatXe.setPreferredSize(new java.awt.Dimension(0, 54));
@@ -197,7 +189,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/checkout.png"))); // NOI18N
         jLabel5.setText(" ĐẶT XE");
@@ -216,10 +208,10 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(DatXeLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel5)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        NavbarMenu.add(DatXe, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 171, 250, 60));
+        NavbarMenu.add(DatXe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 250, 60));
 
         DangXuat.setBackground(new java.awt.Color(152, 0, 0));
         DangXuat.setPreferredSize(new java.awt.Dimension(88, 62));
@@ -232,7 +224,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_logout.png"))); // NOI18N
         jLabel12.setText("ĐĂNG XUẤT");
@@ -241,20 +233,20 @@ public class Admin extends javax.swing.JFrame {
         DangXuat.setLayout(DangXuatLayout);
         DangXuatLayout.setHorizontalGroup(
             DangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DangXuatLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DangXuatLayout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
         DangXuatLayout.setVerticalGroup(
             DangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DangXuatLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(DangXuatLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addComponent(jLabel12)
-                .addContainerGap())
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        NavbarMenu.add(DangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 742, 240, 38));
+        NavbarMenu.add(DangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 720, 250, 60));
 
         ThongTin.setBackground(new java.awt.Color(152, 0, 0));
         ThongTin.setPreferredSize(new java.awt.Dimension(88, 62));
@@ -268,7 +260,7 @@ public class Admin extends javax.swing.JFrame {
         });
 
         jLabel11.setBackground(new java.awt.Color(152, 0, 0));
-        jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_account_1.png"))); // NOI18N
         jLabel11.setText(" THÔNG TIN");
@@ -279,18 +271,18 @@ public class Admin extends javax.swing.JFrame {
             ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThongTinLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         ThongTinLayout.setVerticalGroup(
             ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThongTinLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addComponent(jLabel11)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        NavbarMenu.add(ThongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 696, 240, 40));
+        NavbarMenu.add(ThongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 250, 60));
 
         HoaDon.setBackground(new java.awt.Color(152, 0, 0));
         HoaDon.setPreferredSize(new java.awt.Dimension(0, 54));
@@ -304,7 +296,7 @@ public class Admin extends javax.swing.JFrame {
         });
 
         jLabel13.setBackground(new java.awt.Color(152, 0, 0));
-        jLabel13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_invoice.png"))); // NOI18N
         jLabel13.setText(" HÓA ĐƠN");
@@ -321,47 +313,12 @@ public class Admin extends javax.swing.JFrame {
         HoaDonLayout.setVerticalGroup(
             HoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HoaDonLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addGap(15, 15, 15))
         );
 
-        NavbarMenu.add(HoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 243, 250, 60));
-
-        HopDong.setBackground(new java.awt.Color(152, 0, 0));
-        HopDong.setPreferredSize(new java.awt.Dimension(0, 54));
-        HopDong.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                HopDongMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                HopDongMousePressed(evt);
-            }
-        });
-
-        jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_contract.png"))); // NOI18N
-        jLabel14.setText(" HỢP ĐỒNG");
-
-        javax.swing.GroupLayout HopDongLayout = new javax.swing.GroupLayout(HopDong);
-        HopDong.setLayout(HopDongLayout);
-        HopDongLayout.setHorizontalGroup(
-            HopDongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HopDongLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
-        HopDongLayout.setVerticalGroup(
-            HopDongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HopDongLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel14)
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        NavbarMenu.add(HopDong, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 315, 250, 60));
+        NavbarMenu.add(HoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 250, 60));
 
         DanhGia.setBackground(new java.awt.Color(152, 0, 0));
         DanhGia.setPreferredSize(new java.awt.Dimension(0, 54));
@@ -375,7 +332,7 @@ public class Admin extends javax.swing.JFrame {
         });
 
         jLabel15.setBackground(new java.awt.Color(153, 153, 255));
-        jLabel15.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_feedback.png"))); // NOI18N
         jLabel15.setText(" ĐÁNH GIÁ");
@@ -386,18 +343,18 @@ public class Admin extends javax.swing.JFrame {
             DanhGiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DanhGiaLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         DanhGiaLayout.setVerticalGroup(
             DanhGiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DanhGiaLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addComponent(jLabel15)
                 .addGap(15, 15, 15))
         );
 
-        NavbarMenu.add(DanhGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 387, 250, 60));
+        NavbarMenu.add(DanhGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 250, 60));
 
         ThongKe.setBackground(new java.awt.Color(152, 0, 0));
         ThongKe.setPreferredSize(new java.awt.Dimension(0, 54));
@@ -411,7 +368,7 @@ public class Admin extends javax.swing.JFrame {
         });
 
         jLabel16.setBackground(new java.awt.Color(153, 153, 255));
-        jLabel16.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_statistics.png"))); // NOI18N
         jLabel16.setText(" THỐNG KÊ");
@@ -422,18 +379,18 @@ public class Admin extends javax.swing.JFrame {
             ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThongKeLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         ThongKeLayout.setVerticalGroup(
             ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ThongKeLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addGap(15, 15, 15))
         );
 
-        NavbarMenu.add(ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 459, 250, 60));
+        NavbarMenu.add(ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
 
         getContentPane().add(NavbarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -460,7 +417,6 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(ClickedColor);
         HoaDon.setBackground(DefaultColor);
-        HopDong.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
         TaiKhoan.setBackground(DefaultColor);
@@ -472,7 +428,6 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(ClickedColor);
-        HopDong.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
         TaiKhoan.setBackground(DefaultColor);
@@ -480,23 +435,10 @@ public class Admin extends javax.swing.JFrame {
         DangXuat.setBackground(DefaultColor);
     }//GEN-LAST:event_HoaDonMousePressed
 
-    private void HopDongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HopDongMousePressed
-        // TODO add your handling code here:
-        DatXe.setBackground(DefaultColor);
-        HoaDon.setBackground(DefaultColor);
-        HopDong.setBackground(ClickedColor);
-        DanhGia.setBackground(DefaultColor);
-        ThongKe.setBackground(DefaultColor);
-        TaiKhoan.setBackground(DefaultColor);
-        ThongTin.setBackground(DefaultColor);
-        DangXuat.setBackground(DefaultColor);
-    }//GEN-LAST:event_HopDongMousePressed
-
     private void DanhGiaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DanhGiaMousePressed
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
-        HopDong.setBackground(DefaultColor);
         DanhGia.setBackground(ClickedColor);
         ThongKe.setBackground(DefaultColor);
         TaiKhoan.setBackground(DefaultColor);
@@ -508,7 +450,6 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
-        HopDong.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(ClickedColor);
         TaiKhoan.setBackground(DefaultColor);
@@ -520,7 +461,6 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
-        HopDong.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
         TaiKhoan.setBackground(ClickedColor);
@@ -532,7 +472,6 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
-        HopDong.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
         TaiKhoan.setBackground(DefaultColor);
@@ -563,15 +502,6 @@ public class Admin extends javax.swing.JFrame {
         MainContent.validate();
         MainContent.repaint();
     }//GEN-LAST:event_HoaDonMouseClicked
-
-    private void HopDongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HopDongMouseClicked
-        // TODO add your handling code here:
-        MainContent.removeAll();
-        HopDongForm hd = new HopDongForm();
-        MainContent.add(hd).setVisible(true);
-        MainContent.validate();
-        MainContent.repaint();
-    }//GEN-LAST:event_HopDongMouseClicked
 
     private void DanhGiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DanhGiaMouseClicked
         // TODO add your handling code here:
@@ -666,7 +596,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel DanhGia;
     private javax.swing.JPanel DatXe;
     private javax.swing.JPanel HoaDon;
-    private javax.swing.JPanel HopDong;
     private javax.swing.JPanel MainContent;
     private javax.swing.JPanel NavbarMenu;
     private javax.swing.JPanel TaiKhoan;
@@ -676,7 +605,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;

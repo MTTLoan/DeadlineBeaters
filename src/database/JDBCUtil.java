@@ -10,9 +10,9 @@ public class JDBCUtil {
         Connection c = null;
         try {
             // Các thông số kết nối
-            String url = "jdbc:oracle:thin:@localhost:1521:ORCL"; // Địa chỉ và cổng của cơ sở dữ liệu Oracle
-            String userName = "sinhvien18"; // Tên đăng nhập vào cơ sở dữ liệu Oracle
-            String password = "sinhvien18"; // Mật khẩu đăng nhập vào cơ sở dữ liệu Oracle
+            String url = "jdbc:oracle:thin:@localhost:1521:orcl"; // Địa chỉ và cổng của cơ sở dữ liệu Oracle
+            String userName = "qlthuexe"; // Tên đăng nhập vào cơ sở dữ liệu Oracle
+            String password = "qlthuexe"; // Mật khẩu đăng nhập vào cơ sở dữ liệu Oracle
 
             // Tạo kết nối 
             c = DriverManager.getConnection(url, userName, password);
