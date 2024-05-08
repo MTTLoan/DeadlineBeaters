@@ -616,7 +616,7 @@ public class Admin extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION);
         if (relly == JOptionPane.YES_OPTION) {
             this.dispose();
-            DangNhapFrom a = new DangNhapFrom();
+            DangNhapForm a = new DangNhapForm();
             a.setVisible(true);
         } else {
             DangXuat.setBackground(DefaultColor);
