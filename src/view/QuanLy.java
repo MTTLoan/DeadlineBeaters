@@ -80,6 +80,8 @@ public class QuanLy extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         ThongKe = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
+        HoaDonPhat = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
         MainContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -173,7 +175,7 @@ public class QuanLy extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        NavbarMenu.add(DatXe, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 171, 250, 60));
+        NavbarMenu.add(DatXe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 250, 60));
 
         DangXuat.setBackground(new java.awt.Color(152, 0, 0));
         DangXuat.setPreferredSize(new java.awt.Dimension(88, 62));
@@ -280,7 +282,7 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        NavbarMenu.add(HoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 243, 250, 60));
+        NavbarMenu.add(HoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 250, 60));
 
         DanhGia.setBackground(new java.awt.Color(152, 0, 0));
         DanhGia.setPreferredSize(new java.awt.Dimension(0, 54));
@@ -316,7 +318,7 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        NavbarMenu.add(DanhGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 250, 60));
+        NavbarMenu.add(DanhGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
 
         ThongKe.setBackground(new java.awt.Color(152, 0, 0));
         ThongKe.setPreferredSize(new java.awt.Dimension(0, 54));
@@ -352,7 +354,43 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        NavbarMenu.add(ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 250, 60));
+        NavbarMenu.add(ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 250, 60));
+
+        HoaDonPhat.setBackground(new java.awt.Color(152, 0, 0));
+        HoaDonPhat.setPreferredSize(new java.awt.Dimension(0, 54));
+        HoaDonPhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HoaDonPhatMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                HoaDonPhatMousePressed(evt);
+            }
+        });
+
+        jLabel17.setBackground(new java.awt.Color(153, 153, 255));
+        jLabel17.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_fine.png"))); // NOI18N
+        jLabel17.setText(" HÓA ĐƠN PHẠT");
+
+        javax.swing.GroupLayout HoaDonPhatLayout = new javax.swing.GroupLayout(HoaDonPhat);
+        HoaDonPhat.setLayout(HoaDonPhatLayout);
+        HoaDonPhatLayout.setHorizontalGroup(
+            HoaDonPhatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HoaDonPhatLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel17)
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+        HoaDonPhatLayout.setVerticalGroup(
+            HoaDonPhatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HoaDonPhatLayout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addGap(15, 15, 15))
+        );
+
+        NavbarMenu.add(HoaDonPhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 250, 60));
 
         getContentPane().add(NavbarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -379,6 +417,7 @@ public class QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(ClickedColor);
         HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
         ThongTin.setBackground(DefaultColor);
@@ -389,6 +428,7 @@ public class QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(ClickedColor);
+        HoaDonPhat.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
         ThongTin.setBackground(DefaultColor);
@@ -399,6 +439,7 @@ public class QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
         DanhGia.setBackground(ClickedColor);
         ThongKe.setBackground(DefaultColor);
         ThongTin.setBackground(DefaultColor);
@@ -409,6 +450,7 @@ public class QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(ClickedColor);
         ThongTin.setBackground(DefaultColor);
@@ -419,6 +461,7 @@ public class QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
         ThongTin.setBackground(ClickedColor);
@@ -502,6 +545,26 @@ public class QuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void HoaDonPhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonPhatMouseClicked
+        // TODO add your handling code here:
+        MainContent.removeAll();
+        HoaDonPhatForm hdp  = new HoaDonPhatForm();
+        MainContent.add(hdp).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
+    }//GEN-LAST:event_HoaDonPhatMouseClicked
+
+    private void HoaDonPhatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonPhatMousePressed
+        // TODO add your handling code here:
+        DatXe.setBackground(DefaultColor);
+        HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(ClickedColor);
+        DanhGia.setBackground(DefaultColor);
+        ThongKe.setBackground(DefaultColor);
+        ThongTin.setBackground(DefaultColor);
+        DangXuat.setBackground(DefaultColor);
+    }//GEN-LAST:event_HoaDonPhatMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -533,6 +596,7 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel DanhGia;
     private javax.swing.JPanel DatXe;
     private javax.swing.JPanel HoaDon;
+    private javax.swing.JPanel HoaDonPhat;
     private javax.swing.JPanel MainContent;
     private javax.swing.JPanel NavbarMenu;
     private javax.swing.JPanel ThongKe;
@@ -543,6 +607,7 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

@@ -84,6 +84,8 @@ public class Admin extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         ThongKe = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
+        HoaDonPhat = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
         MainContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -125,8 +127,8 @@ public class Admin extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -171,12 +173,12 @@ public class Admin extends javax.swing.JFrame {
         TaiKhoanLayout.setVerticalGroup(
             TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TaiKhoanLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(14, 14, 14))
         );
 
-        NavbarMenu.add(TaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 250, -1));
+        NavbarMenu.add(TaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 250, 60));
 
         DatXe.setBackground(new java.awt.Color(152, 0, 0));
         DatXe.setPreferredSize(new java.awt.Dimension(0, 54));
@@ -354,7 +356,7 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        NavbarMenu.add(DanhGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 250, 60));
+        NavbarMenu.add(DanhGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
 
         ThongKe.setBackground(new java.awt.Color(152, 0, 0));
         ThongKe.setPreferredSize(new java.awt.Dimension(0, 54));
@@ -390,7 +392,43 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        NavbarMenu.add(ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
+        NavbarMenu.add(ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 250, 60));
+
+        HoaDonPhat.setBackground(new java.awt.Color(152, 0, 0));
+        HoaDonPhat.setPreferredSize(new java.awt.Dimension(0, 54));
+        HoaDonPhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HoaDonPhatMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                HoaDonPhatMousePressed(evt);
+            }
+        });
+
+        jLabel17.setBackground(new java.awt.Color(153, 153, 255));
+        jLabel17.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_fine.png"))); // NOI18N
+        jLabel17.setText(" HÓA ĐƠN PHẠT");
+
+        javax.swing.GroupLayout HoaDonPhatLayout = new javax.swing.GroupLayout(HoaDonPhat);
+        HoaDonPhat.setLayout(HoaDonPhatLayout);
+        HoaDonPhatLayout.setHorizontalGroup(
+            HoaDonPhatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HoaDonPhatLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel17)
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+        HoaDonPhatLayout.setVerticalGroup(
+            HoaDonPhatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HoaDonPhatLayout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addGap(15, 15, 15))
+        );
+
+        NavbarMenu.add(HoaDonPhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 250, 60));
 
         getContentPane().add(NavbarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -417,6 +455,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(ClickedColor);
         HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
         TaiKhoan.setBackground(DefaultColor);
@@ -428,6 +467,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(ClickedColor);
+        HoaDonPhat.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
         TaiKhoan.setBackground(DefaultColor);
@@ -439,6 +479,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
         DanhGia.setBackground(ClickedColor);
         ThongKe.setBackground(DefaultColor);
         TaiKhoan.setBackground(DefaultColor);
@@ -450,6 +491,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(ClickedColor);
         TaiKhoan.setBackground(DefaultColor);
@@ -461,6 +503,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
         TaiKhoan.setBackground(ClickedColor);
@@ -472,6 +515,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
         DanhGia.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
         TaiKhoan.setBackground(DefaultColor);
@@ -488,7 +532,6 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         MainContent.removeAll();
         DatXeForm dx = new DatXeForm();
-        MainContent.setLayout(new BorderLayout());
         MainContent.add(dx).setVisible(true);
         MainContent.validate();
         MainContent.repaint();
@@ -565,6 +608,27 @@ public class Admin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void HoaDonPhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonPhatMouseClicked
+        // TODO add your handling code here:
+        MainContent.removeAll();
+        HoaDonPhatForm hdp  = new HoaDonPhatForm();
+        MainContent.add(hdp).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
+    }//GEN-LAST:event_HoaDonPhatMouseClicked
+
+    private void HoaDonPhatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonPhatMousePressed
+        // TODO add your handling code here:
+        DatXe.setBackground(DefaultColor);
+        HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(ClickedColor);
+        DanhGia.setBackground(DefaultColor);
+        ThongKe.setBackground(DefaultColor);
+        TaiKhoan.setBackground(DefaultColor);
+        ThongTin.setBackground(DefaultColor);
+        DangXuat.setBackground(DefaultColor);
+    }//GEN-LAST:event_HoaDonPhatMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -596,6 +660,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel DanhGia;
     private javax.swing.JPanel DatXe;
     private javax.swing.JPanel HoaDon;
+    private javax.swing.JPanel HoaDonPhat;
     private javax.swing.JPanel MainContent;
     private javax.swing.JPanel NavbarMenu;
     private javax.swing.JPanel TaiKhoan;
@@ -607,6 +672,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

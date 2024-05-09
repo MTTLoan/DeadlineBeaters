@@ -71,11 +71,13 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Ngày tạo:");
 
+        jTextField2.setEditable(false);
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel4.setText("Tổng tiền");
 
+        jTextField3.setEditable(false);
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -110,13 +112,13 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã CTHD", "Mã xe", "Số giờ", "Số tiền"
+                "Mã HD", "Mã xe", "Số giờ", "Số tiền", "Mã hợp đồng giấy"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

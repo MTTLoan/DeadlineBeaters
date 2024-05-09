@@ -32,7 +32,6 @@ public class DatXeForm extends javax.swing.JPanel {
         btnReset = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -59,7 +58,6 @@ public class DatXeForm extends javax.swing.JPanel {
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1100, 820));
@@ -112,35 +110,31 @@ public class DatXeForm extends javax.swing.JPanel {
         jTable1.setRowHeight(30);
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 520, 630));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Mã HD:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 60, 30));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 520, 620));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Chú thích:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, 70, 30));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, 70, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Ngày trả:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 260, 80, 30));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 230, 80, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Giờ nhận:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, -1, 30));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, -1, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Ngày nhận:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 220, 80, 30));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 190, 80, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Người tạo:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 70, 30));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 110, 70, 30));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("Giờ trả:");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 60, 30));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 60, 30));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,7 +149,7 @@ public class DatXeForm extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 380, 460, 290));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, 460, 310));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(152, 0, 0));
@@ -167,25 +161,25 @@ public class DatXeForm extends javax.swing.JPanel {
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 460, 10));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel11.setText("Tiền cọc:");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 680, 70, 30));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setText("Tổng tiền cọc:");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 680, 100, 30));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel12.setText("Tổng tiền:");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 680, 80, 30));
+        jLabel12.setText("Tổng tiền thuê:");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 680, 120, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("0đ");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 680, 120, 30));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 680, 90, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("0đ");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 680, 120, 30));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 680, 90, 30));
 
         jButton1.setBackground(new java.awt.Color(27, 121, 30));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
@@ -220,7 +214,7 @@ public class DatXeForm extends javax.swing.JPanel {
                 jTextField2ActionPerformed(evt);
             }
         });
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 360, 30));
+        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 110, 360, 30));
 
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -228,13 +222,13 @@ public class DatXeForm extends javax.swing.JPanel {
                 jTextField3ActionPerformed(evt);
             }
         });
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 220, 90, 30));
+        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 90, 30));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane3.setViewportView(jTextArea1);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 360, 60));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 270, 360, 60));
 
         jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
@@ -242,7 +236,7 @@ public class DatXeForm extends javax.swing.JPanel {
                 jTextField4ActionPerformed(evt);
             }
         });
-        add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 180, 360, 30));
+        add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 150, 360, 30));
 
         jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
@@ -250,7 +244,7 @@ public class DatXeForm extends javax.swing.JPanel {
                 jTextField5ActionPerformed(evt);
             }
         });
-        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 220, 170, 30));
+        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 190, 170, 30));
 
         jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
@@ -258,7 +252,7 @@ public class DatXeForm extends javax.swing.JPanel {
                 jTextField6ActionPerformed(evt);
             }
         });
-        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, 170, 30));
+        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 230, 170, 30));
 
         jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
@@ -266,20 +260,11 @@ public class DatXeForm extends javax.swing.JPanel {
                 jTextField7ActionPerformed(evt);
             }
         });
-        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, 90, 30));
+        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 230, 90, 30));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Mã KH:");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 60, 30));
-
-        jTextField8.setEditable(false);
-        jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
-            }
-        });
-        add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 360, 30));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 60, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSearchFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchFormActionPerformed
@@ -330,10 +315,6 @@ public class DatXeForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReset;
@@ -341,7 +322,6 @@ public class DatXeForm extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -368,7 +348,6 @@ public class DatXeForm extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField txtSearchForm;
     // End of variables declaration//GEN-END:variables
 }
