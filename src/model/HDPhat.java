@@ -23,5 +23,57 @@ public class HDPhat {
         this.MaHopDong = MaHopDong;
     }
     
-    
+    // Getter and Setter for MaHDP
+    public String getMaHDP() {
+        return MaHDP;
+    }
+
+    public void setMaHDP(String MaHDP) {
+        this.MaHDP = MaHDP;
+    }
+
+    // Getter and Setter for NgayTao
+    public LocalDateTime getNgayTao() {
+        return NgayTao;
+    }
+
+    public void setNgayTao(LocalDateTime NgayTao) {
+        this.NgayTao = NgayTao;
+    }
+
+    // Getter and Setter for SoTien
+    public long getSoTien() {
+        return SoTien;
+    }
+
+    public void setSoTien(long SoTien) {
+        this.SoTien = SoTien;
+    }
+
+    // Getter and Setter for ChuThich
+    public String getChuThich() {
+        return ChuThich;
+    }
+
+    public void setChuThich(String ChuThich) {
+        this.ChuThich = ChuThich;
+    }
+
+    // Getter and Setter for TinhTrang
+    public String getTinhTrang() {
+        return TinhTrang;
+    }
+
+    public void setTinhTrang(String TinhTrang) {
+        this.TinhTrang = TinhTrang;
+    }
+
+    // Getter and Setter for MaHopDong
+    public String getMaHopDong() {
+        return MaHopDong;
+    }
+
+    public void setMaHopDong(String MaHopDong) {
+        this.MaHopDong = MaHopDong;
+    }
 }
