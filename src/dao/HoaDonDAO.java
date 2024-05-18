@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import model.HoaDon;
@@ -22,20 +22,19 @@ public class HoaDonDAO implements DAOInterface<HoaDon>{
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "INSERT INTO HOADON (MaHD, TGTao, TongTien, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("DD-MM-YYYY HH24:MI");
-            pst.setString(1, t.getMaHD());
-            pst.setString(2, t.getTGTao().format(dtf));
-            pst.setLong(3, t.getTongTien());
-            pst.setString(4, t.getTGNhan().format(dtf));
-            pst.setString(5, t.getTGTra().format(dtf));
-            pst.setLong(6, t.getTongTienCoc());
-            pst.setString(7, t.getTGCapNhat().format(dtf));
-            pst.setString(8, t.getTinhTrang());
-            pst.setString(9, t.getChuThich());
-            pst.setString(10, t.getMaKH());
-            pst.setString(11, t.getMaNV());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            pst.setString(1, t.getTGTao().format(dtf));
+            pst.setInt(2, t.getTongTienThue());
+            pst.setString(3, t.getTGNhan().format(dtf));
+            pst.setString(4, t.getTGTra().format(dtf));
+            pst.setInt(5, t.getTongTienCoc());
+            pst.setString(6, t.getTGCapNhat().format(dtf));
+            pst.setString(7, t.getTinhTrang());
+            pst.setString(8, t.getChuThich());
+            pst.setInt(9, t.getMaKH());
+            pst.setInt(10, t.getMaNV());
 
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
@@ -51,21 +50,25 @@ public class HoaDonDAO implements DAOInterface<HoaDon>{
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE HOADON SET TGTao=?, TongTien=?, TGNhan=?, TGTra=?, TongTienCoc=?, TGCapNhat=?, TinhTrang=?, ChuThich=?, MaKH=?, MaNV=? WHERE MaHD=? ";
-            PreparedStatement pst = con.prepareStatement(sql);
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("DD-MM-YYYY HH24:MI");
+            PreparedStatement pst;
+            String alterSessionSql = "ALTER SESSION SET nls_date_format = 'DD/MM/YYYY'";
+            pst = con.prepareStatement(alterSessionSql);
+            pst.execute();
+            String sql = "UPDATE HOADON SET TGTao=?, TongTienThue=?, TGNhan=?, TGTra=?, TongTienCoc=?, TGCapNhat=?, TinhTrang=?, ChuThich=?, MaKH=?, MaNV=? WHERE MaHD=? ";
+            pst = con.prepareStatement(sql);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             pst.setString(1, t.getTGTao().format(dtf));
-            pst.setLong(2, t.getTongTien());
+            pst.setInt(2, t.getTongTienThue());
             pst.setString(3, t.getTGNhan().format(dtf));
             pst.setString(4, t.getTGTra().format(dtf));
-            pst.setLong(5, t.getTongTienCoc());
-            pst.setString(6, t.getTGCapNhat().format(dtf));
+            pst.setInt(5, t.getTongTienCoc());
+            pst.setString(6, LocalDate.now().format(dtf));
             pst.setString(7, t.getTinhTrang());
             pst.setString(8, t.getChuThich());
-            pst.setString(9, t.getMaKH());
-            pst.setString(10, t.getMaNV());
-            pst.setString(11, t.getMaHD());
-
+            pst.setInt(9, t.getMaKH());
+            pst.setInt(10, t.getMaNV());
+            pst.setInt(11, t.getMaHD());
+            
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
 
@@ -80,9 +83,9 @@ public class HoaDonDAO implements DAOInterface<HoaDon>{
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "DELETE FROM TaiKhoan WHERE MaHD=?";
+            String sql = "DELETE FROM HOADON WHERE MaHD=?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, t.getMaHD());
+            pst.setInt(1, t.getMaHD());
 
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
@@ -95,26 +98,26 @@ public class HoaDonDAO implements DAOInterface<HoaDon>{
 
     @Override
     public ArrayList<HoaDon> selectAll() {
-        ArrayList<HoaDon> ketQua = new ArrayList<HoaDon>();
+        ArrayList<HoaDon> ketQua = new ArrayList<>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM HoaDon";
+            String sql = "SELECT * FROM HOADON";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String MaHD = rs.getString("MaHD");
-                LocalDateTime TGTao = rs.getTimestamp("TGTao").toLocalDateTime();
-                long TongTien = rs.getLong("TongTien");
-                LocalDateTime TGNhan = rs.getTimestamp("TGNhan").toLocalDateTime();
-                LocalDateTime TGTra = rs.getTimestamp("TGTra").toLocalDateTime();
-                long TongTienCoc = rs.getLong("TongTienCoc");
-                LocalDateTime TGCapNhat = rs.getTimestamp("TGCapNhat").toLocalDateTime();
+                int MaHD = rs.getInt("MaHD");
+                LocalDate TGTao = rs.getDate("TGTao").toLocalDate();
+                int TongTienThue = rs.getInt("TongTienThue");
+                LocalDate TGNhan = rs.getDate("TGNhan").toLocalDate();
+                LocalDate TGTra = rs.getDate("TGTra").toLocalDate();
+                int TongTienCoc = rs.getInt("TongTienCoc");
+                LocalDate TGCapNhat = rs.getDate("TGCapNhat").toLocalDate();
                 String TinhTrang = rs.getString("TinhTrang");
                 String ChuThich = rs.getString("ChuThich");
-                String MaKH = rs.getString("MaKH");
-                String MaNV = rs.getString("MaNV");
+                int MaKH = rs.getInt("MaKH");
+                int MaNV = rs.getInt("MaNV");
 
-                HoaDon tk = new HoaDon(MaHD, TGTao, TongTien, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV);
+                HoaDon tk = new HoaDon(MaHD, TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV);
                 ketQua.add(tk);
             }
             JDBCUtil.closeConnection(con);
@@ -129,24 +132,24 @@ public class HoaDonDAO implements DAOInterface<HoaDon>{
         HoaDon ketQua = null;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM HoaDon WHERE MaHD=?";
+            String sql = "SELECT * FROM HOADON WHERE MaHD=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String MaHD = rs.getString("MaHD");
-                LocalDateTime TGTao = rs.getTimestamp("TGTao").toLocalDateTime();
-                long TongTien = rs.getLong("TongTien");
-                LocalDateTime TGNhan = rs.getTimestamp("TGNhan").toLocalDateTime();
-                LocalDateTime TGTra = rs.getTimestamp("TGTra").toLocalDateTime();
-                long TongTienCoc = rs.getLong("TongTienCoc");
-                LocalDateTime TGCapNhat = rs.getTimestamp("TGCapNhat").toLocalDateTime();
+                int MaHD = rs.getInt("MaHD");
+                LocalDate TGTao = rs.getDate("TGTao").toLocalDate();
+                int TongTienThue = rs.getInt("TongTienThue");
+                LocalDate TGNhan = rs.getDate("TGNhan").toLocalDate();
+                LocalDate TGTra = rs.getDate("TGTra").toLocalDate();
+                int TongTienCoc = rs.getInt("TongTienCoc");
+                LocalDate TGCapNhat = rs.getDate("TGCapNhat").toLocalDate();
                 String TinhTrang = rs.getString("TinhTrang");
                 String ChuThich = rs.getString("ChuThich");
-                String MaKH = rs.getString("MaKH");
-                String MaNV = rs.getString("MaNV");
+                int MaKH = rs.getInt("MaKH");
+                int MaNV = rs.getInt("MaNV");
 
-                ketQua = new HoaDon(MaHD, TGTao, TongTien, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV);
+                ketQua = new HoaDon(MaHD, TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV);
             }
             JDBCUtil.closeConnection(con);
         } catch (SQLException e) {

@@ -1,27 +1,25 @@
 
 package model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class HDPhat {
-    private String MaHDP;
-    private LocalDateTime NgayTao;
-    private long SoTien;
-    private String ChuThich;
+    private int MaHDP;
+    private LocalDate NgayTao;
+    private int TongTienPhat;
     private String TinhTrang;
-    private String MaHopDong;
+    private int MaHD;
 
     public HDPhat() {
     }
 
-    public HDPhat(String MaHDP, LocalDateTime NgayTao, long SoTien, String ChuThich, String TinhTrang, String MaHopDong) {
+    public HDPhat(int MaHDP, LocalDate NgayTao, int TongTienPhat, String TinhTrang, int MaHD) {
         this.MaHDP = MaHDP;
         this.NgayTao = NgayTao;
-        this.SoTien = SoTien;
-        this.ChuThich = ChuThich;
+        this.TongTienPhat = TongTienPhat;
         this.TinhTrang = TinhTrang;
-        this.MaHopDong = MaHopDong;
+        this.MaHD = MaHD;
     }
-    
+
     
 }

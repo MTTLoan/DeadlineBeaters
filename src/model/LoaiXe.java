@@ -2,7 +2,7 @@
 package model;
 
 public class LoaiXe {
-    private String MaLX;
+    private int MaLX;
     private String TenLX;
     private int SoLuong;
     private int SoCho;
@@ -10,7 +10,7 @@ public class LoaiXe {
     public LoaiXe() {
     }
 
-    public LoaiXe(String MaLX, String TenLX, int SoLuong, int SoCho) {
+    public LoaiXe(int MaLX, String TenLX, int SoLuong, int SoCho) {
         this.MaLX = MaLX;
         this.TenLX = TenLX;
         this.SoLuong = SoLuong;

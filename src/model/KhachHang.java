@@ -4,7 +4,7 @@ package model;
 import java.time.LocalDate;
 
 public class KhachHang {
-    private String MaKH;
+    private int MaKH;
     private String TenKH;
     private String GioiTinh;
     private LocalDate NgaySinh;
@@ -15,7 +15,7 @@ public class KhachHang {
     public KhachHang() {
     }
 
-    public KhachHang(String MaKH, String TenKH, String GioiTinh, LocalDate NgaySinh, String DiaChi, String SDT, int TongDoanhThu) {
+    public KhachHang(int MaKH, String TenKH, String GioiTinh, LocalDate NgaySinh, String DiaChi, String SDT, int TongDoanhThu) {
         this.MaKH = MaKH;
         this.TenKH = TenKH;
         this.GioiTinh = GioiTinh;

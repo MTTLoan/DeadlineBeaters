@@ -23,16 +23,16 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
             Connection con = JDBCUtil.getConnection();
             String sql = "INSERT INTO TaiKhoan (MaNV, TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL) VALUES (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, t.getMaNV());
+            pst.setInt(1, t.getMaNV());
             pst.setString(2, t.getTenTK());
             pst.setString(3, t.getMatKhau());
             pst.setString(4, t.getHoTen());
             pst.setString(5, t.getGioiTinh());
             pst.setDate(6, java.sql.Date.valueOf(t.getNgaySinh()));
             pst.setString(7, t.getChucVu());
-            pst.setLong(8, t.getLuong());
+            pst.setInt(8, t.getLuong());
             pst.setDate(9, java.sql.Date.valueOf(t.getNgayVaoLam()));
-            pst.setString(10, t.getMaQL());
+            pst.setInt(10, t.getMaQL());
 
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
@@ -50,15 +50,15 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
             Connection con = JDBCUtil.getConnection();
             String sql = "UPDATE TaiKhoan SET MaNV=?, MatKhau=?, HoTen=?, GioiTinh=?, NgaySinh=?, ChucVu=?, Luong=?, NgayVaoLam=?, MaQL=? WHERE TenTK=?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, t.getMaNV());
+            pst.setInt(1, t.getMaNV());
             pst.setString(2, t.getMatKhau());
             pst.setString(3, t.getHoTen());
             pst.setString(4, t.getGioiTinh());
             pst.setDate(5, java.sql.Date.valueOf(t.getNgaySinh()));
             pst.setString(6, t.getChucVu());
-            pst.setLong(7, t.getLuong());
+            pst.setInt(7, t.getLuong());
             pst.setDate(8, java.sql.Date.valueOf(t.getNgayVaoLam()));
-            pst.setString(9, t.getMaQL());
+            pst.setInt(9, t.getMaQL());
             pst.setString(10, t.getTenTK());
 
             ketQua = pst.executeUpdate();
@@ -90,23 +90,23 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
 
     @Override
     public ArrayList<TaiKhoan> selectAll() {
-        ArrayList<TaiKhoan> ketQua = new ArrayList<TaiKhoan>();
+        ArrayList<TaiKhoan> ketQua = new ArrayList<>();
         try {
             Connection con = JDBCUtil.getConnection();
             String sql = "SELECT * FROM TaiKhoan";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String MaNV = rs.getString("MaNV");
+                int MaNV = rs.getInt("MaNV");
                 String TenTK = rs.getString("TenTK");
                 String MatKhau = rs.getString("MatKhau");
                 String HoTen = rs.getString("HoTen");
                 String GioiTinh = rs.getString("GioiTinh");
                 LocalDate NgaySinh = rs.getDate("NgaySinh").toLocalDate();
                 String ChucVu = rs.getString("ChucVu");
-                long Luong = rs.getLong("Luong");
+                int Luong = rs.getInt("Luong");
                 LocalDate NgayVaoLam = rs.getDate("NgayVaoLam").toLocalDate();
-                String MaQL = rs.getString("MaQL");
+                int MaQL = rs.getInt("MaQL");
 
                 TaiKhoan tk = new TaiKhoan(MaNV, TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL);
                 ketQua.add(tk);
@@ -128,16 +128,16 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
             pst.setString(1, t);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String MaNV = rs.getString("MaNV");
+                int MaNV = rs.getInt("MaNV");
                 String TenTK = rs.getString("TenTK");
                 String MatKhau = rs.getString("MatKhau");
                 String HoTen = rs.getString("HoTen");
                 String GioiTinh = rs.getString("GioiTinh");
                 LocalDate NgaySinh = rs.getDate("NgaySinh").toLocalDate();
                 String ChucVu = rs.getString("ChucVu");
-                long Luong = rs.getLong("Luong");
+                int Luong = rs.getInt("Luong");
                 LocalDate NgayVaoLam = rs.getDate("NgayVaoLam").toLocalDate();
-                String MaQL = rs.getString("MaQL");
+                int MaQL = rs.getInt("MaQL");
 
                 tk = new TaiKhoan(MaNV, TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL);
             }
@@ -158,16 +158,16 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
             pst.setString(2, matKhau);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                String MaNV = rs.getString("MaNV");
+                int MaNV = rs.getInt("MaNV");
                 String TenTK = rs.getString("TenTK");
                 String MatKhau = rs.getString("MatKhau");
                 String HoTen = rs.getString("HoTen");
                 String GioiTinh = rs.getString("GioiTinh");
                 LocalDate NgaySinh = rs.getDate("NgaySinh").toLocalDate();
                 String ChucVu = rs.getString("ChucVu");
-                long Luong = rs.getLong("Luong");
+                int Luong = rs.getInt("Luong");
                 LocalDate NgayVaoLam = rs.getDate("NgayVaoLam").toLocalDate();
-                String MaQL = rs.getString("MaQL");
+                int MaQL = rs.getInt("MaQL");
 
                 taiKhoan = new TaiKhoan(MaNV, TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL);
             }
