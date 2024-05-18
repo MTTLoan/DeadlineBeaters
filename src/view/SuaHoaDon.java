@@ -43,7 +43,13 @@ public class SuaHoaDon extends javax.swing.JFrame {
         jTextField_MaNV.setText(Integer.toString(hd.getMaNV()));
         jTextField_TongTienThue.setText(hd.getTongTienThue() + "đ");
         jTextField_TongTienCoc.setText(hd.getTongTienCoc() + "đ");
-        jTextField_TinhTrang.setText(hd.getTinhTrang());
+        if(hd.getTinhTrang().equals("Đã đặt xe")){
+            jComboBox_TinhTrang.setSelectedIndex(0);
+        } else if(hd.getTinhTrang().equals("Đã nhận xe")){
+            jComboBox_TinhTrang.setSelectedIndex(1);
+        } else {
+            jComboBox_TinhTrang.setSelectedIndex(2);
+        }
         jTextArea_ChuThich.setText(hd.getChuThich());
         jTable_ChiTietHD.setDefaultEditor(Object.class, null);
         loadDataToTable_CTHD();
@@ -85,7 +91,6 @@ public class SuaHoaDon extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField_TinhTrang = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_ChiTietHD = new javax.swing.JTable();
         jButton_Thoat = new javax.swing.JButton();
@@ -101,6 +106,7 @@ public class SuaHoaDon extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea_ChuThich = new javax.swing.JTextArea();
+        jComboBox_TinhTrang = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 740));
@@ -158,14 +164,6 @@ public class SuaHoaDon extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel10.setText("Mã khách hàng:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 120, 30));
-
-        jTextField_TinhTrang.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jTextField_TinhTrang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_TinhTrangActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField_TinhTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 190, 33));
 
         jTable_ChiTietHD.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jTable_ChiTietHD.setModel(new javax.swing.table.DefaultTableModel(
@@ -276,6 +274,10 @@ public class SuaHoaDon extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 530, 50));
 
+        jComboBox_TinhTrang.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jComboBox_TinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã đặt xe", "Đã nhận xe", "Đã trả xe" }));
+        jPanel1.add(jComboBox_TinhTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 190, 30));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 710));
 
         pack();
@@ -290,7 +292,7 @@ public class SuaHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
         String makh = jTextField_MaKH.getText();
         String manv = jTextField_MaNV.getText();
-        String tinhtrang = jTextField_TinhTrang.getText();
+        String tinhtrang = String.valueOf(jComboBox_TinhTrang.getSelectedItem());
         String chuthich = jTextArea_ChuThich.getText();
         if (makh.equals("") || manv.equals("") || tinhtrang.equals("") ) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
@@ -335,10 +337,6 @@ public class SuaHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_TongTienCocActionPerformed
 
-    private void jTextField_TinhTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_TinhTrangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_TinhTrangActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -378,6 +376,7 @@ public class SuaHoaDon extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Luu;
     private javax.swing.JButton jButton_Thoat;
+    private javax.swing.JComboBox<String> jComboBox_TinhTrang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -401,7 +400,6 @@ public class SuaHoaDon extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_TGNhan;
     private javax.swing.JTextField jTextField_TGTao;
     private javax.swing.JTextField jTextField_TGTra;
-    private javax.swing.JTextField jTextField_TinhTrang;
     private javax.swing.JTextField jTextField_TongTienCoc;
     private javax.swing.JTextField jTextField_TongTienThue;
     // End of variables declaration//GEN-END:variables

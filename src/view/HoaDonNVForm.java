@@ -204,8 +204,12 @@ public final class HoaDonNVForm extends javax.swing.JPanel {
 
     private void jButton_CTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_CTHDMouseClicked
         // TODO add your handling code here:
-        ChiTietHoaDon cthd = new ChiTietHoaDon(getHoaDonSelect());
-        cthd.setVisible(true);
+        if (jTable_HoaDon.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn xem chi tiết");
+        } else {
+            ChiTietHoaDon cthd = new ChiTietHoaDon(getHoaDonSelect());
+            cthd.setVisible(true);
+        }
     }//GEN-LAST:event_jButton_CTHDMouseClicked
 
     private void jButton_SuaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SuaHDActionPerformed

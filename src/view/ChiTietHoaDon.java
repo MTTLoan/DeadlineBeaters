@@ -44,6 +44,7 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         jLabel_TongTienThue.setText(hd.getTongTienThue() + "đ");
         jLabel_TongTienCoc.setText(hd.getTongTienCoc() + "đ");
         jLabel_TinhTrang.setText(hd.getTinhTrang());
+        jLabel_TGCapNhat.setText(hd.getTGCapNhat().format(dtf));
         jLabel_ChuThich.setText(hd.getChuThich());
         jTable_ChiTietHD.setDefaultEditor(Object.class, null);
         loadDataToTable_CTHD();
@@ -99,6 +100,8 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         jLabel_TGTao = new javax.swing.JLabel();
         jLabel_TGTra = new javax.swing.JLabel();
         jLabel_MaNV = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel_TGCapNhat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,8 +124,8 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 110, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel4.setText("Tổng tiền cọc:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 110, 30));
+        jLabel4.setText("Thời gian cập nhật:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, 140, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setText("Chú thích:");
@@ -182,7 +185,7 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
 
         jLabel_TongTienCoc.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel_TongTienCoc.setText("jLabel9");
-        jPanel1.add(jLabel_TongTienCoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 240, 150, 30));
+        jPanel1.add(jLabel_TongTienCoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 240, 150, 30));
 
         jLabel_MaKH.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel_MaKH.setText("jLabel9");
@@ -204,15 +207,23 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
 
         jLabel_TGTao.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel_TGTao.setText("jLabel9");
-        jPanel1.add(jLabel_TGTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 150, 30));
+        jPanel1.add(jLabel_TGTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, 150, 30));
 
         jLabel_TGTra.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel_TGTra.setText("jLabel9");
-        jPanel1.add(jLabel_TGTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 150, 30));
+        jPanel1.add(jLabel_TGTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, 150, 30));
 
         jLabel_MaNV.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel_MaNV.setText("jLabel9");
-        jPanel1.add(jLabel_MaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 200, 150, 30));
+        jPanel1.add(jLabel_MaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 200, 150, 30));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel9.setText("Tổng tiền cọc:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 110, 30));
+
+        jLabel_TGCapNhat.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel_TGCapNhat.setText("jLabel9");
+        jPanel1.add(jLabel_TGCapNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 150, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 710));
 
@@ -269,10 +280,12 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_ChuThich;
     private javax.swing.JLabel jLabel_MaHD;
     private javax.swing.JLabel jLabel_MaKH;
     private javax.swing.JLabel jLabel_MaNV;
+    private javax.swing.JLabel jLabel_TGCapNhat;
     javax.swing.JLabel jLabel_TGNhan;
     private javax.swing.JLabel jLabel_TGTao;
     private javax.swing.JLabel jLabel_TGTra;

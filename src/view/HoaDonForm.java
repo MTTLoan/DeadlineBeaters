@@ -127,6 +127,11 @@ public final class HoaDonForm extends javax.swing.JPanel {
                 jButton_CTHDMouseClicked(evt);
             }
         });
+        jButton_CTHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CTHDActionPerformed(evt);
+            }
+        });
         jPanel_HoaDon.add(jButton_CTHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, 170, 41));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -215,8 +220,12 @@ public final class HoaDonForm extends javax.swing.JPanel {
 
     private void jButton_CTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_CTHDMouseClicked
         // TODO add your handling code here:
-        ChiTietHoaDon cthd = new ChiTietHoaDon(getHoaDonSelect());
-        cthd.setVisible(true);
+        if (jTable_HoaDon.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn xem chi tiết");
+        } else {
+            ChiTietHoaDon cthd = new ChiTietHoaDon(getHoaDonSelect());
+            cthd.setVisible(true);
+        }
     }//GEN-LAST:event_jButton_CTHDMouseClicked
 
     private void jButton_XoaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_XoaHDActionPerformed
@@ -336,6 +345,16 @@ public final class HoaDonForm extends javax.swing.JPanel {
         cbxLuachon.setSelectedIndex(0);
         loadDataToTable(HoaDonDAO.getInstance().selectAll());
     }//GEN-LAST:event_jButton_LamMoiActionPerformed
+
+    private void jButton_CTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CTHDActionPerformed
+        // TODO add your handling code here:
+        if (jTable_HoaDon.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn xem chi tiết");
+        } else {
+            ChiTietHoaDon cthd = new ChiTietHoaDon(getHoaDonSelect());
+            cthd.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton_CTHDActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

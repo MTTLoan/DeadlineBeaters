@@ -22,7 +22,7 @@ public class TimKiemHoaDon {
     public ArrayList<HoaDon> tkTatCa(String text) {
         ArrayList<HoaDon> result = new ArrayList<>();
         ArrayList<HoaDon> ds = HoaDonDAO.getInstance().selectAll();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("DD-MM-YYYY HH:MM");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("DD-MM-YYYY");
         for (var i : ds) {
             if (Integer.toString(i.getMaHD()).contains(text.toLowerCase())
                 || i.getTGTao().format(dtf).contains(text.toLowerCase())
@@ -53,7 +53,7 @@ public class TimKiemHoaDon {
     public ArrayList<HoaDon> tkTGTao(String text) {
         ArrayList<HoaDon> result = new ArrayList<>();
         ArrayList<HoaDon> ds = HoaDonDAO.getInstance().selectAll();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("DD-MM-YYYY HH:MM");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("DD-MM-YYYY");
         for (var i : ds) {
             if (i.getTGTao().format(dtf).contains(text.toLowerCase())) {
                 result.add(i);
@@ -76,7 +76,7 @@ public class TimKiemHoaDon {
     public ArrayList<HoaDon> tkTGNhan(String text) {
         ArrayList<HoaDon> result = new ArrayList<>();
         ArrayList<HoaDon> ds = HoaDonDAO.getInstance().selectAll();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("DD-MM-YYYY HH:MM");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("DD-MM-YYYY");
         for (var i : ds) {
             if (i.getTGNhan().format(dtf).contains(text.toLowerCase())) {
                 result.add(i);
@@ -88,7 +88,7 @@ public class TimKiemHoaDon {
     public ArrayList<HoaDon> tkTGTra(String text) {
         ArrayList<HoaDon> result = new ArrayList<>();
         ArrayList<HoaDon> ds = HoaDonDAO.getInstance().selectAll();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("DD-MM-YYYY HH:MM");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("DD-MM-YYYY");
         for (var i : ds) {
             if (i.getTGTra().format(dtf).contains(text.toLowerCase())) {
                 result.add(i);
