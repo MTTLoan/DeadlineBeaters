@@ -10,6 +10,7 @@ public class DangNhapForm extends javax.swing.JFrame {
 
     public DangNhapForm() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -126,18 +127,24 @@ public class DangNhapForm extends javax.swing.JFrame {
 
         if (taiKhoan != null) {
             // Đăng nhập thành công
-            if (taiKhoan.getChucVu().equals("Admin")) {
-                // Hiển thị giao diện cho admin
-                Admin adminFrame = new Admin();
-                adminFrame.setVisible(true);
-            } else if (taiKhoan.getChucVu().equals("Quản lý")) {
-                // Hiển thị giao diện cho quản lý
-                QuanLy quanLyFrame = new QuanLy();
-                quanLyFrame.setVisible(true);
-            } else if (taiKhoan.getChucVu().equals("Nhân viên")) {
-                // Hiển thị giao diện cho nhân viên
-                NhanVien nhanVienFrame = new NhanVien();
-                nhanVienFrame.setVisible(true);
+            switch (taiKhoan.getChucVu()) {
+                case "Admin" -> {
+                    // Hiển thị giao diện cho admin
+                    Admin adminFrame = new Admin();
+                    adminFrame.setVisible(true);
+                }
+                case "Quản lý" -> {
+                    // Hiển thị giao diện cho quản lý
+                    QuanLy quanLyFrame = new QuanLy();
+                    quanLyFrame.setVisible(true);
+                }
+                case "Nhân viên" -> {
+                    // Hiển thị giao diện cho nhân viên
+                    NhanVien nhanVienFrame = new NhanVien();
+                    nhanVienFrame.setVisible(true);
+                }
+                default -> {
+                }
             }
             // Đóng cửa sổ đăng nhập
             this.dispose();

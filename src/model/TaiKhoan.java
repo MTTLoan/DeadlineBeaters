@@ -3,21 +3,21 @@ package model;
 import java.time.LocalDate;
 
 public class TaiKhoan {
-    private String MaNV;
+    private int MaNV;
     private String TenTK;
     private String MatKhau;
     private String HoTen;
     private String GioiTinh;
     private LocalDate NgaySinh;
     private String ChucVu;
-    private long Luong;
+    private int Luong;
     private LocalDate NgayVaoLam;
-    private String MaQL;
+    private int MaQL;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String MaNV, String TenTK, String MatKhau, String HoTen, String GioiTinh, LocalDate NgaySinh, String ChucVu, long Luong, LocalDate NgayVaoLam, String MaQL) {
+    public TaiKhoan(int MaNV, String TenTK, String MatKhau, String HoTen, String GioiTinh, LocalDate NgaySinh, String ChucVu, int Luong, LocalDate NgayVaoLam, int MaQL) {
         this.MaNV = MaNV;
         this.TenTK = TenTK;
         this.MatKhau = MatKhau;
@@ -30,84 +30,85 @@ public class TaiKhoan {
         this.MaQL = MaQL;
     }
 
-    // Getter và Setter cho các trường dữ liệu
-    public String getMaNV() {
+    public int getMaNV() {
         return MaNV;
-    }
-
-    public void setMaNV(String MaNV) {
-        this.MaNV = MaNV;
     }
 
     public String getTenTK() {
         return TenTK;
     }
 
-    public void setTenTK(String TenTK) {
-        this.TenTK = TenTK;
-    }
-
     public String getMatKhau() {
         return MatKhau;
-    }
-
-    public void setMatKhau(String MatKhau) {
-        this.MatKhau = MatKhau;
     }
 
     public String getHoTen() {
         return HoTen;
     }
 
-    public void setHoTen(String HoTen) {
-        this.HoTen = HoTen;
-    }
-
     public String getGioiTinh() {
         return GioiTinh;
-    }
-
-    public void setGioiTinh(String GioiTinh) {
-        this.GioiTinh = GioiTinh;
     }
 
     public LocalDate getNgaySinh() {
         return NgaySinh;
     }
 
-    public void setNgaySinh(LocalDate NgaySinh) {
-        this.NgaySinh = NgaySinh;
-    }
-
     public String getChucVu() {
         return ChucVu;
     }
 
-    public void setChucVu(String ChucVu) {
-        this.ChucVu = ChucVu;
-    }
-
-    public long getLuong() {
+    public int getLuong() {
         return Luong;
-    }
-
-    public void setLuong(long Luong) {
-        this.Luong = Luong;
     }
 
     public LocalDate getNgayVaoLam() {
         return NgayVaoLam;
     }
 
+    public int getMaQL() {
+        return MaQL;
+    }
+
+    public void setMaNV(int MaNV) {
+        this.MaNV = MaNV;
+    }
+
+    public void setTenTK(String TenTK) {
+        this.TenTK = TenTK;
+    }
+
+    public void setMatKhau(String MatKhau) {
+        this.MatKhau = MatKhau;
+    }
+
+    public void setHoTen(String HoTen) {
+        this.HoTen = HoTen;
+    }
+
+    public void setGioiTinh(String GioiTinh) {
+        this.GioiTinh = GioiTinh;
+    }
+
+    public void setNgaySinh(LocalDate NgaySinh) {
+        this.NgaySinh = NgaySinh;
+    }
+
+    public void setChucVu(String ChucVu) {
+        this.ChucVu = ChucVu;
+    }
+
+    public void setLuong(int Luong) {
+        this.Luong = Luong;
+    }
+
     public void setNgayVaoLam(LocalDate NgayVaoLam) {
         this.NgayVaoLam = NgayVaoLam;
     }
 
-    public String getMaQL() {
-        return MaQL;
-    }
-
-    public void setMaQL(String MaQL) {
+    public void setMaQL(int MaQL) {
         this.MaQL = MaQL;
     }
+
+    
 }

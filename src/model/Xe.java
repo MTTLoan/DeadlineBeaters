@@ -2,20 +2,20 @@
 package model;
 
 public class Xe {
-    private String MaXe;
+    private int MaXe;
     private String TenXe;
     private String BienSo;
     private String TrangThai; 
     private int TGBaoDuong;
-    private long DonGia;
+    private int DonGia;
     private String ThuongHieu;
-    private long TienCoc; 
-    private String MaLX;
+    private int TienCoc; 
+    private int MaLX;
 
     public Xe() {
     }
-    
-    public Xe(String MaXe, String TenXe, String BienSo, String TrangThai, int TGBaoDuong, long DonGia, String ThuongHieu, long TienCoc, String MaLX) {
+
+    public Xe(int MaXe, String TenXe, String BienSo, String TrangThai, int TGBaoDuong, int DonGia, String ThuongHieu, int TienCoc, int MaLX) {
         this.MaXe = MaXe;
         this.TenXe = TenXe;
         this.BienSo = BienSo;
@@ -26,6 +26,7 @@ public class Xe {
         this.TienCoc = TienCoc;
         this.MaLX = MaLX;
     }
+    
     
     
 }
