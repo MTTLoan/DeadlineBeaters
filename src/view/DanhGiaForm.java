@@ -8,15 +8,64 @@ package view;
  *
  * @author ASUS
  */
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.DanhGia;
+import dao.DanhGiaDAO;
+import controller.TimKiemDanhGia;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 public class DanhGiaForm extends javax.swing.JPanel {
 
     /**
      * Creates new form DanhGiaForm
      */
+    private DefaultTableModel tblModel;
+    private static ArrayList<DanhGia> ds;
+    
     public DanhGiaForm() {
         initComponents();
+        tblDanhGia.setDefaultEditor(Object.class, null);
+        initTable();
+        ds = DanhGiaDAO.getInstance().selectAll();
+        loadDataToTable(ds);
     }
 
+    public final void initTable() {
+        tblModel = new DefaultTableModel();
+        String[] headerTbl = new String[]{"Mã đánh giá", "Số điểm", "Nội dung", "Mã hóa đơn"};
+        tblModel.setColumnIdentifiers(headerTbl);
+        tblDanhGia.setModel(tblModel);
+    }
+    
+    public void loadDataToTable(ArrayList<DanhGia> dg) {
+        try {
+            tblModel.setRowCount(0);
+            for (DanhGia i : dg) {
+                    tblModel.addRow(new Object[]{
+                    i.getMaDG(), i.getSoDiem(), i.getNoiDung(), i.getMaHD()
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public DanhGia getDanhGiaSelect(){
+        int i_row = tblDanhGia.getSelectedRow();
+        DanhGia dg = DanhGiaDAO.getInstance().selectAll().get(i_row);
+        return dg;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,16 +77,16 @@ public class DanhGiaForm extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDanhGia = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         cbxLuachon = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnXuatExcel = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -46,8 +95,8 @@ public class DanhGiaForm extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(1100, 820));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDanhGia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tblDanhGia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -55,10 +104,10 @@ public class DanhGiaForm extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Mã đánh giá", "Số điểm", "Nội dung", "Mã hợp đồng"
+                "Mã đánh giá", "Số điểm", "Nội dung", "Mã hóa đơn"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblDanhGia);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1010, 530));
 
@@ -68,7 +117,7 @@ public class DanhGiaForm extends javax.swing.JPanel {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cbxLuachon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbxLuachon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã đánh giá", "Số điểm", "Nội dung", "Mã hợp đồng" }));
+        cbxLuachon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã đánh giá", "Số điểm", "Nội dung", "Mã hóa đơn" }));
         cbxLuachon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxLuachonActionPerformed(evt);
@@ -104,13 +153,13 @@ public class DanhGiaForm extends javax.swing.JPanel {
         });
         jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 350, 40));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 40, 40));
+        jPanel3.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 40, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 600, 90));
 
@@ -128,25 +177,25 @@ public class DanhGiaForm extends javax.swing.JPanel {
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 1010, 10));
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_add.png"))); // NOI18N
-        jButton6.setText("Thêm");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_add.png"))); // NOI18N
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 150, 47));
+        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 150, 47));
 
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_xls.png"))); // NOI18N
-        jButton7.setText(" Xuất Excel");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnXuatExcel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnXuatExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_xls.png"))); // NOI18N
+        btnXuatExcel.setText(" Xuất Excel");
+        btnXuatExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnXuatExcelActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 120, 150, 47));
+        jPanel1.add(btnXuatExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 120, 150, 47));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -172,34 +221,100 @@ public class DanhGiaForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchKeyPressed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-
+        String luachon = (String) cbxLuachon.getSelectedItem();
+        String text = txtSearch.getText();
+        ArrayList<DanhGia> result = new ArrayList<>();
+        switch (luachon) {
+            case "Tất cả" -> result = TimKiemDanhGia.getInstance().tkTatCa(text);
+            case "Mã đánh giá" -> result = TimKiemDanhGia.getInstance().tkMaDG(text);
+            case "Số điểm" -> result = TimKiemDanhGia.getInstance().tkSoDiem(text);
+            case "Nội dung" -> result = TimKiemDanhGia.getInstance().tkNoiDung(text);
+            case "Mã hóa đơn" -> result = TimKiemDanhGia.getInstance().tkMaHD(text);
+        }
+        loadDataToTable(result);
     }//GEN-LAST:event_txtSearchKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+                String luachon = (String) cbxLuachon.getSelectedItem();
+        String text = txtSearch.getText();
+        ArrayList<DanhGia> result = new ArrayList<>();
+        switch (luachon) {
+            case "Tất cả" -> result = TimKiemDanhGia.getInstance().tkTatCa(text);
+            case "Mã đánh giá" -> result = TimKiemDanhGia.getInstance().tkMaDG(text);
+            case "Số điểm" -> result = TimKiemDanhGia.getInstance().tkSoDiem(text);
+            case "Nội dung" -> result = TimKiemDanhGia.getInstance().tkNoiDung(text);
+            case "Mã hóa đơn" -> result = TimKiemDanhGia.getInstance().tkMaHD(text);
+        }
+        loadDataToTable(result);
+    }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+        ThemDanhGia a = new ThemDanhGia();
+        a.setVisible(true);
+    }//GEN-LAST:event_btnThemActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatExcelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+        try {
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("DanhGia");
+
+                Row rowCol = sheet.createRow(0);
+                for (int i = 0; i < tblDanhGia.getColumnCount(); i++) {
+                    Cell cell = rowCol.createCell(i);
+                    cell.setCellValue(tblDanhGia.getColumnName(i));
+                }
+
+                for (int j = 0; j < tblDanhGia.getRowCount(); j++) {
+                    Row row = sheet.createRow(j + 1);
+                    for (int k = 0; k < tblDanhGia.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k);
+                        if (tblDanhGia.getValueAt(j, k) != null) {
+                            cell.setCellValue(tblDanhGia.getValueAt(j, k).toString());
+                        }
+
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                openFile(saveFile.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton_ExcelHDActionPerformed
+
+    private void openFile(String file) {
+        try {
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_btnXuatExcelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXuatExcel;
     private javax.swing.JComboBox<String> cbxLuachon;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblDanhGia;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
