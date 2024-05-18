@@ -130,17 +130,17 @@ public class DangNhapForm extends javax.swing.JFrame {
             switch (taiKhoan.getChucVu()) {
                 case "Admin" -> {
                     // Hiển thị giao diện cho admin
-                    Admin adminFrame = new Admin();
+                    Admin adminFrame = new Admin(taiKhoan);
                     adminFrame.setVisible(true);
                 }
                 case "Quản lý" -> {
                     // Hiển thị giao diện cho quản lý
-                    QuanLy quanLyFrame = new QuanLy();
+                    QuanLy quanLyFrame = new QuanLy(taiKhoan);
                     quanLyFrame.setVisible(true);
                 }
                 case "Nhân viên" -> {
                     // Hiển thị giao diện cho nhân viên
-                    NhanVien nhanVienFrame = new NhanVien();
+                    NhanVien nhanVienFrame = new NhanVien(taiKhoan);
                     nhanVienFrame.setVisible(true);
                 }
                 default -> {
