@@ -12,10 +12,10 @@ grant dba to qlthuexe;
 CREATE DIRECTORY hinhxe AS 'D:\hinh xe'; -
 --duong link luu file hinh xe
 
---GRANT READ, WRITE ON DIRECTORY hinhxe TO qlthuexe;
---cấp quyền sử dụng directory cho  qlthuexe
+GRANT READ, WRITE ON DIRECTORY hinhxe TO qlthuexe;
+--cấp quy�?n sử dụng directory cho  qlthuexe
 
---SELECT * FROM DBA_DIRECTORIES 
+SELECT * FROM DBA_DIRECTORIES 
 --run statement kiem tra co directory hay khong
 
 -- DROP TABLE
@@ -414,37 +414,37 @@ END;
 ALTER SESSION SET nls_date_format = 'DD/MM/YYYY';
 -- INSERT DU LIEU
 --KHACHANG
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Nguyễn Văn A', 'Nam','12-10-1998', '731 Trần Hưng Đạo, Quận 5, TP Hồ Chí Minh','0938776266', 2000000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Trần Ngọc Hân', 'Nữ','25-01-2000', '23/5 Nguyễn Trãi, Quận 5, TP Hồ Chí Minh','0912300247', 2850000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Nguyễn Văn A', 'Nam','12-10-1998', '731 Trần Hưng �?ạo, Quận 5, TP Hồ Chí Minh','0938776266', 2000000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Trần Ng�?c Hân', 'Nữ','25-01-2000', '23/5 Nguyễn Trãi, Quận 5, TP Hồ Chí Minh','0912300247', 2850000);
 INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Trần Minh Long', 'Nam','23-08-1995', '45 Nguyễn cảnh Chân, Quận 1, TP Hồ Chí Minh','0915133607', 1560000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Lê Nhật Minh', 'Nam','30-08-2003', '50/34 Lê Đại Hành, Quận 10, TP Hồ Chí Minh','0915391312', 6930000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Lê Hoài Thương', 'Nữ','07-10-2004', '34 Trương Định, Quận 3, TP Hồ Chí Minh','0913602103', 825000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Lê Nhật Minh', 'Nam','30-08-2003', '50/34 Lê �?ại Hành, Quận 10, TP Hồ Chí Minh','0915391312', 6930000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Lê Hoài Thương', 'Nữ','07-10-2004', '34 Trương �?ịnh, Quận 3, TP Hồ Chí Minh','0913602103', 825000);
 INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Lê Gia Hân', 'Nữ','06-03-2000', '227 Nguyễn Văn Cừ, Quận 5, TP Hồ Chí Minh','0905372666', 600000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Lê Đức Thịnh', 'Nam','23-05-2002', '32/3 Trần Bình Trọng, Quận 5, TP Hồ Chí Minh','0912222798', 2520000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Lê �?ức Thịnh', 'Nam','23-05-2002', '32/3 Trần Bình Tr�?ng, Quận 5, TP Hồ Chí Minh','0912222798', 2520000);
 INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Nguyễn Văn Tâm', 'Nam','12-06-1983', '45/2 An Dương Vương, Quận 5, TP Hồ Chí Minh','0913295947', 240000);
 INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Phan Thị Thanh', 'Nữ','31-12-1989', '873 Lê Hồng Phong, Quận 5, TP Hồ Chí Minh','0979749536', 2820000);
 INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Lê Hà Vinh', 'Nam','10-01-1990', '34/34B Nguyễn Trãi, Quận 1, TP Hồ Chí Minh','0914418539', 120000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Hà Duy Lập', 'Nam','02-05-1998', '197  Nguyễn Văn Thủ, Phường Đa Kao, Quận 1, TP Hồ Chí Minh','0944747978', 1680000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Nguyễn Tuấn Mạnh', 'Nam','03-09-2000', '33/9A Đường số 08, Khu phố 01, Phường Linh Xuân, Thành phố Thủ Đức, TP Hồ Chí Minh','0949234388', 600000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Trần Văn Kiên', 'Nam','15-08-1995', '58 đường 53, Phường Tân Phong, Quận 7, TP Hồ Chí Minh','0949522905', 1300000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Nguyễn Huy Hùng', 'Nam','04-04-2001', '18 đường Trần Ngọc Diện, Phường Thảo Điền, Thành phố Thủ Đức, TP Hồ Chí Minh','0911375199', 1050000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Vũ Thị Anh', 'Nữ','09-03-2004', '12, Đường số 2, Phường Phú Hữu, Thành phố Thủ Đức, TP Hồ Chí Minh','0919795257', 1550000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Trần Ngọc Anh', 'Nữ','06-04-1994', '1A Nguyễn Văn Đậu, Phường 05, Quận Phú Nhuận, TP Hồ Chí Minh','0977097698', 900000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Ngô Thị Kiều Diễm', 'Nữ','02-05-2002', '36/38 Quốc Lộ 1A, Khu Phố 3, phường An Phú Đông, Quận 12, TP Hồ Chí Minh','0912980878', 210000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Nguyễn Thị Thuỳ Giang', 'Nữ','12-07-2003', '13 đường số 22, Phường Bình Trị Đông B, Quận Bình Tân, TP Hồ Chí Minh','0854569729', 1200000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Nguyễn Thị Minh Anh', 'Nữ','22-10-1990', '371 Nguyễn Kiệm, Phường 3, Quận Gò Vấp, TP Hồ Chí Minh','0917822121', 900000);
-INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Trần Khang Ninh', 'Nam','23-11-1991', '256/30 Phan Huy ích, Phường 12, Quận Gò Vấp, TP Hồ Chí Minh','0945951146', 795000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Hà Duy Lập', 'Nam','02-05-1998', '197  Nguyễn Văn Thủ, Phư�?ng �?a Kao, Quận 1, TP Hồ Chí Minh','0944747978', 1680000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Nguyễn Tuấn Mạnh', 'Nam','03-09-2000', '33/9A �?ư�?ng số 08, Khu phố 01, Phư�?ng Linh Xuân, Thành phố Thủ �?ức, TP Hồ Chí Minh','0949234388', 600000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Trần Văn Kiên', 'Nam','15-08-1995', '58 đư�?ng 53, Phư�?ng Tân Phong, Quận 7, TP Hồ Chí Minh','0949522905', 1300000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Nguyễn Huy Hùng', 'Nam','04-04-2001', '18 đư�?ng Trần Ng�?c Diện, Phư�?ng Thảo �?i�?n, Thành phố Thủ �?ức, TP Hồ Chí Minh','0911375199', 1050000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Vũ Thị Anh', 'Nữ','09-03-2004', '12, �?ư�?ng số 2, Phư�?ng Phú Hữu, Thành phố Thủ �?ức, TP Hồ Chí Minh','0919795257', 1550000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Trần Ng�?c Anh', 'Nữ','06-04-1994', '1A Nguyễn Văn �?ậu, Phư�?ng 05, Quận Phú Nhuận, TP Hồ Chí Minh','0977097698', 900000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Ngô Thị Ki�?u Diễm', 'Nữ','02-05-2002', '36/38 Quốc Lộ 1A, Khu Phố 3, phư�?ng An Phú �?ông, Quận 12, TP Hồ Chí Minh','0912980878', 210000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Nguyễn Thị Thuỳ Giang', 'Nữ','12-07-2003', '13 đư�?ng số 22, Phư�?ng Bình Trị �?ông B, Quận Bình Tân, TP Hồ Chí Minh','0854569729', 1200000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Nguyễn Thị Minh Anh', 'Nữ','22-10-1990', '371 Nguyễn Kiệm, Phư�?ng 3, Quận Gò Vấp, TP Hồ Chí Minh','0917822121', 900000);
+INSERT INTO KHACHHANG (TenKH, GioiTinh, NgaySinh , DiaChi, SDT, TongDoanhThu) VALUES ('Trần Khang Ninh', 'Nam','23-11-1991', '256/30 Phan Huy ích, Phư�?ng 12, Quận Gò Vấp, TP Hồ Chí Minh','0945951146', 795000);
 
 --TAIKHOAN
-INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('admin', '123456', 'Phạm Ngọc Tài', 'Nam','24-06-2000', 'Admin', 8000000, '13-12-2023', NULL);
-INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('quanly', '123456', 'Bùi Xuân Thường', 'Nữ','13-07-1990', 'Quản lý', 15200000, '21-11-2023', NULL);
-INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('nhanvien', '123456', 'Trần Thị Như  Ý', 'Nữ','04-05-2002', 'Nhân viên', 6100000, '21-12-2023', 2002);
+INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('admin', '123456', 'Phạm Ng�?c Tài', 'Nam','24-06-2000', 'Admin', 8000000, '13-12-2023', NULL);
+INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('quanly', '123456', 'Bùi Xuân Thư�?ng', 'Nữ','13-07-1990', 'Quản lý', 15200000, '21-11-2023', NULL);
+INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('nhanvien', '123456', 'Trần Thị Như  �?', 'Nữ','04-05-2002', 'Nhân viên', 6100000, '21-12-2023', 2002);
 INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('linhnvl', 'linhnvl1234', 'Nguyễn Văn Linh', 'Nam','14-01-2002', 'Nhân viên', 6100000, '21-12-2023', 2002);
 INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('phuongntp', 'phuongntp1234', 'Nguyễn Thị Phương', 'Nữ','03-09-1998', 'Nhân viên', 8000000, '21-12-2023', 2002);
 INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('binhptb', 'binhptb1234', 'Phạm Thanh Bình', 'Nam','24-01-1989', 'Nhân viên', 8000000, '27-12-2023', 2002);
 INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('phongntp', 'phongntp1234', 'Nguyễn Thanh Phong', 'Nam','25-02-2000', 'Nhân viên', 8000000, '27-12-2023', 2002);
 INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('tuyetctt', 'tuyetctt1234', 'Cao Thị Tuyết', 'Nữ','02-05-2001', 'Nhân viên', 8000000, '27-12-2023', 2002);
-INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('hienndh', 'hienndh1234', 'Nguyễn Đức Hiền', 'Nam','12-06-1998', 'Nhân viên', 8000000, '27-12-2023', 2002);
+INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('hienndh', 'hienndh1234', 'Nguyễn �?ức Hi�?n', 'Nam','12-06-1998', 'Nhân viên', 8000000, '27-12-2023', 2002);
 INSERT INTO TAIKHOAN (TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL  ) VALUES ('tuanhat', 'tuanhat1234', 'Hoàng  Anh Tuấn', 'Nam','16-01-2001', 'Nhân viên', 8000000, '15-02-2024', 2002);
 --LOAIXE
 INSERT INTO LOAIXE (TenLX, SoLuong, SoCho) VALUES ('Xe bốn chỗ ', 10, 4);
@@ -475,34 +475,34 @@ INSERT INTO XE (TenXe, BienSo, TrangThai, TGBaoDuong, DonGia, ThuongHieu, TienCo
 --
 ALTER SESSION SET nls_date_format = 'DD/MM/YYYY HH24:MI';
 --HOADON
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('01-01-2024 9:35', 1200000, '01-01-2024  9:00', '01-01-2024 13:00', 20000000, '01-01-2024 13:00',  'Đã trả xe', NULL, 0001, 2001);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('18-01-2024 13:45', 1050000, '20-01-2024 8:00', '21-01-2024 8:00', 10000000, '21-01-2024 8:00',  'Đã trả xe', NULL, 0002, 2003);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('10-02-2024 10:23', 660000, '10-02-2024  10:30', '10-02-2024  18:30', 10000000, '10-02-2024  18:30',  'Đã trả xe', NULL, 0003, 2004);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('14-02-2024 15:12', 840000, '15-02-2024 10:00', '16-02-2024 10:00', 0, '16-02-2024 10:00',  'Đã trả xe', NULL, 0004, 2003);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 16:00', 825000, '17-02-2024 16:20', '18-02-2024 4:20', 10000000, '18-02-2024 4:20',  'Đã trả xe', NULL, 0005, 2003);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('19-02-2024 20:00', 600000, '20-02-2024 18:20', '20-02-2024 22:20', 10000000, '20-02-2024 22:20',  'Đã trả xe', NULL, 0006, 2006);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('20-02-2024 19:02', 2520000, '20-02-2024 23:45', '22-02-2024 23:45', 10000000, '22-02-2024 23:45',  'Đã trả xe', NULL, 0007, 2002);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('01-03-2024  7:28', 240000, '02-03-2024 8:00', '02-03-2024 16:00 ', 0, '02-03-2024 16:00 ',  'Đã trả xe', NULL, 0008, 2005);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('01-03-2024  7:30', 1800000, '02-03-2024 6:00', '02-03-2024 14:00', 30000000, '02-03-2024 14:00',  'Đã trả xe', NULL, 0009, 2007);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('10-03-2024 8:12', 600000, '10-03-2024 8:20', '10-03-2024 12:12', 10000000, '10-03-2024 12:12',  'Đã trả xe', NULL, 0009, 2008);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('15-03-2024 17:45', 800000, '15-03-2024 18:00', '15-03-2024 22:00', 10000000, '15-03-2024 22:45',  'Đã trả xe', NULL, 0001, 2009);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('23-03-2024 7:00', 120000, '23-03-2024 7:15', '23-03-2024 15:15', 0, '23-03-2024 15:15',  'Đã trả xe', NULL, 0010, 2010);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('03-04-2024 5:00', 1680000, '03-04-2024 5:15', '03-04-2024 13:15', 20000000, '03-04-2024 13:15',  'Đã trả xe', NULL, 0011, 2008);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('07-04-2024 15:34', 600000, '08-04-2024 17:30', '08-04-2024 21:30', 10000000, '08-04-2024 21:30',  'Đã trả xe', NULL, 0012, 2003);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('13-04-2024 10:25', 750000, '15-04-2024 5:30', '15-04-2024 17:30', 10000000, '15-04-2024 17:30',  'Đã trả xe', NULL, 0013, 2005);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('14-04-2024 9:23', 1050000, '15-04-2024 7:30', '16-04-2024 7:30', 10000000, '16-04-2024 9:35',  'Đã trả xe', NULL, 0014, 2002);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('16-04-2024 9:20', 1550000, '16-04-2024 9:25', '16-04-2024 13:25', 20000000, '16-04-2024 13:25',  'Đã trả xe', NULL, 0015, 2003);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('16-04-2024 10:12', 900000, '16-04-2024 14:45', '16-04-2024 22:45', 10000000, '16-04-2024 22:45',  'Đã trả xe', NULL, 0016, 2010);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-04-2024 6:30', 210000, '17-04-2024 6:45', '18-04-2024 6:45', 0, '18-04-2024 6:45',  'Đã nhận xe', NULL, 0017, 2004);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-04-2024 11:10', 1200000, '18-04-2024 5:00', '18-04-2024 13:00', 20000000, '18-04-2024 13:00',  'Đã đặt xe', NULL, 0018, 2006);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-04-2024 11:30', 900000, '17-04-2024 11:40', '17-04-2024 23:40', 10000000, '17-04-2024 23:40',  'Đã nhận xe', NULL, 0019, 2005);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-04-2024 13:15', 195000, '18-04-2024 7:45', '18-04-2024 19:45', 0, '18-04-2024 19:45',  'Đã đặt xe', NULL, 0020, 2003);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 13:20', 600000, '19-04-2024 5:15', '19-04-2024 9:15', 10000000, '19-04-2024 9:15',  'Đã đặt xe', NULL, 0020, 2003);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 14:12', 900000, '18-04-2024 13:00', '18-04-2024  1:00', 10000000, '18-04-2024  1:00',  'Đã đặt xe', NULL, 0003, 2004);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 14:13', 1800000, '18-04-2024 5:00', '18-04-2024 13:00', 20000000, '18-04-2024 13:00',  'Đã đặt xe', NULL, 0002, 2005);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 15:00', 6090000, '17-04-2024 15:15', '19-04-2024 15:15', 20000000, '19-04-2024 15:15',  'Đã nhận xe', NULL, 0004, 2006);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 15:27', 420000, '18-04-2024 8:00', '19-04-2024 8:00', 0, '19-04-2024 8:00',  'Đã đặt xe', NULL, 0009, 2003);
-INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 15:34', 550000, '17-04-2024 15:45', '17-04-2024 19:45', 10000000, '17-04-2024 19:45',  'Đã nhận xe', NULL, 0013, 2007);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('01-01-2024 9:35', 1200000, '01-01-2024  9:00', '01-01-2024 13:00', 20000000, '01-01-2024 13:00',  '�?ã trả xe', NULL, 0001, 2001);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('18-01-2024 13:45', 1050000, '20-01-2024 8:00', '21-01-2024 8:00', 10000000, '21-01-2024 8:00',  '�?ã trả xe', NULL, 0002, 2003);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('10-02-2024 10:23', 660000, '10-02-2024  10:30', '10-02-2024  18:30', 10000000, '10-02-2024  18:30',  '�?ã trả xe', NULL, 0003, 2004);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('14-02-2024 15:12', 840000, '15-02-2024 10:00', '16-02-2024 10:00', 0, '16-02-2024 10:00',  '�?ã trả xe', NULL, 0004, 2003);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 16:00', 825000, '17-02-2024 16:20', '18-02-2024 4:20', 10000000, '18-02-2024 4:20',  '�?ã trả xe', NULL, 0005, 2003);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('19-02-2024 20:00', 600000, '20-02-2024 18:20', '20-02-2024 22:20', 10000000, '20-02-2024 22:20',  '�?ã trả xe', NULL, 0006, 2006);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('20-02-2024 19:02', 2520000, '20-02-2024 23:45', '22-02-2024 23:45', 10000000, '22-02-2024 23:45',  '�?ã trả xe', NULL, 0007, 2002);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('01-03-2024  7:28', 240000, '02-03-2024 8:00', '02-03-2024 16:00 ', 0, '02-03-2024 16:00 ',  '�?ã trả xe', NULL, 0008, 2005);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('01-03-2024  7:30', 1800000, '02-03-2024 6:00', '02-03-2024 14:00', 30000000, '02-03-2024 14:00',  '�?ã trả xe', NULL, 0009, 2007);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('10-03-2024 8:12', 600000, '10-03-2024 8:20', '10-03-2024 12:12', 10000000, '10-03-2024 12:12',  '�?ã trả xe', NULL, 0009, 2008);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('15-03-2024 17:45', 800000, '15-03-2024 18:00', '15-03-2024 22:00', 10000000, '15-03-2024 22:45',  '�?ã trả xe', NULL, 0001, 2009);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('23-03-2024 7:00', 120000, '23-03-2024 7:15', '23-03-2024 15:15', 0, '23-03-2024 15:15',  '�?ã trả xe', NULL, 0010, 2010);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('03-04-2024 5:00', 1680000, '03-04-2024 5:15', '03-04-2024 13:15', 20000000, '03-04-2024 13:15',  '�?ã trả xe', NULL, 0011, 2008);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('07-04-2024 15:34', 600000, '08-04-2024 17:30', '08-04-2024 21:30', 10000000, '08-04-2024 21:30',  '�?ã trả xe', NULL, 0012, 2003);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('13-04-2024 10:25', 750000, '15-04-2024 5:30', '15-04-2024 17:30', 10000000, '15-04-2024 17:30',  '�?ã trả xe', NULL, 0013, 2005);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('14-04-2024 9:23', 1050000, '15-04-2024 7:30', '16-04-2024 7:30', 10000000, '16-04-2024 9:35',  '�?ã trả xe', NULL, 0014, 2002);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('16-04-2024 9:20', 1550000, '16-04-2024 9:25', '16-04-2024 13:25', 20000000, '16-04-2024 13:25',  '�?ã trả xe', NULL, 0015, 2003);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('16-04-2024 10:12', 900000, '16-04-2024 14:45', '16-04-2024 22:45', 10000000, '16-04-2024 22:45',  '�?ã trả xe', NULL, 0016, 2010);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-04-2024 6:30', 210000, '17-04-2024 6:45', '18-04-2024 6:45', 0, '18-04-2024 6:45',  '�?ã nhận xe', NULL, 0017, 2004);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-04-2024 11:10', 1200000, '18-04-2024 5:00', '18-04-2024 13:00', 20000000, '18-04-2024 13:00',  '�?ã đặt xe', NULL, 0018, 2006);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-04-2024 11:30', 900000, '17-04-2024 11:40', '17-04-2024 23:40', 10000000, '17-04-2024 23:40',  '�?ã nhận xe', NULL, 0019, 2005);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-04-2024 13:15', 195000, '18-04-2024 7:45', '18-04-2024 19:45', 0, '18-04-2024 19:45',  '�?ã đặt xe', NULL, 0020, 2003);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 13:20', 600000, '19-04-2024 5:15', '19-04-2024 9:15', 10000000, '19-04-2024 9:15',  '�?ã đặt xe', NULL, 0020, 2003);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 14:12', 900000, '18-04-2024 13:00', '18-04-2024  1:00', 10000000, '18-04-2024  1:00',  '�?ã đặt xe', NULL, 0003, 2004);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 14:13', 1800000, '18-04-2024 5:00', '18-04-2024 13:00', 20000000, '18-04-2024 13:00',  '�?ã đặt xe', NULL, 0002, 2005);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 15:00', 6090000, '17-04-2024 15:15', '19-04-2024 15:15', 20000000, '19-04-2024 15:15',  '�?ã nhận xe', NULL, 0004, 2006);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 15:27', 420000, '18-04-2024 8:00', '19-04-2024 8:00', 0, '19-04-2024 8:00',  '�?ã đặt xe', NULL, 0009, 2003);
+INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES ('17-02-2024 15:34', 550000, '17-04-2024 15:45', '17-04-2024 19:45', 10000000, '17-04-2024 19:45',  '�?ã nhận xe', NULL, 0013, 2007);
 --CTHD
 INSERT INTO CHITIETHD VALUES (5001, 4001, 4, 500000, 7001);
 INSERT INTO CHITIETHD VALUES (5001, 4011, 4, 700000, 7002);
@@ -543,13 +543,13 @@ INSERT INTO CHITIETHD VALUES (5026, 4010, 48, 2940000, 7036);
 INSERT INTO CHITIETHD VALUES (5027, 4020, 24, 420000, 7037);
 INSERT INTO CHITIETHD VALUES (5028, 4005, 4, 550000, 7038);
 --HDPHAT
-INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('01-01-2024 13:50', 2000000, 'Đã thanh toán', 5001);
-INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('18-02-2024 4:50', 1000000, 'Đã thanh toán', 5005);
-INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('02-03-2024 14:00', 3000000, 'Đã thanh toán', 5009);
-INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('10-03-2024 12:30', 500000, 'Đã thanh toán', 5010);
-INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('03-04-2024 13:50', 5000000, 'Đã thanh toán', 5013);
-INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('16-04-2024 08:04', 7000000, 'Đã thanh toán', 5016);
-INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('16-04-2024 14:15', 7000000, 'Đã thanh toán', 5017);
+INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('01-01-2024 13:50', 2000000, '�?ã thanh toán', 5001);
+INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('18-02-2024 4:50', 1000000, '�?ã thanh toán', 5005);
+INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('02-03-2024 14:00', 3000000, '�?ã thanh toán', 5009);
+INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('10-03-2024 12:30', 500000, '�?ã thanh toán', 5010);
+INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('03-04-2024 13:50', 5000000, '�?ã thanh toán', 5013);
+INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('16-04-2024 08:04', 7000000, '�?ã thanh toán', 5016);
+INSERT INTO HDPHAT (TGTao, TongTienPhat, TinhTrang, MaHD) VALUES ('16-04-2024 14:15', 7000000, '�?ã thanh toán', 5017);
 --CTHDPHAT
 SET SERVEROUTPUT ON
 BEGIN
@@ -564,23 +564,23 @@ END;
 /
 --- DANHGIA
 INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Giá cả phải chăng và dễ dàng đặt xe', 5001);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Xe được cung cấp đều mới và sạch sẽ, đảm bảo an toàn và thoải mái ', 5002);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (10, 'Đội ngũ nhân viên thân thiện và chuyên nghiệp, luôn sẵn lòng hỗ trợ và giải đáp mọi thắc mắc của khách hàng.', 5003);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Quy trình thuê xe linh hoạt và tiện lợi, tiết kiệm thời gian và công sức.', 5004);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Giá cả hợp lý và minh bạch, không có phí ẩn hay phụ phí bất ngờ khi thuê xe', 5005);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Xe được cung cấp đ�?u mới và sạch sẽ, đảm bảo an toàn và thoải mái ', 5002);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (10, '�?ội ngũ nhân viên thân thiện và chuyên nghiệp, luôn sẵn lòng hỗ trợ và giải đáp m�?i thắc mắc của khách hàng.', 5003);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Quy trình thuê xe linh hoạt và tiện lợi, tiết kiệm th�?i gian và công sức.', 5004);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Giá cả hợp lý và minh bạch, không có phí ẩn hay phụ phí bất ng�? khi thuê xe', 5005);
 INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Xe đạt tiêu chuẩn an toàn cao, được trang bị đầy đủ các tính năng an toàn và kiểm soát hiện đại.', 5006);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (10, 'Quy trình trả xe đơn giản và thuận tiện,tiết kiệm thời gian và không gặp phải bất kỳ rắc rối nào.', 5007);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (10, 'Quy trình trả xe đơn giản và thuận tiện,tiết kiệm th�?i gian và không gặp phải bất kỳ rắc rối nào.', 5007);
 INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Xe được trang bị đầy đủ các tính năng hiện đại và tiện nghi, tạo nên một trải nghiệm lái xe thoải mái và tiện lợi.', 5008);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Quy trình thuê xe được tổ chức rõ ràng và minh bạch, giúp hiểu rõ về các điều khoản và điều kiện thuê xe trước khi đồng ý với đơn hàng', 5009);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Tôi đã thấy rất hài lòng với chất lượng và tính đa dạng của các loại xe được cung cấp bởi công ty, đáp ứng được mọi nhu cầu và sở thích của khách hàng.', 5010);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Dịch vụ khách hàng của công ty là một trong những điểm mạnh, với nhân viên luôn sẵn lòng lắng nghe và giúp đỡ khách hàng trong mọi tình huống.', 5011);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Dịch vụ đặt xe qua ứng dụng di động của công ty hoạt động mượt mà và tiện lợi, cho phép tôi dễ dàng quản lý đơn đặt hàng và nhận thông tin cập nhật về đơn hàng của mình.', 5012);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (10, 'Tôi đã thấy rất ấn tượng với sự linh hoạt của công ty trong việc đáp ứng nhu cầu đặc biệt của khách hàng, như yêu cầu đặc biệt về loại xe hoặc điều kiện thuê xe.', 5013);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Tôi đã được hướng dẫn chi tiết về các tính năng và trang thiết bị của xe khi nhận xe, giúp tôi cảm thấy tự tin và thoải mái khi lái xe', 5014);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Tôi đã nhận được một dịch vụ thuê xe linh hoạt và tiện lợi, với các lựa chọn đa dạng cho thuê xe ngắn hạn và dài hạn', 5015);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Tôi đã được hỗ trợ và giải quyết mọi vấn đề kỹ thuật hoặc sự cố với xe một cách nhanh chóng và chuyên nghiệp từ nhân viên kỹ thuật của công ty', 5016);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (10, 'Tôi đã nhận được sự hài lòng tối đa từ dịch vụ thuê xe của công ty, với sự kết hợp hoàn hảo giữa chất lượng, tiện ích và giá trị, làm cho trải nghiệm thuê xe trở nên thú vị và tiện lợi hơn bao giờ hết', 5017);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Công ty cung cấp các chương trình thưởng và điểm thưởng cho khách hàng thân thiết, tạo động lực cho tôi quay lại sử dụng dịch vụ của họ một cách thường xuyên.', 5018);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Tôi đã nhận được sự hỗ trợ tận tình và chuyên nghiệp từ nhân viên khi gặp phải vấn đề hoặc câu hỏi liên quan đến việc thuê xe, giúp tôi cảm thấy an tâm và tin tưởng.', 5019);
-INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (10, 'Tôi đã được nhận một chiếc xe sạch sẽ và đảm bảo an toàn khi nhận xe, tạo sự yên tâm và tin tưởng trong suốt thời gian thuê xe.', 5020);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Quy trình thuê xe được tổ chức rõ ràng và minh bạch, giúp hiểu rõ v�? các đi�?u khoản và đi�?u kiện thuê xe trước khi đồng ý với đơn hàng', 5009);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Tôi đã thấy rất hài lòng với chất lượng và tính đa dạng của các loại xe được cung cấp bởi công ty, đáp ứng được m�?i nhu cầu và sở thích của khách hàng.', 5010);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Dịch vụ khách hàng của công ty là một trong những điểm mạnh, với nhân viên luôn sẵn lòng lắng nghe và giúp đỡ khách hàng trong m�?i tình huống.', 5011);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Dịch vụ đặt xe qua ứng dụng di động của công ty hoạt động mượt mà và tiện lợi, cho phép tôi dễ dàng quản lý đơn đặt hàng và nhận thông tin cập nhật v�? đơn hàng của mình.', 5012);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (10, 'Tôi đã thấy rất ấn tượng với sự linh hoạt của công ty trong việc đáp ứng nhu cầu đặc biệt của khách hàng, như yêu cầu đặc biệt v�? loại xe hoặc đi�?u kiện thuê xe.', 5013);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Tôi đã được hướng dẫn chi tiết v�? các tính năng và trang thiết bị của xe khi nhận xe, giúp tôi cảm thấy tự tin và thoải mái khi lái xe', 5014);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Tôi đã nhận được một dịch vụ thuê xe linh hoạt và tiện lợi, với các lựa ch�?n đa dạng cho thuê xe ngắn hạn và dài hạn', 5015);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Tôi đã được hỗ trợ và giải quyết m�?i vấn đ�? kỹ thuật hoặc sự cố với xe một cách nhanh chóng và chuyên nghiệp từ nhân viên kỹ thuật của công ty', 5016);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (10, 'Tôi đã nhận được sự hài lòng tối đa từ dịch vụ thuê xe của công ty, với sự kết hợp hoàn hảo giữa chất lượng, tiện ích và giá trị, làm cho trải nghiệm thuê xe trở nên thú vị và tiện lợi hơn bao gi�? hết', 5017);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Công ty cung cấp các chương trình thưởng và điểm thưởng cho khách hàng thân thiết, tạo động lực cho tôi quay lại sử dụng dịch vụ của h�? một cách thư�?ng xuyên.', 5018);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Tôi đã nhận được sự hỗ trợ tận tình và chuyên nghiệp từ nhân viên khi gặp phải vấn đ�? hoặc câu h�?i liên quan đến việc thuê xe, giúp tôi cảm thấy an tâm và tin tưởng.', 5019);
+INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (10, 'Tôi đã được nhận một chiếc xe sạch sẽ và đảm bảo an toàn khi nhận xe, tạo sự yên tâm và tin tưởng trong suốt th�?i gian thuê xe.', 5020);
 
