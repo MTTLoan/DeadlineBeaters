@@ -5,10 +5,7 @@
         <group>
             <file>file:/C:/Users/acer/OneDrive/Documents/NetBeansProjects/DeadlineBeaters/src/view/DangNhapForm.java</file>
             <file>file:/C:/Users/acer/OneDrive/Documents/NetBeansProjects/DeadlineBeaters/src/view/ThongTinTKForm.java</file>
-            <file>file:/C:/Users/acer/OneDrive/Documents/NetBeansProjects/DeadlineBeaters/src/view/NhanVien.java</file>
-            <file>file:/C:/Users/acer/OneDrive/Documents/NetBeansProjects/DeadlineBeaters/src/view/Admin.java</file>
-            <file>file:/C:/Users/acer/OneDrive/Documents/NetBeansProjects/DeadlineBeaters/src/database/JDBCUtil.java</file>
-            <file>file:/C:/Users/acer/OneDrive/Documents/NetBeansProjects/DeadlineBeaters/src/model/TaiKhoan.java</file>
+            <file>file:/C:/Users/acer/OneDrive/Documents/NetBeansProjects/DeadlineBeaters/src/controller/PhienDangNhap.java</file>
             <file>file:/C:/Users/acer/OneDrive/Documents/NetBeansProjects/DeadlineBeaters/src/view/DoiMatKhau.java</file>
             <file>file:/C:/Users/acer/OneDrive/Documents/NetBeansProjects/DeadlineBeaters/src/dao/TaiKhoanDAO.java</file>
         </group>

@@ -75,9 +75,9 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "DELETE FROM TaiKhoan WHERE TenTK=?";
+            String sql = "DELETE FROM TaiKhoan WHERE MaNV=?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, t.getTenTK());
+            pst.setString(1, t.getMaNV());
 
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
@@ -123,7 +123,7 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
         TaiKhoan tk = null;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM TaiKhoan WHERE TenTK=?";
+            String sql = "SELECT * FROM TaiKhoan WHERE MaNV=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t);
             ResultSet rs = pst.executeQuery();
@@ -147,7 +147,7 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
         }
         return tk;
     }
-    
+
     public TaiKhoan kiemTraDangNhap(String tenTaiKhoan, String matKhau) {
         TaiKhoan taiKhoan = null;
         try {
@@ -177,32 +177,31 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
         }
         return taiKhoan;
     }
-    
-public boolean doiMatKhau(String tenTaiKhoan, String matKhauCu, String matKhauMoi) {
-    try {
-        Connection con = JDBCUtil.getConnection();
-        String sql = "SELECT * FROM TaiKhoan WHERE TenTK=? AND MatKhau=?";
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setString(1, tenTaiKhoan);
-        pst.setString(2, matKhauCu);
-        ResultSet rs = pst.executeQuery();
-        if (rs.next()) {
 
-            String updateSql = "UPDATE TaiKhoan SET MatKhau=? WHERE TenTK=?";
-            PreparedStatement updatePst = con.prepareStatement(updateSql);
-            updatePst.setString(1, matKhauMoi);
-            updatePst.setString(2, tenTaiKhoan);
-            int rowsAffected = updatePst.executeUpdate();
+    public boolean doiMatKhau(String tenTaiKhoan, String matKhauCu, String matKhauMoi) {
+        try {
+            Connection con = JDBCUtil.getConnection();
+            String sql = "SELECT * FROM TaiKhoan WHERE TenTK=? AND MatKhau=?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, tenTaiKhoan);
+            pst.setString(2, matKhauCu);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                String updateSql = "UPDATE TaiKhoan SET MatKhau=? WHERE TenTK=?";
+                PreparedStatement updatePst = con.prepareStatement(updateSql);
+                updatePst.setString(1, matKhauMoi);
+                updatePst.setString(2, tenTaiKhoan);
+                int rowsAffected = updatePst.executeUpdate();
 
-            if (rowsAffected > 0) {
-                JDBCUtil.closeConnection(con);
-                return true;
+                if (rowsAffected > 0) {
+                    JDBCUtil.closeConnection(con);
+                    return true;
+                }
             }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        JDBCUtil.closeConnection(con);
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return false;
     }
-    return false;
-}
 }

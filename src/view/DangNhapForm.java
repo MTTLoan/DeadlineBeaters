@@ -1,14 +1,19 @@
 package view;
 
-import dao.TaiKhoanDAO;
 import javax.swing.JOptionPane;
 import model.TaiKhoan;
+import controller.PhienDangNhap;
+import view.DangNhapForm;
 
 public class DangNhapForm extends javax.swing.JFrame {
+    
+    private PhienDangNhap phienDangNhap;
 
     public DangNhapForm() {
         initComponents();
+        this.phienDangNhap = new PhienDangNhap(); // Khởi tạo đối tượng phienDangNhap ở đây
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -114,15 +119,15 @@ public class DangNhapForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDangNhapActionPerformed
-        // TODO add your handling code here:
         String tenTaiKhoan = jtTenTK.getText();
         String matKhau = new String(jtMatKhau.getPassword());
 
         // Kiểm tra đăng nhập
-        TaiKhoanDAO taiKhoanDAO = TaiKhoanDAO.getInstance();
-        TaiKhoan taiKhoan = taiKhoanDAO.kiemTraDangNhap(tenTaiKhoan, matKhau);
-
-        if (taiKhoan != null) {
+        boolean dangNhapThanhCong = phienDangNhap.dangNhap(tenTaiKhoan, matKhau);
+    
+        if (dangNhapThanhCong) {
+            TaiKhoan taiKhoan = phienDangNhap.getCurrentAcc();
+        
             // Đăng nhập thành công
             if (taiKhoan.getChucVu().equals("Admin")) {
                 // Hiển thị giao diện cho admin
@@ -137,12 +142,13 @@ public class DangNhapForm extends javax.swing.JFrame {
                 NhanVien nhanVienFrame = new NhanVien();
                 nhanVienFrame.setVisible(true);
             }
+        
             // Đóng cửa sổ đăng nhập
             this.dispose();
         } else {
             // Đăng nhập không thành công, hiển thị thông báo lỗi
             JOptionPane.showMessageDialog(this, "Tên tài khoản hoặc mật khẩu không chính xác!", "Đăng nhập không thành công", JOptionPane.ERROR_MESSAGE);
-        }                                         
+        }                                                                                                                     
     }//GEN-LAST:event_jbDangNhapActionPerformed
 
     private void jtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtMatKhauActionPerformed
