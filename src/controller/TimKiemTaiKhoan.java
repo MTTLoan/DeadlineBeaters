@@ -22,16 +22,16 @@ public class TimKiemTaiKhoan {
         ArrayList<TaiKhoan> ds = TaiKhoanDAO.getInstance().selectAll();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         for (var i : ds) {
-            if (i.getMaNV().toLowerCase().contains(text.toLowerCase())
+            if (Integer.toString(i.getMaNV()).contains(text.toLowerCase())
                 || i.getTenTK().toLowerCase().contains(text.toLowerCase())
                 || i.getMatKhau().toLowerCase().contains(text.toLowerCase())
                 || i.getHoTen().toLowerCase().contains(text.toLowerCase())
                 || i.getGioiTinh().toLowerCase().contains(text.toLowerCase())
                 || i.getNgaySinh().format(dtf).contains(text.toLowerCase())
                 || i.getChucVu().toLowerCase().contains(text.toLowerCase())
-                || Long.toString(i.getLuong()).contains(text.toLowerCase())
+                || Integer.toString(i.getLuong()).contains(text.toLowerCase())
                 || i.getNgayVaoLam().format(dtf).contains(text.toLowerCase())
-                || i.getMaQL().toLowerCase().contains(text.toLowerCase())) {
+                || Integer.toString(i.getMaQL()).contains(text.toLowerCase())) {
                 result.add(i);
             }
         }
@@ -42,7 +42,7 @@ public class TimKiemTaiKhoan {
         ArrayList<TaiKhoan> result = new ArrayList<>();
         ArrayList<TaiKhoan> ds = TaiKhoanDAO.getInstance().selectAll();
         for (var i : ds) {
-            if (i.getMaNV().toLowerCase().contains(text.toLowerCase())) {
+            if (Integer.toString(i.getMaNV()).contains(text.toLowerCase())) {
                 result.add(i);
             }
         }
@@ -109,7 +109,7 @@ public class TimKiemTaiKhoan {
         ArrayList<TaiKhoan> result = new ArrayList<>();
         ArrayList<TaiKhoan> ds = TaiKhoanDAO.getInstance().selectAll();
         for (var i : ds) {
-            if (Long.toString(i.getLuong()).contains(text.toLowerCase())) {
+            if (Integer.toString(i.getLuong()).contains(text.toLowerCase())) {
                 result.add(i);
             }
         }
@@ -132,7 +132,7 @@ public class TimKiemTaiKhoan {
         ArrayList<TaiKhoan> result = new ArrayList<>();
         ArrayList<TaiKhoan> ds = TaiKhoanDAO.getInstance().selectAll();
         for (var i : ds) {
-            if (i.getMaQL().toLowerCase().contains(text.toLowerCase())) {
+            if (Integer.toString(i.getMaQL()).contains(text.toLowerCase())) {
                 result.add(i);
             }
         }

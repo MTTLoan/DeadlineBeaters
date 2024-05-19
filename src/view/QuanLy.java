@@ -46,13 +46,6 @@ public class QuanLy extends javax.swing.JFrame {
         MainContent.repaint();
     }
     
-    public TaiKhoan getCurrentAcc() {
-        return currentAcc;
-    }
-    
-    public void setCurrentAcc(TaiKhoan currentAcc) {
-        this.currentAcc = currentAcc;
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -513,7 +506,7 @@ public class QuanLy extends javax.swing.JFrame {
     private void ThongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThongTinMouseClicked
         // TODO add your handling code here:
         MainContent.removeAll();
-        ThongTinTKForm tt = new ThongTinTKForm();
+        ThongTinTKForm tt = new ThongTinTKForm(currentAcc);
         MainContent.add(tt).setVisible(true);
         MainContent.validate();
         MainContent.repaint();
@@ -523,7 +516,7 @@ public class QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         int relly = JOptionPane.showConfirmDialog(
                 null,
-                "Bạn muốn thoát khỏi chương trình ?",
+                "Bạn có chắc muốn đăng xuất?",
                 "Xác nhận",
                 JOptionPane.YES_NO_OPTION);
         if (relly == JOptionPane.YES_OPTION) {

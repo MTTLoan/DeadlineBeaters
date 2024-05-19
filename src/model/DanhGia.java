@@ -2,7 +2,7 @@
 package model;
 
 public class DanhGia {
-    private Integer MaDG;
+    private int MaDG;
     private int SoDiem;
     private String NoiDung;
     private int MaHD;
@@ -10,19 +10,14 @@ public class DanhGia {
     public DanhGia() {
     }
 
-    public DanhGia(Integer MaDG, int SoDiem, String NoiDung, int MaHD) {
+    public DanhGia(int MaDG, int SoDiem, String NoiDung, int MaHD) {
         this.MaDG = MaDG;
         this.SoDiem = SoDiem;
         this.NoiDung = NoiDung;
         this.MaHD = MaHD;
     }
 
-    public DanhGia(Object object, String SoDiem, String NoiDung, String MaHD) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-        // Getter and Setter for MaDG
-    public Integer getMaDG() {
+    public int getMaDG() {
         return MaDG;
     }
 
@@ -38,7 +33,7 @@ public class DanhGia {
         return MaHD;
     }
 
-    public void setMaDG(Integer MaDG) {
+    public void setMaDG(int MaDG) {
         this.MaDG = MaDG;
     }
 

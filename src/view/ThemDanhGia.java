@@ -10,6 +10,7 @@ package view;
  */
 import model.DanhGia;
 import dao.DanhGiaDAO;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class ThemDanhGia extends javax.swing.JFrame {
@@ -17,11 +18,10 @@ public class ThemDanhGia extends javax.swing.JFrame {
     /**
      * Creates new form ThemTaiKhoan
      */
-    private final DanhGiaForm homedg;
-    public ThemDanhGia(DanhGiaForm parent) {
+    public ThemDanhGia() {
         initComponents();
         setLocationRelativeTo(null);
-        homedg = parent;
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -191,16 +191,18 @@ public class ThemDanhGia extends javax.swing.JFrame {
         String NoiDung = jTextArea_NoiDung.getText();
         String MaHD = jTextField_MaHD.getText();
         String SoDiem = (String) jComboBox1_SoDiem.getSelectedItem();
-        if( NoiDung.isEmpty() || MaHD.isEmpty()|| SoDiem.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-            
-        }else{
-            
-                DanhGia DanhGia = new DanhGia(null, SoDiem, NoiDung, MaHD);
+        try {
+            int diem = Integer.parseInt(SoDiem);
+            if( NoiDung.isEmpty() || MaHD.isEmpty()|| SoDiem.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            }else{
+                DanhGia DanhGia = new DanhGia(0, diem, NoiDung, Integer.parseInt(MaHD));
                 DanhGiaDAO.getInstance().insert(DanhGia);
                 this.dispose();
-                homedg.loadDataToTable(DanhGiaDAO.getInstance().selectAll());
                 JOptionPane.showMessageDialog(this, "Thêm thành công!");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Điểm không hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnThemMouseClicked
 

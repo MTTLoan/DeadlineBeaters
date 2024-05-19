@@ -15,6 +15,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.*;
@@ -26,7 +27,7 @@ import javax.swing.JFrame;
  * @author ASUS
  */
 
-public class TaiKhoanForm extends javax.swing.JPanel {
+public final class TaiKhoanForm extends javax.swing.JPanel {
 
     /**
      * Creates new form TaiKhoanForm
@@ -37,12 +38,11 @@ public class TaiKhoanForm extends javax.swing.JPanel {
     public TaiKhoanForm() {
         initComponents();
         UIManager.put("Table.showVerticalLines", true);
-        BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
-        ui.setNorthPane(null);
         tblAccount.setDefaultEditor(Object.class, null);
         initTable();
         loadDataToTable(taikhoans);
     }
+    
     public final void initTable() {
         tblModel = new DefaultTableModel();
         String[] headerTbl = new String[]{"Họ và tên", "Tên tài khoản", "Mã số nhân viên", "Chức vụ", "Giới tính", "Ngày sinh"};
@@ -53,9 +53,10 @@ public class TaiKhoanForm extends javax.swing.JPanel {
     public void loadDataToTable(ArrayList<TaiKhoan> tk){
         try{
             tblModel.setRowCount(0);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             for( TaiKhoan i: tk){
                 tblModel.addRow(new Object[]{
-                    i.getHoTen(),i.getTenTK(),i.getMaNV(),i.getChucVu(),i.getGioiTinh(),i.getNgaySinh()
+                    i.getHoTen(),i.getTenTK(),i.getMaNV(),i.getChucVu(),i.getGioiTinh(),i.getNgaySinh().format(dtf)
                 });
             }
         }

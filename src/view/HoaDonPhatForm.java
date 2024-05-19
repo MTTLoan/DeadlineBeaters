@@ -4,6 +4,25 @@
  */
 package view;
 
+import dao.HDPhatDAO;
+import dao.HoaDonDAO;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.HDPhat;
+import model.HoaDon;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /**
  *
  * @author ASUS
@@ -13,8 +32,42 @@ public class HoaDonPhatForm extends javax.swing.JPanel {
     /**
      * Creates new form HoaDonPhatForm
      */
+    private DefaultTableModel tblModel; //sử dụng để quản lý dữ liệu cho JTable
+    private static ArrayList<HDPhat> ds;
+    
     public HoaDonPhatForm() {
         initComponents();
+        jTable_HDPhat.setDefaultEditor(Object.class, null);
+        initTable();
+        ds = HDPhatDAO.getInstance().selectAll();
+        loadDataToTable(ds);
+    }
+    
+    public final void initTable() {
+        tblModel = new DefaultTableModel();
+        String[] headerTbl = new String[]{"Mã hóa đơn phạt", "Thời gian tạo", "Tổng tiền phạt", "Tình trạng", "Mã hóa đơn"};
+        tblModel.setColumnIdentifiers(headerTbl);
+        jTable_HDPhat.setModel(tblModel);
+    }
+
+    public void loadDataToTable(ArrayList<HDPhat> hd) {
+        try {
+            tblModel.setRowCount(0);
+            for (HDPhat i : hd) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                tblModel.addRow(new Object[]{
+                    i.getMaHDP(), i.getTGTao().format(dtf), i.getTongTienPhat(), i.getTinhTrang(), i.getMaHD()
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public HoaDon getHDPhatSelect() {
+        int i_row = jTable_HDPhat.getSelectedRow();
+        HoaDon hd = HoaDonDAO.getInstance().selectAll().get(i_row);
+        return hd;
     }
 
     /**
@@ -26,65 +79,52 @@ public class HoaDonPhatForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel_HDPhat = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton_ThemHDP = new javax.swing.JButton();
-        jButton_CTHDP = new javax.swing.JButton();
+        jButton_Excel = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         cbxLuachon = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
-        jButton_TimKiemHDP = new javax.swing.JButton();
-        jButton_ExcelHDP = new javax.swing.JButton();
-        jButton_SuaHDP = new javax.swing.JButton();
-        jButton_XoaHDP = new javax.swing.JButton();
+        jButton_TimKiem = new javax.swing.JButton();
+        jButton_LamMoi = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_HDPhat = new javax.swing.JTable();
+        jButton_CTHDP = new javax.swing.JButton();
+        jButton_ThemHDP = new javax.swing.JButton();
+        jButton_SuaHDP = new javax.swing.JButton();
+        jButton_XoaHDP = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel_HDPhat.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel_HDPhat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(152, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("HÓA ĐƠN PHẠT");
-        jPanel_HDPhat.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 1010, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 1010, -1));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel_HDPhat.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1010, 14));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1010, 14));
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel_HDPhat.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 1010, 17));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 1010, 17));
 
-        jButton_ThemHDP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton_ThemHDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_add.png"))); // NOI18N
-        jButton_ThemHDP.setText(" Thêm");
-        jButton_ThemHDP.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton_ThemHDPMouseClicked(evt);
-            }
-        });
-        jButton_ThemHDP.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Excel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton_Excel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_xls.png"))); // NOI18N
+        jButton_Excel.setText(" Xuất Excel");
+        jButton_Excel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_ThemHDPActionPerformed(evt);
+                jButton_ExcelActionPerformed(evt);
             }
         });
-        jPanel_HDPhat.add(jButton_ThemHDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 120, 41));
-
-        jButton_CTHDP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton_CTHDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_detail.png"))); // NOI18N
-        jButton_CTHDP.setText(" Xem chi tiết");
-        jButton_CTHDP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CTHDPActionPerformed(evt);
-            }
-        });
-        jPanel_HDPhat.add(jButton_CTHDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 174, 41));
+        jPanel1.add(jButton_Excel, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 170, 41));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
@@ -126,48 +166,25 @@ public class HoaDonPhatForm extends javax.swing.JPanel {
                 txtSearchKeyReleased(evt);
             }
         });
-        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 300, 40));
+        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 240, 40));
 
-        jButton_TimKiemHDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
-        jButton_TimKiemHDP.addActionListener(new java.awt.event.ActionListener() {
+        jButton_TimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
+        jButton_TimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_TimKiemHDPActionPerformed(evt);
+                jButton_TimKiemActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton_TimKiemHDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 40, 40));
+        jPanel3.add(jButton_TimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 40, 40));
 
-        jPanel_HDPhat.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 570, 90));
-
-        jButton_ExcelHDP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton_ExcelHDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_xls.png"))); // NOI18N
-        jButton_ExcelHDP.setText(" Xuất Excel");
-        jButton_ExcelHDP.addActionListener(new java.awt.event.ActionListener() {
+        jButton_LamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_refresh.png"))); // NOI18N
+        jButton_LamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_ExcelHDPActionPerformed(evt);
+                jButton_LamMoiActionPerformed(evt);
             }
         });
-        jPanel_HDPhat.add(jButton_ExcelHDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 173, 41));
+        jPanel3.add(jButton_LamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 40, 40));
 
-        jButton_SuaHDP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton_SuaHDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_update.png"))); // NOI18N
-        jButton_SuaHDP.setText(" Sửa");
-        jButton_SuaHDP.setToolTipText("");
-        jButton_SuaHDP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_SuaHDPActionPerformed(evt);
-            }
-        });
-        jPanel_HDPhat.add(jButton_SuaHDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 120, 41));
-
-        jButton_XoaHDP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton_XoaHDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
-        jButton_XoaHDP.setText(" Xóa");
-        jButton_XoaHDP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_XoaHDPActionPerformed(evt);
-            }
-        });
-        jPanel_HDPhat.add(jButton_XoaHDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 100, 120, 41));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 570, 90));
 
         jTable_HDPhat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,39 +199,87 @@ public class HoaDonPhatForm extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable_HDPhat);
 
-        jPanel_HDPhat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1010, 520));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1010, 520));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1112, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel_HDPhat, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel_HDPhat, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE))
-        );
+        jButton_CTHDP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton_CTHDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_detail.png"))); // NOI18N
+        jButton_CTHDP.setText(" Xem chi tiết");
+        jButton_CTHDP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CTHDPActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton_CTHDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 170, 41));
+
+        jButton_ThemHDP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton_ThemHDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_add.png"))); // NOI18N
+        jButton_ThemHDP.setText(" Thêm");
+        jButton_ThemHDP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton_ThemHDPMouseClicked(evt);
+            }
+        });
+        jPanel1.add(jButton_ThemHDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 120, 41));
+
+        jButton_SuaHDP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton_SuaHDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_update.png"))); // NOI18N
+        jButton_SuaHDP.setText(" Sửa");
+        jButton_SuaHDP.setToolTipText("");
+        jPanel1.add(jButton_SuaHDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 120, 41));
+
+        jButton_XoaHDP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton_XoaHDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
+        jButton_XoaHDP.setText(" Xóa");
+        jPanel1.add(jButton_XoaHDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 100, 120, 41));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1112, 820));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_ThemHDPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_ThemHDPMouseClicked
+    private void jButton_ExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ExcelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_ThemHDPMouseClicked
+        try {
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("HoaDon");
 
-    private void jButton_ThemHDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemHDPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_ThemHDPActionPerformed
+                Row rowCol = sheet.createRow(0);
+                for (int i = 0; i < jTable_HDPhat.getColumnCount(); i++) {
+                    Cell cell = rowCol.createCell(i);
+                    cell.setCellValue(jTable_HDPhat.getColumnName(i));
+                }
 
-    private void jButton_CTHDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CTHDPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_CTHDPActionPerformed
-
+                for (int j = 0; j < jTable_HDPhat.getRowCount(); j++) {
+                    Row row = sheet.createRow(j + 1);
+                    for (int k = 0; k < jTable_HDPhat.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k);
+                        if (jTable_HDPhat.getValueAt(j, k) != null) {
+                            cell.setCellValue(jTable_HDPhat.getValueAt(j, k).toString());
+                        }
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                openFile(saveFile.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }  
+    }//GEN-LAST:event_jButton_ExcelActionPerformed
+    private void openFile(String file) {
+        try {
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
     private void cbxLuachonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLuachonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxLuachonActionPerformed
@@ -239,34 +304,44 @@ public class HoaDonPhatForm extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtSearchKeyReleased
 
-    private void jButton_TimKiemHDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TimKiemHDPActionPerformed
+    private void jButton_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TimKiemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_TimKiemHDPActionPerformed
+    }//GEN-LAST:event_jButton_TimKiemActionPerformed
 
-    private void jButton_ExcelHDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ExcelHDPActionPerformed
+    private void jButton_CTHDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CTHDPActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_ExcelHDPActionPerformed
+        if (jTable_HDPhat.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn xem chi tiết");
+        } else {
+            ChiTietHoaDon cthd = new ChiTietHoaDon(getHDPhatSelect());
+            cthd.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton_CTHDPActionPerformed
 
-    private void jButton_SuaHDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SuaHDPActionPerformed
+    private void jButton_ThemHDPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_ThemHDPMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_SuaHDPActionPerformed
+    }//GEN-LAST:event_jButton_ThemHDPMouseClicked
 
-    private void jButton_XoaHDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_XoaHDPActionPerformed
+    private void jButton_LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LamMoiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_XoaHDPActionPerformed
+        txtSearch.setText("");
+        cbxLuachon.setSelectedIndex(0);
+        loadDataToTable(HDPhatDAO.getInstance().selectAll());
+    }//GEN-LAST:event_jButton_LamMoiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxLuachon;
     private javax.swing.JButton jButton_CTHDP;
-    private javax.swing.JButton jButton_ExcelHDP;
+    private javax.swing.JButton jButton_Excel;
+    private javax.swing.JButton jButton_LamMoi;
     private javax.swing.JButton jButton_SuaHDP;
     private javax.swing.JButton jButton_ThemHDP;
-    private javax.swing.JButton jButton_TimKiemHDP;
+    private javax.swing.JButton jButton_TimKiem;
     private javax.swing.JButton jButton_XoaHDP;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel_HDPhat;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

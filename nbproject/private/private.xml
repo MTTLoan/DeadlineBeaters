@@ -3,41 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/model/TaiKhoan.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/dao/TaiKhoanDAO.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/test/Test.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/Admin.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/DanhGiaForm.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/SuaTaiKhoan.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/ThongKeForm.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/SuaHoaDon.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/controller/TimKiemXe.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/controller/TimKiemTaiKhoan.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/controller/TimKiemHoaDon.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/HoaDonForm.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/TaiKhoanForm.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/model/HDPhat.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/model/Xe.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/model/HopDong.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/ThongTinTKForm.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/DatXeForm.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/ThemHDPhat.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/dao/HoaDonDAO.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/database/JDBCUtil.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/ChiTietHDPhat.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/dao/DanhGiaDAO.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/DangNhapForm.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/model/LoaiXe.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/model/HoaDon.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/ChiTietHoaDon.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/model/CTHD.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/model/KhachHang.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/controller/TimKiemDanhGia.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/ThemDanhGia.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/ThemTaiKhoan.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/dao/DAOInterface.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/model/DanhGia.java</file>
-            <file>file:/D:/Bao/laptrinhjava/DOAN/DeadlineBeaters/src/view/HoaDonNVForm.java</file>
+            <file>file:/E:/Gogo/DeadlineBeaters/src/view/ThemTaiKhoan.java</file>
+            <file>file:/E:/Gogo/DeadlineBeaters/src/view/ThemDanhGia.java</file>
         </group>
     </open-files>
 </project-private>
