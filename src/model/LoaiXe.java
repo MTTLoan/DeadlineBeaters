@@ -2,7 +2,7 @@
 package model;
 
 public class LoaiXe {
-    private String MaLX;
+    private Integer MaLX;
     private String TenLX;
     private int SoLuong;
     private int SoCho;
@@ -10,7 +10,7 @@ public class LoaiXe {
     public LoaiXe() {
     }
 
-    public LoaiXe(String MaLX, String TenLX, int SoLuong, int SoCho) {
+    public LoaiXe(Integer MaLX, String TenLX, int SoLuong, int SoCho) {
         this.MaLX = MaLX;
         this.TenLX = TenLX;
         this.SoLuong = SoLuong;
@@ -18,11 +18,11 @@ public class LoaiXe {
     }
     
         // Getter and Setter for MaLX
-    public String getMaLX() {
+    public Integer getMaLX() {
         return MaLX;
     }
 
-    public void setMaLX(String MaLX) {
+    public void setMaLX(Integer MaLX) {
         this.MaLX = MaLX;
     }
 

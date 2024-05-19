@@ -4,6 +4,11 @@
  */
 package view;
 
+import dao.HoaDonDAO;
+import dao.XeDAO;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
@@ -15,8 +20,75 @@ public class ThongKeForm extends javax.swing.JPanel {
      */
     public ThongKeForm() {
         initComponents();
+        hienThongTinTongQuan();
+        
+    }
+    // Method to display overall information
+    private void hienThongTinTongQuan() {
+        // Get current selected month and year
+        int selectedMonth = jComboBox_Thang.getSelectedIndex() + 1; // Months are 0-indexed
+        int selectedYear = Integer.parseInt((String) jComboBox_Nam.getSelectedItem());
+
+        // Get top rented cars
+        XeDAO xeDAO = new XeDAO();
+        ArrayList<Object[]> topRentedCars = xeDAO.getTopRentedCars(selectedMonth, selectedYear);
+
+        // Display top rented cars in tblTop
+        displayTopRentedCars(topRentedCars);
+
+        // Get total invoice count
+        HoaDonDAO hoaDonDAO = new HoaDonDAO();
+        int totalInvoiceCount = hoaDonDAO.getTotalInvoiceCount(selectedMonth, selectedYear);
+
+        // Display total invoice count in JLabel
+        SoHoaDon.setText("Tổng số hóa đơn: " + totalInvoiceCount);
+
+        // Calculate total revenue and revenue for each type of vehicle
+        int totalRevenue = 0;
+        int motorbikeRevenue = 0;
+        int car4Revenue = 0;
+        int car7Revenue = 0;
+
+        // Retrieve revenue data from database
+        ArrayList<Object[]> revenueData = hoaDonDAO.getRevenueData(selectedMonth, selectedYear);
+        for (Object[] data : revenueData) {
+            String vehicleType = (String) data[0];
+            int revenue = (int) data[1];
+            totalRevenue += revenue;
+            switch (vehicleType) {
+                case "Xe máy":
+                    motorbikeRevenue += revenue;
+                    break;
+                case "Xe 4 chỗ":
+                    car4Revenue += revenue;
+                    break;
+                case "Xe 7 chỗ":
+                    car7Revenue += revenue;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // Display total revenue and revenue for each type of vehicle in JLabels
+        DoanhThu.setText("Tổng doanh thu: " + totalRevenue);
+        DT_XeMay.setText("Xe máy: " + motorbikeRevenue);
+        DT_Xe4.setText("Xe 4 chỗ: " + car4Revenue);
+        DT_Xe7.setText("Xe 7 chỗ: " + car7Revenue);
     }
 
+    // Method to display top rented cars in tblTop
+    private void displayTopRentedCars(ArrayList<Object[]> topRentedCars) {
+    // Clear existing rows in tblTop
+    DefaultTableModel model = (DefaultTableModel) tblTop.getModel();
+    model.setRowCount(0);
+
+    // Add rows for top rented cars
+    for (int i = 0; i < topRentedCars.size(); i++) {
+        Object[] car = topRentedCars.get(i);
+        model.addRow(new Object[]{i + 1, car[1], car[2]});
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,8 +98,6 @@ public class ThongKeForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
@@ -36,37 +106,27 @@ public class ThongKeForm extends javax.swing.JPanel {
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tblTopXe = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox_Thang = new javax.swing.JComboBox<>();
+        jComboBox_Nam = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblTop = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel26 = new javax.swing.JLabel();
-
-        setBackground(new java.awt.Color(255, 255, 255));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1180, 820));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTabbedPane1.setBackground(new java.awt.Color(255, 153, 153));
-        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
-        jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(1100, 745));
+        SoHoaDon = new javax.swing.JLabel();
+        DT_XeMay = new javax.swing.JLabel();
+        DT_Xe4 = new javax.swing.JLabel();
+        DT_Xe7 = new javax.swing.JLabel();
+        btnSearch = new javax.swing.JButton();
+        DoanhThu = new javax.swing.JLabel();
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setPreferredSize(new java.awt.Dimension(1100, 710));
@@ -94,11 +154,11 @@ public class ThongKeForm extends javax.swing.JPanel {
 
         jLabel33.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel33.setText("Tổng doanh thu:");
-        jPanel4.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 560, 140, 30));
+        jPanel4.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 560, 180, 30));
 
-        jTable4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jTable4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tblTopXe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        tblTopXe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tblTopXe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null},
                 {"2", null, null},
@@ -115,12 +175,12 @@ public class ThongKeForm extends javax.swing.JPanel {
                 "Top", "Mã xe", "Số lần"
             }
         ));
-        jTable4.setGridColor(new java.awt.Color(102, 102, 102));
-        jTable4.setRowHeight(45);
-        jTable4.setSelectionBackground(new java.awt.Color(204, 255, 204));
-        jTable4.setSelectionForeground(new java.awt.Color(102, 102, 102));
-        jTable4.setShowGrid(true);
-        jScrollPane4.setViewportView(jTable4);
+        tblTopXe.setGridColor(new java.awt.Color(102, 102, 102));
+        tblTopXe.setRowHeight(45);
+        tblTopXe.setSelectionBackground(new java.awt.Color(204, 255, 204));
+        tblTopXe.setSelectionForeground(new java.awt.Color(102, 102, 102));
+        tblTopXe.setShowGrid(true);
+        jScrollPane4.setViewportView(tblTopXe);
 
         jPanel4.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, 470, 480));
 
@@ -132,28 +192,38 @@ public class ThongKeForm extends javax.swing.JPanel {
         jLabel25.setText(" Top 10 xe được thuê ");
         jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, 30));
 
-        jTabbedPane1.addTab("Tổng quan", jPanel4);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1180, 820));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 153, 153));
+        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+        jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(1100, 745));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setMinimumSize(new java.awt.Dimension(1180, 710));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        jPanel5.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 50, 40));
+        jComboBox_Thang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jComboBox_Thang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        jPanel5.add(jComboBox_Thang, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 50, 40));
 
-        jComboBox3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2023", "2022", "2021" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox_Nam.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jComboBox_Nam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2023", "2022", "2021" }));
+        jComboBox_Nam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                jComboBox_NamActionPerformed(evt);
             }
         });
-        jPanel5.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, -1, 40));
+        jPanel5.add(jComboBox_Nam, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, -1, 40));
 
-        jTable2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jTable2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblTop.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        tblTop.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tblTop.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null},
                 {"2", null, null},
@@ -170,12 +240,12 @@ public class ThongKeForm extends javax.swing.JPanel {
                 "Top", "Mã xe", "Số lần"
             }
         ));
-        jTable2.setGridColor(new java.awt.Color(102, 102, 102));
-        jTable2.setRowHeight(45);
-        jTable2.setSelectionBackground(new java.awt.Color(204, 255, 204));
-        jTable2.setSelectionForeground(new java.awt.Color(102, 102, 102));
-        jTable2.setShowGrid(true);
-        jScrollPane2.setViewportView(jTable2);
+        tblTop.setGridColor(new java.awt.Color(102, 102, 102));
+        tblTop.setRowHeight(45);
+        tblTop.setSelectionBackground(new java.awt.Color(204, 255, 204));
+        tblTop.setSelectionForeground(new java.awt.Color(102, 102, 102));
+        tblTop.setShowGrid(true);
+        jScrollPane2.setViewportView(tblTop);
 
         jPanel5.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, 470, 480));
 
@@ -196,36 +266,36 @@ public class ThongKeForm extends javax.swing.JPanel {
         jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, 30));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel19.setText("Biểu đồ doanh thu ");
-        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, 30));
+        jLabel19.setText("Thống kê doanh thu ");
+        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 250, 30));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel14.setText("Số hợp đồng:");
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 680, 140, 30));
+        SoHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SoHoaDon.setText("Tổng số hóa đơn:");
+        jPanel5.add(SoHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 390, 30));
 
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel20.setText("Xe máy:");
-        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 590, 140, 30));
+        DT_XeMay.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        DT_XeMay.setText("Xe máy:");
+        jPanel5.add(DT_XeMay, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 320, 30));
 
-        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel21.setText("Xe 4 chỗ:");
-        jPanel5.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 620, 140, 30));
+        DT_Xe4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        DT_Xe4.setText("Xe 4 chỗ:");
+        jPanel5.add(DT_Xe4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 330, 30));
 
-        jLabel22.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel22.setText("Xe 7 chỗ:");
-        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 650, 140, 30));
+        DT_Xe7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        DT_Xe7.setText("Xe 7 chỗ:");
+        jPanel5.add(DT_Xe7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 360, 30));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 41, 40, 40));
+        jPanel5.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 41, 40, 40));
 
-        jLabel26.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel26.setText("Tổng doanh thu:");
-        jPanel5.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 560, 140, 30));
+        DoanhThu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        DoanhThu.setText("Tổng doanh thu:");
+        jPanel5.add(DoanhThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 340, 30));
 
         jTabbedPane1.addTab("Doanh thu", jPanel5);
 
@@ -234,31 +304,33 @@ public class ThongKeForm extends javax.swing.JPanel {
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void jComboBox_NamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_NamActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_jComboBox_NamActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+          hienThongTinTongQuan();
+
+    }//GEN-LAST:event_btnSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel DT_Xe4;
+    private javax.swing.JLabel DT_Xe7;
+    private javax.swing.JLabel DT_XeMay;
+    private javax.swing.JLabel DoanhThu;
+    private javax.swing.JLabel SoHoaDon;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JComboBox<String> jComboBox_Nam;
+    private javax.swing.JComboBox<String> jComboBox_Thang;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
@@ -271,7 +343,11 @@ public class ThongKeForm extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable4;
+    private javax.swing.JTable tblTop;
+    private javax.swing.JTable tblTopXe;
     // End of variables declaration//GEN-END:variables
+
+    private void initComponents() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

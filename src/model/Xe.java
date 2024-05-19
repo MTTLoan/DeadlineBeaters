@@ -1,8 +1,7 @@
-
 package model;
 
 public class Xe {
-    private String MaXe;
+    private Integer MaXe;
     private String TenXe;
     private String BienSo;
     private String TrangThai; 
@@ -10,12 +9,12 @@ public class Xe {
     private long DonGia;
     private String ThuongHieu;
     private long TienCoc; 
-    private String MaLX;
+    private int MaLX;
 
     public Xe() {
     }
     
-    public Xe(String MaXe, String TenXe, String BienSo, String TrangThai, int TGBaoDuong, long DonGia, String ThuongHieu, long TienCoc, String MaLX) {
+    public Xe(Integer MaXe, String TenXe, String BienSo, String TrangThai, int TGBaoDuong, long DonGia, String ThuongHieu, long TienCoc, int MaLX) {
         this.MaXe = MaXe;
         this.TenXe = TenXe;
         this.BienSo = BienSo;
@@ -26,13 +25,13 @@ public class Xe {
         this.TienCoc = TienCoc;
         this.MaLX = MaLX;
     }
-    
-      // Getter and Setter for MaXe
-    public String getMaXe() {
+
+    // Getter and Setter for MaXe
+    public Integer getMaXe() {
         return MaXe;
     }
 
-    public void setMaXe(String MaXe) {
+    public void setMaXe(Integer MaXe) {
         this.MaXe = MaXe;
     }
 
@@ -100,11 +99,11 @@ public class Xe {
     }
 
     // Getter and Setter for MaLX
-    public String getMaLX() {
+    public int getMaLX() {
         return MaLX;
     }
 
-    public void setMaLX(String MaLX) {
+    public void setMaLX(int MaLX) {
         this.MaLX = MaLX;
     }
 }
