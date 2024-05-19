@@ -6,8 +6,16 @@ package view;
 
 import dao.HoaDonDAO;
 import dao.XeDAO;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -75,8 +83,22 @@ public class ThongKeForm extends javax.swing.JPanel {
         DT_XeMay.setText("Xe máy: " + motorbikeRevenue);
         DT_Xe4.setText("Xe 4 chỗ: " + car4Revenue);
         DT_Xe7.setText("Xe 7 chỗ: " + car7Revenue);
+        
+        DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
+        barChartData.setValue(motorbikeRevenue,"Doanh thu","Xe máy");
+        barChartData.setValue(car4Revenue, "Doanh thu", "Xe 4 chỗ");
+        barChartData.setValue(car7Revenue, "Doanh thu", "Xe 7 chỗ");
+        
+        JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ doanh thu","Tháng "+ selectedMonth + ", năm "+ selectedYear,"Doanh thu",barChartData,PlotOrientation.VERTICAL,false,true,false);
+        CategoryPlot barchrt = barChart.getCategoryPlot();
+        barchrt.setRangeGridlinePaint(Color.ORANGE);
+        
+        ChartPanel barPanel = new ChartPanel(barChart);
+        jPanelChar.removeAll();
+        jPanelChar.add(barPanel,BorderLayout.CENTER);
+        jPanelChar.validate();
+        
     }
-
     // Method to display top rented cars in tblTop
     private void displayTopRentedCars(ArrayList<Object[]> topRentedCars) {
     // Clear existing rows in tblTop
@@ -127,6 +149,7 @@ public class ThongKeForm extends javax.swing.JPanel {
         DT_Xe7 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         DoanhThu = new javax.swing.JLabel();
+        jPanelChar = new javax.swing.JPanel();
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setPreferredSize(new java.awt.Dimension(1100, 710));
@@ -271,19 +294,19 @@ public class ThongKeForm extends javax.swing.JPanel {
 
         SoHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         SoHoaDon.setText("Tổng số hóa đơn:");
-        jPanel5.add(SoHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 390, 30));
+        jPanel5.add(SoHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 680, 390, 30));
 
         DT_XeMay.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         DT_XeMay.setText("Xe máy:");
-        jPanel5.add(DT_XeMay, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 320, 30));
+        jPanel5.add(DT_XeMay, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 560, 320, 30));
 
         DT_Xe4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         DT_Xe4.setText("Xe 4 chỗ:");
-        jPanel5.add(DT_Xe4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 330, 30));
+        jPanel5.add(DT_Xe4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 600, 330, 30));
 
         DT_Xe7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         DT_Xe7.setText("Xe 7 chỗ:");
-        jPanel5.add(DT_Xe7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 360, 30));
+        jPanel5.add(DT_Xe7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 360, 30));
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -295,7 +318,11 @@ public class ThongKeForm extends javax.swing.JPanel {
 
         DoanhThu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         DoanhThu.setText("Tổng doanh thu:");
-        jPanel5.add(DoanhThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 340, 30));
+        jPanel5.add(DoanhThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, 340, 30));
+
+        jPanelChar.setBackground(new java.awt.Color(0, 51, 255));
+        jPanelChar.setLayout(new java.awt.BorderLayout());
+        jPanel5.add(jPanelChar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 520, 310));
 
         jTabbedPane1.addTab("Doanh thu", jPanel5);
 
@@ -340,6 +367,7 @@ public class ThongKeForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanelChar;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -350,4 +378,6 @@ public class ThongKeForm extends javax.swing.JPanel {
     private void initComponents() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+ 
 }
