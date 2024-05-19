@@ -48,6 +48,4 @@ public class DanhGia {
     public void setMaHD(int MaHD) {
         this.MaHD = MaHD;
     }
-
-    
 }

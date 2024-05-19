@@ -1,18 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 import dao.DanhGiaDAO;
 import java.util.ArrayList;
 import model.DanhGia;
-/**
- *
- * @author Lenovo
- */
 
 public class TimKiemDanhGia {
+
     public static TimKiemDanhGia getInstance() {
         return new TimKiemDanhGia();
     }
