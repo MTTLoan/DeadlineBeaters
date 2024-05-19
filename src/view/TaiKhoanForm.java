@@ -4,19 +4,70 @@
  */
 package view;
 
+import java.util.ArrayList;
+import javax.swing.UIManager;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
+import model.TaiKhoan;
+import controller.TimKiemTaiKhoan;
+import dao.TaiKhoanDAO;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import javax.swing.JFrame;
+
 /**
  *
  * @author ASUS
  */
-public class TaiKhoanForm extends javax.swing.JPanel {
+
+public final class TaiKhoanForm extends javax.swing.JPanel {
 
     /**
      * Creates new form TaiKhoanForm
      */
+    private DefaultTableModel tblModel;
+    private final ArrayList<TaiKhoan> taikhoans = TaiKhoanDAO.getInstance().selectAll();
+    
     public TaiKhoanForm() {
         initComponents();
+        UIManager.put("Table.showVerticalLines", true);
+        tblAccount.setDefaultEditor(Object.class, null);
+        initTable();
+        loadDataToTable(taikhoans);
     }
-
+    
+    public final void initTable() {
+        tblModel = new DefaultTableModel();
+        String[] headerTbl = new String[]{"Họ và tên", "Tên tài khoản", "Mã số nhân viên", "Chức vụ", "Giới tính", "Ngày sinh"};
+        tblModel.setColumnIdentifiers(headerTbl);
+        tblAccount.setModel(tblModel);
+    }
+    
+    public void loadDataToTable(ArrayList<TaiKhoan> tk){
+        try{
+            tblModel.setRowCount(0);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            for( TaiKhoan i: tk){
+                tblModel.addRow(new Object[]{
+                    i.getHoTen(),i.getTenTK(),i.getMaNV(),i.getChucVu(),i.getGioiTinh(),i.getNgaySinh().format(dtf)
+                });
+            }
+        }
+        catch(Exception e ){}
+    }
+    
+    public TaiKhoan getTaiKhoanSelect(){
+        int i_row = tblAccount.getSelectedRow();
+        TaiKhoan tk = TaiKhoanDAO.getInstance().selectAll().get(i_row);
+        return tk;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,18 +79,18 @@ public class TaiKhoanForm extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblAccount = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         cbxLuachon = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btndelete = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        exportExcel = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -49,21 +100,25 @@ public class TaiKhoanForm extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(1100, 820));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAccount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tblAccount.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Họ và tên", "Tên tài khoản", "Vai trò", "Mã số nhân viên", "Giới tính", "Ngày sinh"
+                "Họ và tên", "Tên tài khoản", "Chức vụ", "Mã số nhân viên", "Giới tính", "Ngày sinh"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblAccount);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1010, 520));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 990, 520));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(152, 0, 0));
@@ -85,7 +140,7 @@ public class TaiKhoanForm extends javax.swing.JPanel {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cbxLuachon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbxLuachon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Họ và tên", "Tên tài khoản", "Vai trò", "Mã số nhân viên", "Giới tính", "Ngày sinh", "Ngày vào làm" }));
+        cbxLuachon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Họ và tên", "Tên tài khoản", "Chức vụ", "Mã số nhân viên", "Giới tính", "Ngày sinh" }));
         cbxLuachon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxLuachonActionPerformed(evt);
@@ -121,55 +176,55 @@ public class TaiKhoanForm extends javax.swing.JPanel {
         });
         jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 350, 40));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 40, 40));
+        jPanel3.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 40, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 612, 90));
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_add.png"))); // NOI18N
-        jButton6.setText(" Thêm");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_add.png"))); // NOI18N
+        btnAdd.setText(" Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, 150, 41));
+        jPanel1.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, 150, 41));
 
-        jButton10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
-        jButton10.setText(" Xóa");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        btndelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btndelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
+        btndelete.setText(" Xóa");
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                btndeleteActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 100, 150, 41));
+        jPanel1.add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 100, 150, 41));
 
-        jButton11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_update.png"))); // NOI18N
-        jButton11.setText(" Sửa");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_update.png"))); // NOI18N
+        btnEdit.setText(" Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 150, 41));
+        jPanel1.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 150, 41));
 
-        jButton12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_xls.png"))); // NOI18N
-        jButton12.setText(" Xuất Excel");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        exportExcel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        exportExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_xls.png"))); // NOI18N
+        exportExcel.setText(" Xuất Excel");
+        exportExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                exportExcelActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 150, 41));
+        jPanel1.add(exportExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 150, 41));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -195,44 +250,148 @@ public class TaiKhoanForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchKeyPressed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-
+                // TODO add your handling code here:
+        String luachon = (String) cbxLuachon.getSelectedItem();
+        String searchContent = txtSearch.getText();
+        ArrayList<TaiKhoan> result = new ArrayList<>();
+        switch (luachon) {
+            case "Tất cả":
+                result = TimKiemTaiKhoan.getInstance().tkTatCa(searchContent);
+                break;
+            case "Họ và tên":
+                result = TimKiemTaiKhoan.getInstance().tkHoTen(searchContent);
+                break;
+            case "Tên tài khoản":
+                result = TimKiemTaiKhoan.getInstance().tkTenTK(searchContent);
+                break;
+            case "Chức vụ":
+                result = TimKiemTaiKhoan.getInstance().tkChucVu(searchContent);
+                break;
+            case "Mã số nhân viên":
+                result = TimKiemTaiKhoan.getInstance().tkMaNV(searchContent);
+                break;
+        }
+        loadDataToTable(result);
     }//GEN-LAST:event_txtSearchKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        loadDataToTable(taikhoans);
+    }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+        ThemTaiKhoan a = new ThemTaiKhoan();
+        a.setVisible(true);
+    }//GEN-LAST:event_btnAddActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+                if (tblAccount.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn tài khoản cần xoá !");
+        } else {
+            TaiKhoan select = getTaiKhoanSelect();
+            if (getTaiKhoanSelect().getChucVu().equals("Admin")) {
+                JOptionPane.showMessageDialog(this, "Không thể xóa tài khoản admin !");
+            } else {
+                int checkVl = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa tài khoản này ?", "Xác nhận xóa tài khoản", JOptionPane.YES_NO_OPTION);
+                if (checkVl == JOptionPane.YES_OPTION) {
+                    try {
+                        TaiKhoanDAO.getInstance().delete(select);
+                        JOptionPane.showMessageDialog(this, "Xoá thành công tài khoản !");
+                        loadDataToTable(TaiKhoanDAO.getInstance().selectAll());
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Xoá thất bại !");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btndeleteActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
+                if (tblAccount.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn tài khoản cần chỉnh sửa !");
+        } else {
+            if (getTaiKhoanSelect().getChucVu().equals("Admin")) {
+                JOptionPane.showMessageDialog(this, "Không thể sửa tài khoản admin tại đây !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            } else {
+                SuaTaiKhoan u = new SuaTaiKhoan(getTaiKhoanSelect());
+                u.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void exportExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportExcelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
+        try {
+            // Hiển thị hộp thoại lưu tệp
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
 
+                // Tạo workbook mới
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("Account");
+
+                // Tạo dòng tiêu đề
+                Row rowCol = sheet.createRow(0);
+                for (int i = 0; i < tblAccount.getColumnCount(); i++) {
+                    Cell cell = rowCol.createCell(i);
+                    cell.setCellValue(tblAccount.getColumnName(i));
+                }
+
+                // Điền dữ liệu vào các ô
+                for (int j = 0; j < tblAccount.getRowCount(); j++) {
+                    Row row = sheet.createRow(j + 1);
+                    for (int k = 0; k < tblAccount.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k);
+                        if (tblAccount.getValueAt(j, k) != null) {
+                            cell.setCellValue(tblAccount.getValueAt(j, k).toString());
+                        }
+                    }
+                }
+
+                // Lưu tệp Excel
+                try (FileOutputStream out = new FileOutputStream(saveFile)) {
+                    wb.write(out);
+                }
+                wb.close();
+
+                // Mở tệp Excel
+                openFile(saveFile.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }           
+    }//GEN-LAST:event_exportExcelActionPerformed
+    public void openFile(String file) {
+        try {
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btndelete;
     private javax.swing.JComboBox<String> cbxLuachon;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton exportExcel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblAccount;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+   
 }

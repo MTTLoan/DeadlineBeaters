@@ -21,7 +21,7 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "INSERT INTO TaiKhoan (MaNV, TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO TaiKhoan ( TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL) VALUES (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, t.getMaNV());
             pst.setString(2, t.getTenTK());
@@ -33,7 +33,7 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
             pst.setInt(8, t.getLuong());
             pst.setDate(9, java.sql.Date.valueOf(t.getNgayVaoLam()));
             pst.setInt(10, t.getMaQL());
-
+            
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
 

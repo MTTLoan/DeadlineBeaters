@@ -5,16 +5,16 @@ public class DanhGia {
     private int MaDG;
     private int SoDiem;
     private String NoiDung;
-    private int MaHopDong;
+    private int MaHD;
 
     public DanhGia() {
     }
 
-    public DanhGia(int MaDG, int SoDiem, String NoiDung, int MaHopDong) {
+    public DanhGia(int MaDG, int SoDiem, String NoiDung, int MaHD) {
         this.MaDG = MaDG;
         this.SoDiem = SoDiem;
         this.NoiDung = NoiDung;
-        this.MaHopDong = MaHopDong;
+        this.MaHD = MaHD;
     }
 
     public int getMaDG() {
@@ -29,8 +29,8 @@ public class DanhGia {
         return NoiDung;
     }
 
-    public int getMaHopDong() {
-        return MaHopDong;
+    public int getMaHD() {
+        return MaHD;
     }
 
     public void setMaDG(int MaDG) {
@@ -45,7 +45,9 @@ public class DanhGia {
         this.NoiDung = NoiDung;
     }
 
-    public void setMaHopDong(int MaHopDong) {
-        this.MaHopDong = MaHopDong;
+    public void setMaHD(int MaHD) {
+        this.MaHD = MaHD;
     }
+
+    
 }

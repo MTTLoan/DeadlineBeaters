@@ -33,7 +33,7 @@ public class TaiKhoan {
     public int getMaNV() {
         return MaNV;
     }
-
+    
     public String getTenTK() {
         return TenTK;
     }
@@ -110,5 +110,4 @@ public class TaiKhoan {
         this.MaQL = MaQL;
     }
 
-    
 }

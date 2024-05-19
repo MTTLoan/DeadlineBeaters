@@ -115,7 +115,7 @@ public class DangNhapForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ 
     private void jbDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDangNhapActionPerformed
         // TODO add your handling code here:
         String tenTaiKhoan = jtTenTK.getText();
@@ -161,11 +161,7 @@ public class DangNhapForm extends javax.swing.JFrame {
     private void jtTenTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtTenTKActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtTenTKActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -192,6 +188,9 @@ public class DangNhapForm extends javax.swing.JFrame {
             }
         });
     }
+    /**
+     * @param args the command line arguments
+     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

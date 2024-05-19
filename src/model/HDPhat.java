@@ -61,6 +61,4 @@ public class HDPhat {
         this.MaHD = MaHD;
     }
     
-    
-    
 }

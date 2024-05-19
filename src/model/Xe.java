@@ -26,7 +26,77 @@ public class Xe {
         this.TienCoc = TienCoc;
         this.MaLX = MaLX;
     }
-    
-    
+
+    public int getMaXe() {
+        return MaXe;
+    }
+
+    public String getTenXe() {
+        return TenXe;
+    }
+
+    public String getBienSo() {
+        return BienSo;
+    }
+
+    public String getTrangThai() {
+        return TrangThai;
+    }
+
+    public int getTGBaoDuong() {
+        return TGBaoDuong;
+    }
+
+    public int getDonGia() {
+        return DonGia;
+    }
+
+    public String getThuongHieu() {
+        return ThuongHieu;
+    }
+
+    public int getTienCoc() {
+        return TienCoc;
+    }
+
+    public int getMaLX() {
+        return MaLX;
+    }
+
+    public void setMaXe(int MaXe) {
+        this.MaXe = MaXe;
+    }
+
+    public void setTenXe(String TenXe) {
+        this.TenXe = TenXe;
+    }
+
+    public void setBienSo(String BienSo) {
+        this.BienSo = BienSo;
+    }
+
+    public void setTrangThai(String TrangThai) {
+        this.TrangThai = TrangThai;
+    }
+
+    public void setTGBaoDuong(int TGBaoDuong) {
+        this.TGBaoDuong = TGBaoDuong;
+    }
+
+    public void setDonGia(int DonGia) {
+        this.DonGia = DonGia;
+    }
+
+    public void setThuongHieu(String ThuongHieu) {
+        this.ThuongHieu = ThuongHieu;
+    }
+
+    public void setTienCoc(int TienCoc) {
+        this.TienCoc = TienCoc;
+    }
+
+    public void setMaLX(int MaLX) {
+        this.MaLX = MaLX;
+    }
     
 }
