@@ -21,10 +21,10 @@ public class TimKiemDanhGia {
         ArrayList<DanhGia> result = new ArrayList<>();
         ArrayList<DanhGia> ds = DanhGiaDAO.getInstance().selectAll();
         for (var i : ds) {
-            if (i.getMaDG().toLowerCase().contains(text.toLowerCase())
+            if (Integer.toString(i.getMaDG()).contains(text.toLowerCase())
                 || Integer.toString(i.getSoDiem()).contains(text.toLowerCase())
                 || i.getNoiDung().toLowerCase().contains(text.toLowerCase())
-                || i.getMaHopDong().toLowerCase().contains(text.toLowerCase())) {
+                || Integer.toString(i.getMaHD()).contains(text.toLowerCase())) {
                 result.add(i);
             }
         }
@@ -35,7 +35,7 @@ public class TimKiemDanhGia {
         ArrayList<DanhGia> result = new ArrayList<>();
         ArrayList<DanhGia> ds = DanhGiaDAO.getInstance().selectAll();
         for (var i : ds) {
-            if (i.getMaDG().toLowerCase().contains(text.toLowerCase())) {
+            if (Integer.toString(i.getMaDG()).contains(text.toLowerCase())) {
                 result.add(i);
             }
         }
@@ -64,11 +64,11 @@ public class TimKiemDanhGia {
         return result;
     }
 
-    public ArrayList<DanhGia> tkMaHopDong(String text) {
+    public ArrayList<DanhGia> tkMaHD(String text) {
         ArrayList<DanhGia> result = new ArrayList<>();
         ArrayList<DanhGia> ds = DanhGiaDAO.getInstance().selectAll();
         for (var i : ds) {
-            if (i.getMaHopDong().toLowerCase().contains(text.toLowerCase())) {
+            if (Integer.toString(i.getMaHD()).contains(text.toLowerCase())) {
                 result.add(i);
             }
         }

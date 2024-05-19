@@ -2,54 +2,52 @@
 package model;
 
 public class DanhGia {
-    private String MaDG;
+    private int MaDG;
     private int SoDiem;
     private String NoiDung;
-    private String MaHopDong;
+    private int MaHD;
 
     public DanhGia() {
     }
 
-    public DanhGia(String MaDG, int SoDiem, String NoiDung, String MaHopDong) {
+    public DanhGia(int MaDG, int SoDiem, String NoiDung, int MaHD) {
         this.MaDG = MaDG;
         this.SoDiem = SoDiem;
         this.NoiDung = NoiDung;
-        this.MaHopDong = MaHopDong;
+        this.MaHD = MaHD;
     }
-    
-        // Getter and Setter for MaDG
-    public String getMaDG() {
+
+    public int getMaDG() {
         return MaDG;
     }
 
-    public void setMaDG(String MaDG) {
-        this.MaDG = MaDG;
-    }
-
-    // Getter and Setter for SoDiem
     public int getSoDiem() {
         return SoDiem;
+    }
+
+    public String getNoiDung() {
+        return NoiDung;
+    }
+
+    public int getMaHD() {
+        return MaHD;
+    }
+
+    public void setMaDG(int MaDG) {
+        this.MaDG = MaDG;
     }
 
     public void setSoDiem(int SoDiem) {
         this.SoDiem = SoDiem;
     }
 
-    // Getter and Setter for NoiDung
-    public String getNoiDung() {
-        return NoiDung;
-    }
-
     public void setNoiDung(String NoiDung) {
         this.NoiDung = NoiDung;
     }
 
-    // Getter and Setter for MaHopDong
-    public String getMaHopDong() {
-        return MaHopDong;
+    public void setMaHD(int MaHD) {
+        this.MaHD = MaHD;
     }
 
-    public void setMaHopDong(String MaHopDong) {
-        this.MaHopDong = MaHopDong;
-    }
+    
 }

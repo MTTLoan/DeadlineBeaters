@@ -1,79 +1,64 @@
 
 package model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class HDPhat {
-    private String MaHDP;
-    private LocalDateTime NgayTao;
-    private long SoTien;
-    private String ChuThich;
+    private int MaHDP;
+    private LocalDate TGTao;
+    private int TongTienPhat;
     private String TinhTrang;
-    private String MaHopDong;
+    private int MaHD;
 
     public HDPhat() {
     }
 
-    public HDPhat(String MaHDP, LocalDateTime NgayTao, long SoTien, String ChuThich, String TinhTrang, String MaHopDong) {
+    public HDPhat(int MaHDP, LocalDate TGTao, int TongTienPhat, String TinhTrang, int MaHD) {
         this.MaHDP = MaHDP;
-        this.NgayTao = NgayTao;
-        this.SoTien = SoTien;
-        this.ChuThich = ChuThich;
+        this.TGTao = TGTao;
+        this.TongTienPhat = TongTienPhat;
         this.TinhTrang = TinhTrang;
-        this.MaHopDong = MaHopDong;
+        this.MaHD = MaHD;
     }
-    
-    // Getter and Setter for MaHDP
-    public String getMaHDP() {
+
+    public int getMaHDP() {
         return MaHDP;
     }
 
-    public void setMaHDP(String MaHDP) {
+    public LocalDate getTGTao() {
+        return TGTao;
+    }
+
+    public int getTongTienPhat() {
+        return TongTienPhat;
+    }
+
+    public String getTinhTrang() {
+        return TinhTrang;
+    }
+
+    public int getMaHD() {
+        return MaHD;
+    }
+
+    public void setMaHDP(int MaHDP) {
         this.MaHDP = MaHDP;
     }
 
-    // Getter and Setter for NgayTao
-    public LocalDateTime getNgayTao() {
-        return NgayTao;
+    public void setTGTao(LocalDate TGTao) {
+        this.TGTao = TGTao;
     }
 
-    public void setNgayTao(LocalDateTime NgayTao) {
-        this.NgayTao = NgayTao;
-    }
-
-    // Getter and Setter for SoTien
-    public long getSoTien() {
-        return SoTien;
-    }
-
-    public void setSoTien(long SoTien) {
-        this.SoTien = SoTien;
-    }
-
-    // Getter and Setter for ChuThich
-    public String getChuThich() {
-        return ChuThich;
-    }
-
-    public void setChuThich(String ChuThich) {
-        this.ChuThich = ChuThich;
-    }
-
-    // Getter and Setter for TinhTrang
-    public String getTinhTrang() {
-        return TinhTrang;
+    public void setTongTienPhat(int TongTienPhat) {
+        this.TongTienPhat = TongTienPhat;
     }
 
     public void setTinhTrang(String TinhTrang) {
         this.TinhTrang = TinhTrang;
     }
 
-    // Getter and Setter for MaHopDong
-    public String getMaHopDong() {
-        return MaHopDong;
+    public void setMaHD(int MaHD) {
+        this.MaHD = MaHD;
     }
-
-    public void setMaHopDong(String MaHopDong) {
-        this.MaHopDong = MaHopDong;
-    }
+    
 }

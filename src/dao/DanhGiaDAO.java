@@ -19,12 +19,12 @@ public class DanhGiaDAO implements DAOInterface<DanhGia> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "INSERT INTO DanhGia (MaDG, SoDiem, NoiDung, MaHopDong) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO DanhGia (MaDG, SoDiem, NoiDung, MaHD) VALUES (?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, t.getMaDG());
+            pst.setInt(1, t.getMaDG());
             pst.setInt(2, t.getSoDiem());
             pst.setString(3, t.getNoiDung());
-            pst.setString(4, t.getMaHopDong());
+            pst.setInt(4, t.getMaHD());
 
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
@@ -39,12 +39,12 @@ public class DanhGiaDAO implements DAOInterface<DanhGia> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE DanhGia SET SoDiem=?, NoiDung=?, MaHopDong=? WHERE MaDG=?";
+            String sql = "UPDATE DanhGia SET SoDiem=?, NoiDung=?, MaHD=? WHERE MaDG=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, t.getSoDiem());
             pst.setString(2, t.getNoiDung());
-            pst.setString(3, t.getMaHopDong());
-            pst.setString(4, t.getMaDG());
+            pst.setInt(3, t.getMaHD());
+            pst.setInt(4, t.getMaDG());
 
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
@@ -61,7 +61,7 @@ public class DanhGiaDAO implements DAOInterface<DanhGia> {
             Connection con = JDBCUtil.getConnection();
             String sql = "DELETE FROM DanhGia WHERE MaDG=?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, t.getMaDG());
+            pst.setInt(1, t.getMaDG());
 
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
@@ -80,12 +80,12 @@ public class DanhGiaDAO implements DAOInterface<DanhGia> {
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String MaDG = rs.getString("MaDG");
+                int MaDG = rs.getInt("MaDG");
                 int SoDiem = rs.getInt("SoDiem");
                 String NoiDung = rs.getString("NoiDung");
-                String MaHopDong = rs.getString("MaHopDong");
+                int MaHD = rs.getInt("MaHD");
 
-                DanhGia dg = new DanhGia(MaDG, SoDiem, NoiDung, MaHopDong);
+                DanhGia dg = new DanhGia(MaDG, SoDiem, NoiDung, MaHD);
                 ketQua.add(dg);
             }
             JDBCUtil.closeConnection(con);
@@ -105,12 +105,12 @@ public class DanhGiaDAO implements DAOInterface<DanhGia> {
             pst.setString(1, t);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                String MaDG = rs.getString("MaDG");
+                int MaDG = rs.getInt("MaDG");
                 int SoDiem = rs.getInt("SoDiem");
                 String NoiDung = rs.getString("NoiDung");
-                String MaHopDong = rs.getString("MaHopDong");
+                int MaHD = rs.getInt("MaHD");
 
-                ketQua = new DanhGia(MaDG, SoDiem, NoiDung, MaHopDong);
+                ketQua = new DanhGia(MaDG, SoDiem, NoiDung, MaHD);
             }
             JDBCUtil.closeConnection(con);
         } catch (SQLException e) {

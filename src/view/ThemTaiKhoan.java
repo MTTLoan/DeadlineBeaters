@@ -12,6 +12,7 @@ import model.TaiKhoan;
 import dao.TaiKhoanDAO;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class ThemTaiKhoan extends javax.swing.JFrame {
@@ -19,17 +20,13 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
     /**
      * Creates new form ThemTaiKhoan
      */
-    private final TaiKhoanForm hometk;
-    public ThemTaiKhoan(TaiKhoanForm parent) {
+    
+    public ThemTaiKhoan() {
         initComponents();
         setLocationRelativeTo(null);
-        hometk = parent;
-   
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    ThemTaiKhoan() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -216,9 +213,9 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
             return;
         }
         String chucVu = (String) cbxChucVu.getSelectedItem();
-        long luong;
+        int luong;
         try {
-            luong = Long.parseLong(txtLuong.getText());
+            luong = Integer.parseInt(txtLuong.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Lương không hợp lệ! Vui lòng nhập số.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
@@ -230,20 +227,19 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ngày vào làm không hợp lệ! Vui lòng nhập theo định dạng yyyy-MM-dd.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        String maQL = txtMaQL.getText();
+        int maQL = Integer.parseInt(txtMaQL.getText());
 
         // Kiểm tra tính đầy đủ và hợp lệ của dữ liệu
         if (tenTK.isEmpty() || matKhau.isEmpty() || hoTen.isEmpty() || gioiTinh.isEmpty() || 
             chucVu.isEmpty() || txtLuong.getText().isEmpty() || txtNgaySinh.getText().isEmpty() || 
-            txtNgayVaoLam.getText().isEmpty() || maQL.isEmpty()) {
+            txtNgayVaoLam.getText().isEmpty() || txtMaQL.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             // Kiểm tra sự tồn tại của tài khoản và thêm vào cơ sở dữ liệu
             if (TaiKhoanDAO.getInstance().selectById(tenTK) == null) {
-                TaiKhoan taiKhoan = new TaiKhoan(null, tenTK, matKhau, hoTen, gioiTinh, ngaySinh, chucVu, luong, ngayVaoLam, maQL);
+                TaiKhoan taiKhoan = new TaiKhoan(0, tenTK, matKhau, hoTen, gioiTinh, ngaySinh, chucVu, luong, ngayVaoLam, maQL);
                 TaiKhoanDAO.getInstance().insert(taiKhoan);
                 this.dispose();
-                hometk.loadDataToTable(TaiKhoanDAO.getInstance().selectAll());
                 JOptionPane.showMessageDialog(this, "Thêm thành công!");
             } else {
                 JOptionPane.showMessageDialog(this, "Tên đăng nhập đã tồn tại!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
