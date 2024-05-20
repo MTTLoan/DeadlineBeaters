@@ -469,7 +469,7 @@ public class QuanLy extends javax.swing.JFrame {
     private void DatXeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DatXeMouseClicked
         // TODO add your handling code here:
         MainContent.removeAll();
-        DatXeForm dx = new DatXeForm();
+        DatXeForm dx = new DatXeForm(currentAcc);
         MainContent.setLayout(new BorderLayout());
         MainContent.add(dx).setVisible(true);
         MainContent.validate();

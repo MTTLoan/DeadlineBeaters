@@ -22,8 +22,12 @@ public class HoaDonDAO implements DAOInterface<HoaDon>{
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
+            PreparedStatement pst;
+            String alterSessionSql = "ALTER SESSION SET nls_date_format = 'DD/MM/YYYY'";
+            pst = con.prepareStatement(alterSessionSql);
+            pst.execute();
             String sql = "INSERT INTO HOADON (TGTao, TongTienThue, TGNhan, TGTra, TongTienCoc, TGCapNhat, TinhTrang, ChuThich, MaKH, MaNV) VALUES (?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement pst = con.prepareStatement(sql);
+            pst = con.prepareStatement(sql);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             pst.setString(1, t.getTGTao().format(dtf));
             pst.setInt(2, t.getTongTienThue());
@@ -158,4 +162,21 @@ public class HoaDonDAO implements DAOInterface<HoaDon>{
         return ketQua;
     }
     
+    public int selectMaHDMax() {
+        int ketQua = 0;
+        try {
+            Connection con = JDBCUtil.getConnection();
+            String sql = "SELECT MAX(MaHD) AS MaHD_latest FROM HOADON";
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                ketQua = rs.getInt("MaHD_latest");
+            }
+            JDBCUtil.closeConnection(con);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ketQua;
+    }
 }

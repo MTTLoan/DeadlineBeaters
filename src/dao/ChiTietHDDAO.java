@@ -28,17 +28,16 @@ public class ChiTietHDDAO implements DAOInterface<ChiTietHD>{
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "INSERT INTO CHITIETHD (MaHD, MaXe, SoNgay, SoTien, MaHopDong) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO CHITIETHD (MaHD, MaXe, SoNgay, SoTien) VALUES (?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, t.getMaHD());
             pst.setInt(2, t.getMaXe());
             pst.setInt(3, t.getSoNgay());
             pst.setInt(4, t.getSoTien());
-            pst.setInt(5, t.getMaHopDong());
 
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }

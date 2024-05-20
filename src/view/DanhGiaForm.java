@@ -82,6 +82,7 @@ public class DanhGiaForm extends javax.swing.JPanel {
         cbxLuachon = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -151,7 +152,7 @@ public class DanhGiaForm extends javax.swing.JPanel {
                 txtSearchKeyReleased(evt);
             }
         });
-        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 350, 40));
+        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 290, 40));
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +160,15 @@ public class DanhGiaForm extends javax.swing.JPanel {
                 btnSearchActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 40, 40));
+        jPanel3.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 40, 40));
+
+        btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_refresh.png"))); // NOI18N
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 40, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 600, 90));
 
@@ -236,7 +245,7 @@ public class DanhGiaForm extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-                String luachon = (String) cbxLuachon.getSelectedItem();
+        String luachon = (String) cbxLuachon.getSelectedItem();
         String text = txtSearch.getText();
         ArrayList<DanhGia> result = new ArrayList<>();
         switch (luachon) {
@@ -255,7 +264,14 @@ public class DanhGiaForm extends javax.swing.JPanel {
         a.setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void btnXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatExcelActionPerformed
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        txtSearch.setText("");
+        cbxLuachon.setSelectedIndex(0);
+        loadDataToTable(DanhGiaDAO.getInstance().selectAll());
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
         try {
             JFileChooser jFileChooser = new JFileChooser();
@@ -291,7 +307,7 @@ public class DanhGiaForm extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton_ExcelHDActionPerformed
+    }                                               
 
     private void openFile(String file) {
         try {
@@ -300,10 +316,11 @@ public class DanhGiaForm extends javax.swing.JPanel {
         } catch (IOException e) {
             System.out.println(e);
         }
-    }//GEN-LAST:event_btnXuatExcelActionPerformed
+    }                                            
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXuatExcel;

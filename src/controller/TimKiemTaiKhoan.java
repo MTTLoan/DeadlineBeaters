@@ -13,6 +13,7 @@ import model.TaiKhoan;
  * @author Lenovo
  */
 public class TimKiemTaiKhoan {
+    
     public static TimKiemTaiKhoan getInstance() {
         return new TimKiemTaiKhoan();
     }

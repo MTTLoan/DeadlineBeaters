@@ -86,6 +86,7 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         cbxLuachon = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
+        btnRefresh = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btndelete = new javax.swing.JButton();
@@ -174,7 +175,15 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
                 txtSearchKeyReleased(evt);
             }
         });
-        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 350, 40));
+        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 300, 40));
+
+        btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 40, 40));
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +191,7 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
                 btnSearchActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 40, 40));
+        jPanel3.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, 40, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 612, 90));
 
@@ -250,34 +259,19 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchKeyPressed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-                // TODO add your handling code here:
+        // TODO add your handling code here:
         String luachon = (String) cbxLuachon.getSelectedItem();
         String searchContent = txtSearch.getText();
         ArrayList<TaiKhoan> result = new ArrayList<>();
         switch (luachon) {
-            case "Tất cả":
-                result = TimKiemTaiKhoan.getInstance().tkTatCa(searchContent);
-                break;
-            case "Họ và tên":
-                result = TimKiemTaiKhoan.getInstance().tkHoTen(searchContent);
-                break;
-            case "Tên tài khoản":
-                result = TimKiemTaiKhoan.getInstance().tkTenTK(searchContent);
-                break;
-            case "Chức vụ":
-                result = TimKiemTaiKhoan.getInstance().tkChucVu(searchContent);
-                break;
-            case "Mã số nhân viên":
-                result = TimKiemTaiKhoan.getInstance().tkMaNV(searchContent);
-                break;
+            case "Tất cả" -> result = TimKiemTaiKhoan.getInstance().tkTatCa(searchContent);
+            case "Họ và tên" -> result = TimKiemTaiKhoan.getInstance().tkHoTen(searchContent);
+            case "Tên tài khoản" -> result = TimKiemTaiKhoan.getInstance().tkTenTK(searchContent);
+            case "Chức vụ" -> result = TimKiemTaiKhoan.getInstance().tkChucVu(searchContent);
+            case "Mã số nhân viên" -> result = TimKiemTaiKhoan.getInstance().tkMaNV(searchContent);
         }
         loadDataToTable(result);
     }//GEN-LAST:event_txtSearchKeyReleased
-
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
-        loadDataToTable(taikhoans);
-    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
@@ -367,6 +361,28 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
             e.printStackTrace();
         }           
     }//GEN-LAST:event_exportExcelActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        String luachon = (String) cbxLuachon.getSelectedItem();
+        String searchContent = txtSearch.getText();
+        ArrayList<TaiKhoan> result = new ArrayList<>();
+        switch (luachon) {
+            case "Tất cả" -> result = TimKiemTaiKhoan.getInstance().tkTatCa(searchContent);
+            case "Họ và tên" -> result = TimKiemTaiKhoan.getInstance().tkHoTen(searchContent);
+            case "Tên tài khoản" -> result = TimKiemTaiKhoan.getInstance().tkTenTK(searchContent);
+            case "Chức vụ" -> result = TimKiemTaiKhoan.getInstance().tkChucVu(searchContent);
+            case "Mã số nhân viên" -> result = TimKiemTaiKhoan.getInstance().tkMaNV(searchContent);
+        }
+        loadDataToTable(result);
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        txtSearch.setText("");
+        cbxLuachon.setSelectedIndex(0);
+        loadDataToTable(TaiKhoanDAO.getInstance().selectAll());
+    }//GEN-LAST:event_btnRefreshActionPerformed
     public void openFile(String file) {
         try {
             File path = new File(file);
@@ -379,6 +395,7 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btndelete;
     private javax.swing.JComboBox<String> cbxLuachon;
