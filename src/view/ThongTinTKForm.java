@@ -4,6 +4,9 @@
  */
 package view;
 
+import java.time.format.DateTimeFormatter;
+import model.TaiKhoan;
+
 /**
  *
  * @author ASUS
@@ -13,10 +16,30 @@ public class ThongTinTKForm extends javax.swing.JPanel {
     /**
      * Creates new form ThongTinTKForm
      */
+    private TaiKhoan currentAcc;
+    
     public ThongTinTKForm() {
         initComponents();
     }
-
+    
+    public ThongTinTKForm(TaiKhoan t) {
+        initComponents();
+        this.currentAcc = t;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        jTextField_HoTen.setText(currentAcc.getHoTen());
+        if(currentAcc.getGioiTinh().equals("Nam"))
+            jComboBox_GioiTinh.setSelectedIndex(0);
+        else
+            jComboBox_GioiTinh.setSelectedIndex(1);
+        jTextField_NgaySinh.setText(currentAcc.getNgaySinh().format(dtf));
+        jTextField_ChucVu.setText(currentAcc.getChucVu());
+        jTextField_Luong.setText(Integer.toString(currentAcc.getLuong()));
+        jTextField_NgayVaoLam.setText(currentAcc.getNgayVaoLam().format(dtf));
+        jTextField_MaNV.setText(Integer.toString(currentAcc.getMaNV()));
+        jTextField_MaQL.setText(Integer.toString(currentAcc.getMaQL()));
+        jTextField_TenTK.setText(currentAcc.getTenTK());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,17 +60,16 @@ public class ThongTinTKForm extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
+        jButton_DoiMatKhau = new javax.swing.JButton();
+        jComboBox_GioiTinh = new javax.swing.JComboBox<>();
+        jTextField_NgaySinh = new javax.swing.JTextField();
+        jTextField_HoTen = new javax.swing.JTextField();
+        jTextField_ChucVu = new javax.swing.JTextField();
+        jTextField_Luong = new javax.swing.JTextField();
+        jTextField_NgayVaoLam = new javax.swing.JTextField();
+        jTextField_MaNV = new javax.swing.JTextField();
+        jTextField_MaQL = new javax.swing.JTextField();
+        jTextField_TenTK = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -63,181 +85,110 @@ public class ThongTinTKForm extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(152, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("THÔNG TIN TÀI KHOẢN");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 24, 1010, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 1010, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLabel2.setText("Họ và tên:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 200, 34));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 200, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLabel3.setText("Giới tính:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 200, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 200, 40));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLabel4.setText("Ngày sinh:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 200, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 200, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLabel5.setText("Chức vụ:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 200, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 200, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLabel6.setText("Lương:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 200, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 200, 40));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLabel7.setText("Ngày vào làm:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, 200, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 200, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLabel8.setText("Mã số nhân viên:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 200, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 200, 40));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLabel9.setText("Mã số quản lý:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 560, 200, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 550, 200, 40));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLabel10.setText("Tên tài khoản:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 630, 200, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 610, 200, 40));
 
-        jButton5.setBackground(new java.awt.Color(27, 121, 30));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Đổi mật khẩu");
-        jButton5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton5.setBorderPainted(false);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButton_DoiMatKhau.setBackground(new java.awt.Color(27, 121, 30));
+        jButton_DoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jButton_DoiMatKhau.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_DoiMatKhau.setText("Đổi mật khẩu");
+        jButton_DoiMatKhau.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton_DoiMatKhau.setBorderPainted(false);
+        jButton_DoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButton_DoiMatKhauActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 710, 273, 55));
+        jPanel1.add(jButton_DoiMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 710, 273, 60));
 
-        jButton6.setBackground(new java.awt.Color(153, 0, 0));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Đăng xuất");
-        jButton6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton6.setBorderPainted(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 710, 273, 55));
+        jComboBox_GioiTinh.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jComboBox_GioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        jPanel1.add(jComboBox_GioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 627, 40));
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 627, 30));
+        jTextField_NgaySinh.setEditable(false);
+        jTextField_NgaySinh.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jPanel1.add(jTextField_NgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 627, 40));
 
-        jTextField8.setEditable(false);
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 627, 34));
+        jTextField_HoTen.setEditable(false);
+        jTextField_HoTen.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jPanel1.add(jTextField_HoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 627, 40));
 
-        jTextField9.setEditable(false);
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 627, 34));
+        jTextField_ChucVu.setEditable(false);
+        jTextField_ChucVu.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jPanel1.add(jTextField_ChucVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, 627, 40));
 
-        jTextField10.setEditable(false);
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 627, 34));
+        jTextField_Luong.setEditable(false);
+        jTextField_Luong.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jPanel1.add(jTextField_Luong, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 627, 40));
 
-        jTextField11.setEditable(false);
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, 627, 34));
+        jTextField_NgayVaoLam.setEditable(false);
+        jTextField_NgayVaoLam.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jPanel1.add(jTextField_NgayVaoLam, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 627, 40));
 
-        jTextField12.setEditable(false);
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, 627, 34));
+        jTextField_MaNV.setEditable(false);
+        jTextField_MaNV.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jPanel1.add(jTextField_MaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 490, 627, 40));
 
-        jTextField13.setEditable(false);
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 500, 627, 34));
+        jTextField_MaQL.setEditable(false);
+        jTextField_MaQL.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jPanel1.add(jTextField_MaQL, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 550, 627, 40));
 
-        jTextField14.setEditable(false);
-        jTextField14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField14ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 560, 627, 40));
-
-        jTextField15.setEditable(false);
-        jTextField15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField15ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 630, 627, 34));
+        jTextField_TenTK.setEditable(false);
+        jTextField_TenTK.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jPanel1.add(jTextField_TenTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 610, 627, 40));
 
         jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1010, 14));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1010, 10));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1192, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton_DoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DoiMatKhauActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
-
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
-
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
-
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
-
-    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField14ActionPerformed
-
-    private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField15ActionPerformed
+        DoiMatKhau doiMK = new DoiMatKhau(currentAcc);
+        doiMK.setVisible(true);
+    }//GEN-LAST:event_jButton_DoiMatKhauActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton_DoiMatKhau;
+    private javax.swing.JComboBox<String> jComboBox_GioiTinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -250,13 +201,13 @@ public class ThongTinTKForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextField_ChucVu;
+    private javax.swing.JTextField jTextField_HoTen;
+    private javax.swing.JTextField jTextField_Luong;
+    private javax.swing.JTextField jTextField_MaNV;
+    private javax.swing.JTextField jTextField_MaQL;
+    private javax.swing.JTextField jTextField_NgaySinh;
+    private javax.swing.JTextField jTextField_NgayVaoLam;
+    private javax.swing.JTextField jTextField_TenTK;
     // End of variables declaration//GEN-END:variables
 }

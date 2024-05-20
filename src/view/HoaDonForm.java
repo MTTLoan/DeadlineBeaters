@@ -4,20 +4,73 @@
  */
 package view;
 
+import dao.HoaDonDAO;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.HoaDon;
+import controller.TimKiemHoaDon;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JFileChooser;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /**
  *
  * @author ASUS
  */
-public class HoaDonForm extends javax.swing.JPanel {
+public final class HoaDonForm extends javax.swing.JPanel {
 
     /**
      * Creates new form HoaDonForm
      */
+    private DefaultTableModel tblModel; //sử dụng để quản lý dữ liệu cho JTable
+    private static ArrayList<HoaDon> ds;
+    
     public HoaDonForm() {
         initComponents();
-        setVisible(true);
+        jTable_HoaDon.setDefaultEditor(Object.class, null);
+        initTable();
+        ds = HoaDonDAO.getInstance().selectAll();
+        loadDataToTable(ds);
+    }
+    
+    public final void initTable() {
+        tblModel = new DefaultTableModel();
+        String[] headerTbl = new String[]{"Mã hóa đơn", "Thời gian tạo", "Tổng tiền thuê", "Thời gian nhận", "Thời gian trả", "Tổng tiền cọc", "Tình trạng", "Mã khách hàng", "Mã nhân viên"};
+        tblModel.setColumnIdentifiers(headerTbl);
+        jTable_HoaDon.setModel(tblModel);
+    }
+    
+    public void loadDataToTable(ArrayList<HoaDon> hd) {
+        try {
+            tblModel.setRowCount(0);
+            for (HoaDon i : hd) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                tblModel.addRow(new Object[]{
+                    i.getMaHD(), i.getTGTao().format(dtf), i.getTongTienThue(), i.getTGNhan().format(dtf), i.getTGTra().format(dtf), i.getTongTienCoc(), i.getTinhTrang(), i.getMaKH(), i.getMaNV()
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    public HoaDon getHoaDonSelect() {
+        int i_row = jTable_HoaDon.getSelectedRow();
+        HoaDon hd = HoaDonDAO.getInstance().selectAll().get(i_row);
+        return hd;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,434 +80,298 @@ public class HoaDonForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel_HoaDon = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        jButton16 = new javax.swing.JButton();
+        jButton_CTHD = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        cbxLuachon1 = new javax.swing.JComboBox<>();
-        txtSearch1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         cbxLuachon = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jButton_LamMoi = new javax.swing.JButton();
+        jButton_TimKiemHD = new javax.swing.JButton();
+        jButton_ExcelHD = new javax.swing.JButton();
+        jButton_SuaHD = new javax.swing.JButton();
+        jButton_XoaHD = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable_HoaDon = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(1100, 820));
+        setPreferredSize(new java.awt.Dimension(1100, 820));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 153, 153));
-        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
-        jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_HoaDon.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_HoaDon.setPreferredSize(new java.awt.Dimension(1100, 820));
+        jPanel_HoaDon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(152, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("HÓA ĐƠN");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 1010, -1));
+        jPanel_HoaDon.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 1010, -1));
 
         jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1010, 14));
+        jPanel_HoaDon.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1010, 14));
 
         jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 1010, 17));
+        jPanel_HoaDon.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 1010, 17));
 
-        jButton16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_detail.png"))); // NOI18N
-        jButton16.setText(" Xem chi tiết");
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+        jButton_CTHD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton_CTHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_detail.png"))); // NOI18N
+        jButton_CTHD.setText(" Xem chi tiết");
+        jButton_CTHD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton_CTHDMouseClicked(evt);
             }
         });
-        jPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, 170, 41));
+        jButton_CTHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CTHDActionPerformed(evt);
+            }
+        });
+        jPanel_HoaDon.add(jButton_CTHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, 170, 41));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
         jPanel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cbxLuachon1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbxLuachon1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã hóa đơn", "Ngày tạo", "Tổng tiền", "Thời gian nhận", "Thời gian trả", "Tình trạng", "Mã khách hàng", "Mã nhân viên" }));
-        cbxLuachon1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxLuachon1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(cbxLuachon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 150, 40));
-
-        txtSearch1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearch1.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtSearch1InputMethodTextChanged(evt);
-            }
-        });
-        txtSearch1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearch1ActionPerformed(evt);
-            }
-        });
-        txtSearch1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtSearch1PropertyChange(evt);
-            }
-        });
-        txtSearch1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSearch1KeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSearch1KeyReleased(evt);
-            }
-        });
-        jPanel4.add(txtSearch1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 300, 40));
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 40, 40));
-
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 570, 90));
-
-        jButton17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_xls.png"))); // NOI18N
-        jButton17.setText(" Xuất Excel");
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 160, 170, 41));
-
-        jButton18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_update.png"))); // NOI18N
-        jButton18.setText(" Sửa");
-        jButton18.setToolTipText("");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 170, 41));
-
-        jButton19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
-        jButton19.setText(" Xóa");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 170, 41));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Mã hóa đơn", "Ngày tạo", "Tổng tiền", "Thời gian nhận", "Thời gian trả", "Tình trạng", "Mã khách hàng", "Mã nhân viên"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1010, 480));
-
-        jTabbedPane1.addTab("Hóa đơn", jPanel2);
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(152, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("HÓA ĐƠN PHẠT");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 1010, -1));
-
-        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1010, 14));
-
-        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 1010, 17));
-
-        jButton10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_add.png"))); // NOI18N
-        jButton10.setText(" Thêm");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 120, 41));
-
-        jButton11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_detail.png"))); // NOI18N
-        jButton11.setText(" Xem chi tiết");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 174, 41));
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
-        jPanel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         cbxLuachon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbxLuachon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã hóa đơn phạt", "Ngày tạo", "Số tiền", "Chú thích", "Tình trạng", "Mã hợp đồng" }));
-        cbxLuachon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxLuachonActionPerformed(evt);
-            }
-        });
-        jPanel3.add(cbxLuachon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 150, 40));
+        cbxLuachon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã hóa đơn", "Ngày tạo", "Tổng tiền thuê", "Thời gian nhận", "Thời gian trả", "Tổng tiền cọc", "Tình trạng", "Mã khách hàng", "Mã nhân viên" }));
+        jPanel4.add(cbxLuachon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 130, 40));
 
         txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearch.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtSearchInputMethodTextChanged(evt);
-            }
-        });
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
-        txtSearch.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtSearchPropertyChange(evt);
-            }
-        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSearchKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchKeyReleased(evt);
             }
         });
-        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 300, 40));
+        jPanel4.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 280, 40));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton_LamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_refresh.png"))); // NOI18N
+        jButton_LamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton_LamMoiActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 40, 40));
+        jPanel4.add(jButton_LamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 40, 40));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 570, 90));
-
-        jButton12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_xls.png"))); // NOI18N
-        jButton12.setText(" Xuất Excel");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+        jButton_TimKiemHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
+        jButton_TimKiemHD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton_TimKiemHDMouseClicked(evt);
             }
         });
-        jPanel1.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 173, 41));
+        jPanel4.add(jButton_TimKiemHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 40, 40));
 
-        jButton13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_update.png"))); // NOI18N
-        jButton13.setText(" Sửa");
-        jButton13.setToolTipText("");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        jPanel_HoaDon.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 590, 90));
+
+        jButton_ExcelHD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton_ExcelHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_xls.png"))); // NOI18N
+        jButton_ExcelHD.setText(" Xuất Excel");
+        jButton_ExcelHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                jButton_ExcelHDActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 120, 41));
+        jPanel_HoaDon.add(jButton_ExcelHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 160, 170, 41));
 
-        jButton14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
-        jButton14.setText(" Xóa");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        jButton_SuaHD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton_SuaHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_update.png"))); // NOI18N
+        jButton_SuaHD.setText(" Sửa");
+        jButton_SuaHD.setToolTipText("");
+        jButton_SuaHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                jButton_SuaHDActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 100, 120, 41));
+        jPanel_HoaDon.add(jButton_SuaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 170, 41));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jButton_XoaHD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton_XoaHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
+        jButton_XoaHD.setText(" Xóa");
+        jButton_XoaHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_XoaHDActionPerformed(evt);
+            }
+        });
+        jPanel_HoaDon.add(jButton_XoaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 170, 41));
+
+        jTable_HoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã hóa đơn phạt", "Ngày tạo", "Số tiền", "Chú thích", "Tình trạng", "Mã hợp đồng"
+                "Mã hóa đơn", "Thời gian tạo", "Tổng tiền thuê", "Thời gian nhận", "Thời gian trả", "Tổng tiền cọc", "Tình trạng", "Mã khách hàng", "Mã nhân viên"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTable_HoaDon);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1010, 480));
+        jPanel_HoaDon.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1010, 520));
 
-        jTabbedPane1.addTab("Hóa đơn phạt", jPanel1);
-
-        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 810));
+        add(jPanel_HoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 820));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+    private void jButton_CTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_CTHDMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton16ActionPerformed
+        if (jTable_HoaDon.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn xem chi tiết");
+        } else {
+            ChiTietHoaDon cthd = new ChiTietHoaDon(getHoaDonSelect());
+            cthd.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton_CTHDMouseClicked
 
-    private void cbxLuachon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLuachon1ActionPerformed
+    private void jButton_XoaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_XoaHDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxLuachon1ActionPerformed
+        if (jTable_HoaDon.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn xoá");
+        } else {
+            int output = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xoá hóa đơn", "Xác nhận xoá hóa đơn", JOptionPane.YES_NO_OPTION);
+            if (output == JOptionPane.YES_OPTION) {
+                HoaDonDAO.getInstance().delete(getHoaDonSelect());
+                JOptionPane.showMessageDialog(this, "Xóa thành công hóa đơn "+getHoaDonSelect().getMaHD()+"!");
+                loadDataToTable(HoaDonDAO.getInstance().selectAll());
+            }
+        }
+    }//GEN-LAST:event_jButton_XoaHDActionPerformed
 
-    private void txtSearch1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtSearch1InputMethodTextChanged
+    private void jButton_SuaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SuaHDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearch1InputMethodTextChanged
-
-    private void txtSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearch1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearch1ActionPerformed
-
-    private void txtSearch1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtSearch1PropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearch1PropertyChange
-
-    private void txtSearch1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearch1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearch1KeyPressed
-
-    private void txtSearch1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearch1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearch1KeyReleased
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton17ActionPerformed
-
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton18ActionPerformed
-
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton19ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void cbxLuachonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLuachonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxLuachonActionPerformed
-
-    private void txtSearchInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtSearchInputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchInputMethodTextChanged
-
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
-
-    private void txtSearchPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtSearchPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchPropertyChange
-
-    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchKeyPressed
+        if (jTable_HoaDon.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn sửa");
+        } else {
+            SuaHoaDon a = new SuaHoaDon(getHoaDonSelect());
+            a.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton_SuaHDActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-
+        // TODO add your handling code here:
+        String luachon = (String) cbxLuachon.getSelectedItem();
+        String text = txtSearch.getText();
+        ArrayList<HoaDon> result = new ArrayList<>();
+        switch (luachon) {
+            case "Tất cả" -> result = TimKiemHoaDon.getInstance().tkTatCa(text);
+            case "Mã hóa đơn" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
+            case "Thời gian tạo" -> result = TimKiemHoaDon.getInstance().tkTGTao(text);
+            case "Tổng tiền thuê" -> result = TimKiemHoaDon.getInstance().tkTongTienThue(text);
+            case "Thời gian nhận" -> result = TimKiemHoaDon.getInstance().tkTGNhan(text);
+            case "Thời gian trả" -> result = TimKiemHoaDon.getInstance().tkTGTra(text);
+            case "Tổng tiền cọc" -> result = TimKiemHoaDon.getInstance().tkTongTienCoc(text);
+            case "Tình trạng" -> result = TimKiemHoaDon.getInstance().tkTinhTrang(text);
+            case "Mã khách hàng" -> result = TimKiemHoaDon.getInstance().tkMaKH(text);
+            case "Mã nhân viên" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
+        }
+        loadDataToTable(result);
     }//GEN-LAST:event_txtSearchKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton_TimKiemHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_TimKiemHDMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        String luachon = (String) cbxLuachon.getSelectedItem();
+        String text = txtSearch.getText();
+        ArrayList<HoaDon> result = new ArrayList<>();
+        switch (luachon) {
+            case "Tất cả" -> result = TimKiemHoaDon.getInstance().tkTatCa(text);
+            case "Mã hóa đơn" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
+            case "Thời gian tạo" -> result = TimKiemHoaDon.getInstance().tkTGTao(text);
+            case "Tổng tiền thuê" -> result = TimKiemHoaDon.getInstance().tkTongTienThue(text);
+            case "Thời gian nhận" -> result = TimKiemHoaDon.getInstance().tkTGNhan(text);
+            case "Thời gian trả" -> result = TimKiemHoaDon.getInstance().tkTGTra(text);
+            case "Tổng tiền cọc" -> result = TimKiemHoaDon.getInstance().tkTongTienCoc(text);
+            case "Tình trạng" -> result = TimKiemHoaDon.getInstance().tkTinhTrang(text);
+            case "Mã khách hàng" -> result = TimKiemHoaDon.getInstance().tkMaKH(text);
+            case "Mã nhân viên" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
+        }
+        loadDataToTable(result);
+    }//GEN-LAST:event_jButton_TimKiemHDMouseClicked
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void jButton_ExcelHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ExcelHDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
+        try {
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("HoaDon");
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+                Row rowCol = sheet.createRow(0);
+                for (int i = 0; i < jTable_HoaDon.getColumnCount(); i++) {
+                    Cell cell = rowCol.createCell(i);
+                    cell.setCellValue(jTable_HoaDon.getColumnName(i));
+                }
+
+                for (int j = 0; j < jTable_HoaDon.getRowCount(); j++) {
+                    Row row = sheet.createRow(j + 1);
+                    for (int k = 0; k < jTable_HoaDon.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k);
+                        if (jTable_HoaDon.getValueAt(j, k) != null) {
+                            cell.setCellValue(jTable_HoaDon.getValueAt(j, k).toString());
+                        }
+
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                openFile(saveFile.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton_ExcelHDActionPerformed
+    
+    private void openFile(String file) {
+        try {
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void jButton_LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LamMoiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
+        txtSearch.setText("");
+        cbxLuachon.setSelectedIndex(0);
+        loadDataToTable(HoaDonDAO.getInstance().selectAll());
+    }//GEN-LAST:event_jButton_LamMoiActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    private void jButton_CTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CTHDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-
+        if (jTable_HoaDon.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn xem chi tiết");
+        } else {
+            ChiTietHoaDon cthd = new ChiTietHoaDon(getHoaDonSelect());
+            cthd.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton_CTHDActionPerformed
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxLuachon;
-    private javax.swing.JComboBox<String> cbxLuachon1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton_CTHD;
+    private javax.swing.JButton jButton_ExcelHD;
+    private javax.swing.JButton jButton_LamMoi;
+    private javax.swing.JButton jButton_SuaHD;
+    private javax.swing.JButton jButton_TimKiemHD;
+    private javax.swing.JButton jButton_XoaHD;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel_HoaDon;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable_HoaDon;
     private javax.swing.JTextField txtSearch;
-    private javax.swing.JTextField txtSearch1;
     // End of variables declaration//GEN-END:variables
 }

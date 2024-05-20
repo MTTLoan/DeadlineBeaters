@@ -4,6 +4,21 @@
  */
 package view;
 
+import controller.TimKiemXe;
+import dao.ChiTietHDDAO;
+import dao.HoaDonDAO;
+import dao.XeDAO;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.ChiTietHD;
+import model.Xe;
+import java.time.ZoneId;
+import model.HoaDon;
+import model.TaiKhoan;
+
 /**
  *
  * @author ASUS
@@ -13,10 +28,94 @@ public class DatXeForm extends javax.swing.JPanel {
     /**
      * Creates new form DatXeForm
      */
+    private DefaultTableModel tblXeModel; //sử dụng để quản lý dữ liệu cho JTable
+    private static ArrayList<Xe> dsXe = new ArrayList<>();
+    private static ArrayList<ChiTietHD> dsCTHD = new ArrayList<>();
+    
     public DatXeForm() {
         initComponents();
+        jTable_Xe.setDefaultEditor(Object.class, null);
+        initTable();
+        dsXe = XeDAO.getInstance().selectAll();
+        loadDataToTableXe(dsXe);
     }
+    
+    public DatXeForm(TaiKhoan tk) {
+        initComponents();
+        jTextField_NgTao.setText(Integer.toString(tk.getMaNV()));
+        jTable_Xe.setDefaultEditor(Object.class, null);
+        initTable();
+        dsXe = XeDAO.getInstance().selectAll();
+        loadDataToTableXe(dsXe);
+    }
+    
+    public final void initTable() {
+        tblXeModel = new DefaultTableModel();
+        String[] headerTbl = new String[]{"Mã xe", "Tên xe", "Loại xe", "Đơn giá", "Tiền cọc"};
+        tblXeModel.setColumnIdentifiers(headerTbl);
+        jTable_Xe.setModel(tblXeModel);
+    }
+    
+    private void loadDataToTableXe(ArrayList<Xe> dsXe) {
+        try {
+            tblXeModel.setRowCount(0);
+            String loaiXe;
+            for (var i : dsXe) {
+                loaiXe = switch (i.getMaLX()) {
+                    case 3001 -> "Xe bốn chỗ ";
+                    case 3002 -> "Xe bảy chỗ ";
+                    default -> "Xe máy";
+                };
+                tblXeModel.addRow(new Object[]{
+                    i.getMaXe(), i.getTenXe(), loaiXe, i.getDonGia(), i.getTienCoc()
+                });
+            }
+        } catch (Exception e) {
+        }
+    }
+    
+    public int tinhTongTienThue() {
+        int tt = 0;
+        for (var i : dsCTHD) {
+            tt += i.getSoTien();
+        }
+        return tt;
+    }
+    
+    public int tinhTongTienCoc() {
+        int tt = 0;
+        for (var i : dsCTHD) {
+            Xe x = XeDAO.getInstance().selectById(Integer.toString(i.getMaXe()));
+            tt += x.getTienCoc();
+        }
+        return tt;
+    }
+    
+    public boolean ktraTonTaiCTHD(int MaXe) {
+        for(var i : dsCTHD){
+            if(MaXe == i.getMaXe())
+                return true;
+        }
+        return false;
+    }
+    
+    public void loadDataToTableCTHD() {
+        try {
+            DefaultTableModel tblCTHDModel = (DefaultTableModel) jTable_CTHD.getModel();
+            tblCTHDModel.setRowCount(0);
 
+            for (var i: dsCTHD) {
+                Xe x = XeDAO.getInstance().selectById(Integer.toString(i.getMaXe()));
+                tblCTHDModel.addRow(new Object[]{
+                    i.getMaXe(), x.getDonGia(), i.getSoNgay(), i.getSoTien()
+                });
+            }
+        } catch (Exception e) {
+        }
+        jLabel_TongTienCoc.setText(Integer.toString(tinhTongTienCoc()));
+        jLabel_TongTienThue.setText(Integer.toString(tinhTongTienThue()));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,38 +127,32 @@ public class DatXeForm extends javax.swing.JPanel {
 
         jPanel3 = new javax.swing.JPanel();
         cbxlLuaChon = new javax.swing.JComboBox<>();
-        txtSearchForm = new javax.swing.JTextField();
-        btnReset = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jDateChooser_TGTra = new com.toedter.calendar.JDateChooser();
+        jDateChooser_TGNhan = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable_Xe = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable_CTHD = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jLabel_TongTienThue = new javax.swing.JLabel();
+        jLabel_TongTienCoc = new javax.swing.JLabel();
+        jButton_ThanhToan = new javax.swing.JButton();
+        jButton_ThemXe = new javax.swing.JButton();
+        jTextField_NgTao = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        jTextArea_ChuThich = new javax.swing.JTextArea();
+        jTextField_MaKH = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        jButton_XoaXe = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1100, 820));
@@ -71,78 +164,63 @@ public class DatXeForm extends javax.swing.JPanel {
 
         cbxlLuaChon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbxlLuaChon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã xe", "Tên xe", "Loại xe", "Đơn giá" }));
-        jPanel3.add(cbxlLuaChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 90, 40));
+        jPanel3.add(cbxlLuaChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 90, 30));
 
-        txtSearchForm.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearchForm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchFormActionPerformed(evt);
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 300, 30));
+
+        btnSearch.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
+        btnSearch.setMaximumSize(new java.awt.Dimension(32, 32));
+        btnSearch.setMinimumSize(new java.awt.Dimension(32, 32));
+        btnSearch.setPreferredSize(new java.awt.Dimension(32, 32));
+        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSearchMouseClicked(evt);
             }
         });
-        txtSearchForm.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSearchFormKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSearchFormKeyReleased(evt);
-            }
-        });
-        jPanel3.add(txtSearchForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 300, 40));
+        jPanel3.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 32, 32));
 
-        btnReset.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
-        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
-        btnReset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 40, 40));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("Ngày nhận:");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 80, 30));
 
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 520, 90));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Ngày trả:");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 70, 30));
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jDateChooser_TGTra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel3.add(jDateChooser_TGTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 140, 30));
+
+        jDateChooser_TGNhan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel3.add(jDateChooser_TGNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 140, 30));
+
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 520, 130));
+
+        jTable_Xe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable_Xe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã xe", "Tên xe", "Loại xe", "Đơn giá"
+                "Mã xe", "Tên xe", "Loại xe", "Đơn giá", "Tiền cọc"
             }
         ));
-        jTable1.setRowHeight(30);
-        jScrollPane1.setViewportView(jTable1);
+        jTable_Xe.setRowHeight(30);
+        jScrollPane1.setViewportView(jTable_Xe);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 520, 630));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Mã HD:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 60, 30));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 520, 520));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Chú thích:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, 70, 30));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Ngày trả:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 260, 80, 30));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Giờ nhận:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, -1, 30));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setText("Ngày nhận:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 220, 80, 30));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 210, 70, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Người tạo:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 70, 30));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 70, 30));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("Giờ trả:");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 60, 30));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_CTHD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable_CTHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -150,12 +228,12 @@ public class DatXeForm extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Mã xe", "Đơn giá", "Số giờ", "Số tiền"
+                "Mã xe", "Đơn giá", "Số ngày", "Số tiền"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTable_CTHD);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 380, 460, 290));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 290, 460, 380));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(152, 0, 0));
@@ -167,208 +245,220 @@ public class DatXeForm extends javax.swing.JPanel {
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 460, 10));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel11.setText("Tiền cọc:");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 680, 70, 30));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setText("Tổng tiền cọc:");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 680, 100, 30));
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel12.setText("Tổng tiền:");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 680, 80, 30));
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setText("Tổng tiền thuê:");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 680, 120, 30));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("0đ");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 680, 120, 30));
+        jLabel_TongTienThue.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel_TongTienThue.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_TongTienThue.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_TongTienThue.setText("0đ");
+        add(jLabel_TongTienThue, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 680, 90, 30));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("0đ");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 680, 120, 30));
+        jLabel_TongTienCoc.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel_TongTienCoc.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_TongTienCoc.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_TongTienCoc.setText("0đ");
+        add(jLabel_TongTienCoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 680, 90, 30));
 
-        jButton1.setBackground(new java.awt.Color(27, 121, 30));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText(" Thanh toán");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_ThanhToan.setBackground(new java.awt.Color(27, 121, 30));
+        jButton_ThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jButton_ThanhToan.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_ThanhToan.setText(" Thanh toán");
+        jButton_ThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_ThanhToanActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 730, 140, 40));
+        add(jButton_ThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 730, 140, 40));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
-        jButton2.setText(" Xóa xe");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 730, 130, 40));
-
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_print.png"))); // NOI18N
-        jButton3.setText(" In hóa đơn");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton_ThemXe.setBackground(new java.awt.Color(204, 0, 0));
+        jButton_ThemXe.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jButton_ThemXe.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_ThemXe.setText("Thêm");
+        jButton_ThemXe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton_ThemXeActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 730, -1, 40));
+        add(jButton_ThemXe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 730, 130, 40));
 
-        jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 360, 30));
+        jTextField_NgTao.setEditable(false);
+        jTextField_NgTao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        add(jTextField_NgTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 320, 30));
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 220, 90, 30));
+        jTextArea_ChuThich.setColumns(20);
+        jTextArea_ChuThich.setRows(5);
+        jScrollPane3.setViewportView(jTextArea_ChuThich);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 210, 320, 60));
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 360, 60));
-
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-        add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 180, 360, 30));
-
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
-        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 220, 170, 30));
-
-        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, 170, 30));
-
-        jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, 90, 30));
+        jTextField_MaKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        add(jTextField_MaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, 320, 30));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Mã KH:");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 60, 30));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 60, 30));
 
-        jTextField8.setEditable(false);
-        jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        jButton_XoaXe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton_XoaXe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_delete.png"))); // NOI18N
+        jButton_XoaXe.setText(" Xóa xe");
+        jButton_XoaXe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                jButton_XoaXeActionPerformed(evt);
             }
         });
-        add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 360, 30));
+        add(jButton_XoaXe, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 730, 130, 40));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSearchFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchFormActionPerformed
+    private void jButton_ThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThanhToanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchFormActionPerformed
+        if (dsCTHD.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn xe !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int check = JOptionPane.showConfirmDialog(this, "Thanh toán thành công hay không?", "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION);
+            if (check == JOptionPane.YES_OPTION) {
+                // Lấy thời gian hiện tại
+                LocalDate TGTao = LocalDate.now();
+                // Lấy dữ liệu chuyển thành localdate
+                LocalDate TGNhan = jDateChooser_TGNhan.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate TGTra = jDateChooser_TGTra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                // Tạo đối tượng hóa đơn
+                HoaDon hd = new HoaDon(0, TGTao, tinhTongTienThue(), TGNhan, TGTra, tinhTongTienCoc(), TGTao, "Đã đặt xe", jTextArea_ChuThich.getText(), Integer.parseInt(jTextField_MaKH.getText()), Integer.parseInt(jTextField_NgTao.getText()));
+                
+                try {
+                    // Thêm vào csdl
+                    HoaDonDAO.getInstance().insert(hd);
+                    for (var i : dsCTHD) {
+                        i.setMaHD(HoaDonDAO.getInstance().selectMaHDMax());
+                        ChiTietHDDAO.getInstance().insert(i);
+                    }
+                    JOptionPane.showMessageDialog(this, "Tạo hóa đơn thành công !");
+//                    int res = JOptionPane.showConfirmDialog(this, "Bạn có muốn xuất file pdf ?","",JOptionPane.YES_NO_OPTION);
+//                    if (res == JOptionPane.YES_OPTION) {
+//                        WritePDF writepdf = new WritePDF();
+//                        writepdf.writePhieuNhap(MaPhieu);
+//                    }
+                    // reset
+                    ArrayList<Xe> xe = XeDAO.getInstance().selectAll();
+                    loadDataToTableXe(xe);
+                    DefaultTableModel r = (DefaultTableModel) jTable_CTHD.getModel();
+                    r.setRowCount(0);
+                    dsCTHD = new ArrayList<>();
+                    jLabel_TongTienCoc.setText("0");
+                    jLabel_TongTienThue.setText("0");
+                    txtSearch.setText("");
+                    cbxlLuaChon.setSelectedIndex(0);
+                    jTextField_MaKH.setText(null);
+                    jTextArea_ChuThich.setText(null);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi !");
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton_ThanhToanActionPerformed
 
-    private void txtSearchFormKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchFormKeyPressed
+    private void jButton_XoaXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_XoaXeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchFormKeyPressed
+        int i_row = jTable_CTHD.getSelectedRow();
+        if (i_row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn xe để xoá khỏi bảng!");
+        } else {
+            dsCTHD.remove(i_row);
+            loadDataToTableCTHD();
+            jLabel_TongTienCoc.setText(tinhTongTienCoc() + "đ");
+            jLabel_TongTienThue.setText(tinhTongTienThue()+ "đ");
+        }
+    }//GEN-LAST:event_jButton_XoaXeActionPerformed
 
-    private void txtSearchFormKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchFormKeyReleased
+    private void jButton_ThemXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemXeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchFormKeyReleased
+        int i_row = jTable_Xe.getSelectedRow();
+        if (i_row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn xe!");
+        } else if (jDateChooser_TGNhan.getDate() == null || jDateChooser_TGTra.getDate() == null){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ ngày nhận, ngày trả!");
+        } else if (jDateChooser_TGNhan.getDate().compareTo(jDateChooser_TGTra.getDate()) > 0){
+            JOptionPane.showMessageDialog(this, "Ngày nhận phải trước ngày trả!");
+        } else if (ktraTonTaiCTHD(Integer.parseInt(jTable_Xe.getValueAt(i_row, 0).toString()))){
+            JOptionPane.showMessageDialog(this, "Xe đã tồn tại trong hóa đơn!");
+        } else {
+            int MaXe = Integer.parseInt(jTable_Xe.getValueAt(i_row, 0).toString());
+            int DonGia = Integer.parseInt(jTable_Xe.getValueAt(i_row, 3).toString());
+            //lấy dữ liệu và chuyển thành LocalDate
+            LocalDate TGNhan = jDateChooser_TGNhan.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate TGTra = jDateChooser_TGTra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            int SoNgay = (int) ChronoUnit.DAYS.between(TGNhan,TGTra);
+            int SoTien = SoNgay*DonGia;
+            //tạo cthd mới
+            ChiTietHD cthd = new ChiTietHD(0, MaXe, SoNgay, SoTien, 0);
+            //thêm vào danh sách
+            dsCTHD.add(cthd);
+            loadDataToTableCTHD();
+            jLabel_TongTienCoc.setText(tinhTongTienCoc() + "đ");
+            jLabel_TongTienThue.setText(tinhTongTienThue()+ "đ");
+        }
+    }//GEN-LAST:event_jButton_ThemXeActionPerformed
 
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnResetActionPerformed
+        if(jDateChooser_TGNhan.getDate() == null || jDateChooser_TGTra.getDate() == null){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ ngày nhận, ngày trả!");
+        } else if (jDateChooser_TGNhan.getDate().compareTo(jDateChooser_TGTra.getDate()) > 0){
+            JOptionPane.showMessageDialog(this, "Ngày nhận phải trước ngày trả!");
+        }else{
+            DefaultTableModel tblxeModel = (DefaultTableModel) jTable_Xe.getModel();
+            String luachon = (String) cbxlLuaChon.getSelectedItem();
+            String text = txtSearch.getText().toLowerCase();
+            ArrayList<Xe> ds = new ArrayList<>();
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+            LocalDate TGNhan = jDateChooser_TGNhan.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate TGTra = jDateChooser_TGTra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            ds = TimKiemXe.getInstance().tkTG(TGNhan, TGTra);
+            
+            switch (luachon) {
+                case "Mã xe" -> ds = TimKiemXe.getInstance().tkMaXe(ds, text);
+                case "Tên xe" -> ds = TimKiemXe.getInstance().tkTenXe(ds, text);
+                case "Loại xe" -> ds = TimKiemXe.getInstance().tkLoaiXe(ds, text);
+                case "Đơn giá" -> ds = TimKiemXe.getInstance().tkDonGia(ds, text);
+            }
+            loadDataToTableXe(ds);
+        }
+    }//GEN-LAST:event_btnSearchMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cbxlLuaChon;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton_ThanhToan;
+    private javax.swing.JButton jButton_ThemXe;
+    private javax.swing.JButton jButton_XoaXe;
+    private com.toedter.calendar.JDateChooser jDateChooser_TGNhan;
+    private com.toedter.calendar.JDateChooser jDateChooser_TGTra;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_TongTienCoc;
+    private javax.swing.JLabel jLabel_TongTienThue;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField txtSearchForm;
+    private javax.swing.JTable jTable_CTHD;
+    private javax.swing.JTable jTable_Xe;
+    private javax.swing.JTextArea jTextArea_ChuThich;
+    private javax.swing.JTextField jTextField_MaKH;
+    private javax.swing.JTextField jTextField_NgTao;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,27 +1,64 @@
 
 package model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class HDPhat {
-    private String MaHDP;
-    private LocalDateTime NgayTao;
-    private long SoTien;
-    private String ChuThich;
+    private int MaHDP;
+    private LocalDate TGTao;
+    private int TongTienPhat;
     private String TinhTrang;
-    private String MaHopDong;
+    private int MaHD;
 
     public HDPhat() {
     }
 
-    public HDPhat(String MaHDP, LocalDateTime NgayTao, long SoTien, String ChuThich, String TinhTrang, String MaHopDong) {
+    public HDPhat(int MaHDP, LocalDate TGTao, int TongTienPhat, String TinhTrang, int MaHD) {
         this.MaHDP = MaHDP;
-        this.NgayTao = NgayTao;
-        this.SoTien = SoTien;
-        this.ChuThich = ChuThich;
+        this.TGTao = TGTao;
+        this.TongTienPhat = TongTienPhat;
         this.TinhTrang = TinhTrang;
-        this.MaHopDong = MaHopDong;
+        this.MaHD = MaHD;
     }
-    
+
+    public int getMaHDP() {
+        return MaHDP;
+    }
+
+    public LocalDate getTGTao() {
+        return TGTao;
+    }
+
+    public int getTongTienPhat() {
+        return TongTienPhat;
+    }
+
+    public String getTinhTrang() {
+        return TinhTrang;
+    }
+
+    public int getMaHD() {
+        return MaHD;
+    }
+
+    public void setMaHDP(int MaHDP) {
+        this.MaHDP = MaHDP;
+    }
+
+    public void setTGTao(LocalDate TGTao) {
+        this.TGTao = TGTao;
+    }
+
+    public void setTongTienPhat(int TongTienPhat) {
+        this.TongTienPhat = TongTienPhat;
+    }
+
+    public void setTinhTrang(String TinhTrang) {
+        this.TinhTrang = TinhTrang;
+    }
+
+    public void setMaHD(int MaHD) {
+        this.MaHD = MaHD;
+    }
     
 }
