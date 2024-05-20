@@ -1,0 +1,19 @@
+-- Tạo user qlthuexe
+
+create user qlthuexe identified by qlthuexe;
+grant connect to qlthuexe;
+grant dba to qlthuexe;
+
+--Nếu báo lỗi ORA-65096: invalid common user or role name chạy câu lệnh
+-- alter session set "_ORACLE_SCRIPT"=true;  rồi tiếp tục thực hiện lại
+
+
+-- Tao directory o user sys
+CREATE DIRECTORY hinhxe AS 'D:\hinh xe'; -
+--duong link luu file hinh xe
+
+--GRANT READ, WRITE ON DIRECTORY hinhxe TO qlthuexe;
+--cấp quyền sử dụng directory cho  qlthuexe
+
+--SELECT * FROM DBA_DIRECTORIES 
+--run statement kiem tra co directory hay khong
