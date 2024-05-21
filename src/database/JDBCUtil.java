@@ -1,8 +1,11 @@
 package database;
 
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 public class JDBCUtil {
@@ -36,6 +39,29 @@ public class JDBCUtil {
         }
     }
 
+    
+    public static void closeStatement(Statement stmt) {
+        try {
+            if (stmt != null) {
+                stmt.close();
+            }
+        } catch (Exception e) {
+            // Xử lý ngoại lệ
+            e.printStackTrace();
+        }
+    }
+
+    public static void closeResultSet(ResultSet rs) {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (Exception e) {
+            // Xử lý ngoại lệ
+            e.printStackTrace();
+        }
+    }
+    
     public static void printInfo(Connection c) {
         try {
             if (c != null) {
@@ -48,4 +74,7 @@ public class JDBCUtil {
             e.printStackTrace();
         }
     }
+   
+
+    
 }

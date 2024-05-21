@@ -558,7 +558,7 @@ public class Admin extends javax.swing.JFrame {
     private void ThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThongKeMouseClicked
         // TODO add your handling code here:
         MainContent.removeAll();
-        ThongKeForm tk = new ThongKeForm();
+        ThongKeForm1 tk = new ThongKeForm1();
         MainContent.add(tk).setVisible(true);
         MainContent.validate();
         MainContent.repaint();

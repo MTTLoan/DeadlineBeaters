@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import model.Xe;
 
@@ -88,7 +90,7 @@ public class XeDAO implements DAOInterface<Xe> {
         ArrayList<Xe> ketQua = new ArrayList<>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM XE";
+            String sql = "SELECT * FROM XE WHERE TrangThai='Không hư'";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -97,13 +99,13 @@ public class XeDAO implements DAOInterface<Xe> {
                 String BienSo = rs.getString("BienSo");
                 String TrangThai = rs.getString("TrangThai");
                 int TGBaoDuong = rs.getInt("TGBaoDuong");
-                long DonGia = rs.getLong("DonGia");
+                int DonGia = rs.getInt("DonGia");
                 String ThuongHieu = rs.getString("ThuongHieu");
-                long TienCoc = rs.getLong("TienCoc");
+                int TienCoc = rs.getInt("TienCoc");
                 int MaLX = rs.getInt("MaLX");
 
-                Xe xe = new Xe(MaXe, TenXe, BienSo, TrangThai, TGBaoDuong, DonGia, ThuongHieu, TienCoc, MaLX);
-                ketQua.add(xe);
+                Xe x = new Xe(MaXe, TenXe, BienSo, TrangThai, TGBaoDuong, DonGia, ThuongHieu, TienCoc, MaLX);
+                ketQua.add(x);
             }
             JDBCUtil.closeConnection(con);
         } catch (SQLException e) {
@@ -119,20 +121,58 @@ public class XeDAO implements DAOInterface<Xe> {
             Connection con = JDBCUtil.getConnection();
             String sql = "SELECT * FROM XE WHERE MaXe=?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, Integer.parseInt(t));
+            pst.setString(1, t);
             ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 int MaXe = rs.getInt("MaXe");
                 String TenXe = rs.getString("TenXe");
                 String BienSo = rs.getString("BienSo");
                 String TrangThai = rs.getString("TrangThai");
                 int TGBaoDuong = rs.getInt("TGBaoDuong");
-                long DonGia = rs.getLong("DonGia");
+                int DonGia = rs.getInt("DonGia");
                 String ThuongHieu = rs.getString("ThuongHieu");
-                long TienCoc = rs.getLong("TienCoc");
+                int TienCoc = rs.getInt("TienCoc");
                 int MaLX = rs.getInt("MaLX");
 
                 ketQua = new Xe(MaXe, TenXe, BienSo, TrangThai, TGBaoDuong, DonGia, ThuongHieu, TienCoc, MaLX);
+
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ketQua;
+    }
+            
+    public ArrayList<Xe> selectAllTG(LocalDate TGNhan, LocalDate TGTra) {
+        ArrayList<Xe> ketQua = new ArrayList<>();
+        try {
+            Connection con = JDBCUtil.getConnection();
+            PreparedStatement pst;
+            String alterSessionSql = "ALTER SESSION SET nls_date_format = 'DD/MM/YYYY'";
+            pst = con.prepareStatement(alterSessionSql);
+            pst.execute();
+            String sql= "SELECT * FROM XE WHERE MaXe NOT IN (SELECT CT.MaXe FROM CHITIETHD CT JOIN HOADON HD ON CT.MaHD = HD.MaHD WHERE (HD.TGNhan between ? and ?) or (HD.TGTra between ? and ?))";
+            pst = con.prepareStatement(sql);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            pst.setString(1, TGNhan.format(dtf));
+            pst.setString(2, TGTra.format(dtf));
+            pst.setString(3, TGNhan.format(dtf));
+            pst.setString(4, TGTra.format(dtf));
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int MaXe = rs.getInt("MaXe");
+                String TenXe = rs.getString("TenXe");
+                String BienSo = rs.getString("BienSo");
+                String TrangThai = rs.getString("TrangThai");
+                int TGBaoDuong = rs.getInt("TGBaoDuong");
+                int DonGia = rs.getInt("DonGia");
+                String ThuongHieu = rs.getString("ThuongHieu");
+                int TienCoc = rs.getInt("TienCoc");
+                int MaLX = rs.getInt("MaLX");
+
+                Xe x = new Xe(MaXe, TenXe, BienSo, TrangThai, TGBaoDuong, DonGia, ThuongHieu, TienCoc, MaLX);
+                ketQua.add(x);
             }
             JDBCUtil.closeConnection(con);
         } catch (SQLException e) {
@@ -168,4 +208,7 @@ public class XeDAO implements DAOInterface<Xe> {
         }
         return result;
     }
+
+    
+    
 }

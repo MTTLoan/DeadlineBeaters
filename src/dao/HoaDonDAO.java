@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import model.HoaDon;
 
 public class HoaDonDAO implements DAOInterface<HoaDon>{
@@ -158,54 +160,201 @@ public class HoaDonDAO implements DAOInterface<HoaDon>{
         return ketQua;
     }
     
-    public int getTotalInvoiceCount(int month, int year) {
-        int totalInvoiceCount = 0;
+    public int selectMaHDMax() {
+        int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT COUNT(*) AS TotalInvoiceCount FROM (" +
-                         "    SELECT hd.MaHD " +
-                         "    FROM HOADON hd " +
-                         "    WHERE EXTRACT(MONTH FROM hd.TGTao) = ? AND EXTRACT(YEAR FROM hd.TGTao) = ? " +
-                         "    UNION ALL " +
-                         "    SELECT phd.MaPhat AS MaHD " +
-                         "    FROM PHATHOADON phd " +
-                         "    WHERE EXTRACT(MONTH FROM phd.TGPhat) = ? AND EXTRACT(YEAR FROM phd.TGPhat) = ? " +
-                         ")";
+            String sql = "SELECT MAX(MaHD) AS MaHD_latest FROM HOADON";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, month);
-            pst.setInt(2, year);
-            pst.setInt(3, month);
-            pst.setInt(4, year);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                totalInvoiceCount = rs.getInt("TotalInvoiceCount");
-            }
-            JDBCUtil.closeConnection(con);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return totalInvoiceCount;
-    }
-    
-    public ArrayList<Object[]> getRevenueData(int month, int year) {
-        ArrayList<Object[]> revenueData = new ArrayList<>();
-        try {
-            Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT MaXe, SUM(TongTien) AS DoanhThu " +
-                         "FROM CHITIETHD " +
-                         "WHERE EXTRACT(MONTH FROM TGTao) = ? AND EXTRACT(YEAR FROM TGTao) = ? " +
-                         "GROUP BY MaXe";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, month);
-            pst.setInt(2, year);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                revenueData.add(new Object[]{rs.getInt("MaXe"), rs.getDouble("DoanhThu")});
+                ketQua = rs.getInt("MaHD_latest");
             }
             JDBCUtil.closeConnection(con);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return revenueData;
+        return ketQua;
     }
+    
+    public int getTongHoaDon(int month, int year) {
+        int tongHoaDon = 0;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            con = JDBCUtil.getConnection();
+            String sql = "SELECT COUNT(*) FROM HOADON WHERE EXTRACT(MONTH FROM TGTao) = ? AND EXTRACT(YEAR FROM TGTao) = ?";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, month);
+            pst.setInt(2, year);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                tongHoaDon = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        
+            JDBCUtil.closeConnection(con);
+        }
+
+        return tongHoaDon;
+    }
+
+public long getRevenueByVehicleisBike(int month, int year) {
+        long revenue = 0;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            con = JDBCUtil.getConnection();
+            String sql = "SELECT SUM(cthd.SoTien) AS DoanhThu " +
+                         "FROM HOADON hd " +
+                         "JOIN CHITIETHD cthd ON hd.MaHD = cthd.MaHD " +
+                         "JOIN XE x ON cthd.MaXe = x.MaXe " +
+                         "JOIN LoaiXe lx ON x.MaLX = lx.MaLX " +
+                         "WHERE lx.MaLX = '3003' AND EXTRACT(MONTH FROM hd.TGTao) = ? AND EXTRACT(YEAR FROM hd.TGTao) = ?";
+
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, month);
+            pst.setInt(2, year);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                revenue = rs.getLong("DoanhThu");
+            }
+
+            String sqlPenalty = "SELECT SUM(cthdp.SoTien) AS DoanhThu " +
+                                "FROM HDPHAT hdp " +
+                                "JOIN CHITIETHDPHAT cthdp ON hdp.MaHDP = cthdp.MaHDP " +
+                                "JOIN XE x ON cthdp.MaXe = x.MaXe " +
+                                "JOIN LoaiXe lx ON x.MaLX = lx.MaLX " +
+                                "WHERE lx.MaLX = '3003' AND EXTRACT(MONTH FROM hdp.TGTao) = ? AND EXTRACT(YEAR FROM hdp.TGTao) = ?";
+
+            pst = con.prepareStatement(sqlPenalty);
+            pst.setInt(1, month);
+            pst.setInt(2, year);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                revenue += rs.getLong("DoanhThu");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeResultSet(rs);
+            JDBCUtil.closeStatement(pst);
+            JDBCUtil.closeConnection(con);
+        }
+
+        return revenue;
+    }
+
+public long getRevenueByVehicleisCar4(int month, int year) {
+        long revenue = 0;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            con = JDBCUtil.getConnection();
+            String sql = "SELECT SUM(cthd.SoTien) AS DoanhThu " +
+                         "FROM HOADON hd " +
+                         "JOIN CHITIETHD cthd ON hd.MaHD = cthd.MaHD " +
+                         "JOIN XE x ON cthd.MaXe = x.MaXe " +
+                         "JOIN LoaiXe lx ON x.MaLX = lx.MaLX " +
+                         "WHERE lx.MaLX = '3001' AND EXTRACT(MONTH FROM hd.TGTao) = ? AND EXTRACT(YEAR FROM hd.TGTao) = ?";
+
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, month);
+            pst.setInt(2, year);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                revenue = rs.getLong("DoanhThu");
+            }
+
+            String sqlPenalty = "SELECT SUM(cthdp.SoTien) AS DoanhThu " +
+                                "FROM HDPHAT hdp " +
+                                "JOIN CHITIETHDPHAT cthdp ON hdp.MaHDP = cthdp.MaHDP " +
+                                "JOIN XE x ON cthdp.MaXe = x.MaXe " +
+                                "JOIN LoaiXe lx ON x.MaLX = lx.MaLX " +
+                                "WHERE lx.MaLX = '3001' AND EXTRACT(MONTH FROM hdp.TGTao) = ? AND EXTRACT(YEAR FROM hdp.TGTao) = ?";
+
+            pst = con.prepareStatement(sqlPenalty);
+            pst.setInt(1, month);
+            pst.setInt(2, year);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                revenue += rs.getLong("DoanhThu");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeResultSet(rs);
+            JDBCUtil.closeStatement(pst);
+            JDBCUtil.closeConnection(con);
+        }
+
+        return revenue;
+    }
+
+public long getRevenueByVehicleisCar7(int month, int year) {
+        long revenue = 0;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            con = JDBCUtil.getConnection();
+            String sql = "SELECT SUM(cthd.SoTien) AS DoanhThu " +
+                         "FROM HOADON hd " +
+                         "JOIN CHITIETHD cthd ON hd.MaHD = cthd.MaHD " +
+                         "JOIN XE x ON cthd.MaXe = x.MaXe " +
+                         "JOIN LoaiXe lx ON x.MaLX = lx.MaLX " +
+                         "WHERE lx.MaLX = '3002' AND EXTRACT(MONTH FROM hd.TGTao) = ? AND EXTRACT(YEAR FROM hd.TGTao) = ?";
+
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, month);
+            pst.setInt(2, year);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                revenue = rs.getLong("DoanhThu");
+            }
+
+            String sqlPenalty = "SELECT SUM(cthdp.SoTien) AS DoanhThu " +
+                                "FROM HDPHAT hdp " +
+                                "JOIN CHITIETHDPHAT cthdp ON hdp.MaHDP = cthdp.MaHDP " +
+                                "JOIN XE x ON cthdp.MaXe = x.MaXe " +
+                                "JOIN LoaiXe lx ON x.MaLX = lx.MaLX " +
+                                "WHERE lx.MaLX = '3002' AND EXTRACT(MONTH FROM hdp.TGTao) = ? AND EXTRACT(YEAR FROM hdp.TGTao) = ?";
+
+            pst = con.prepareStatement(sqlPenalty);
+            pst.setInt(1, month);
+            pst.setInt(2, year);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                revenue += rs.getLong("DoanhThu");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeResultSet(rs);
+            JDBCUtil.closeStatement(pst);
+            JDBCUtil.closeConnection(con);
+        }
+
+        return revenue;
+    }
+    
 }
+    
+    
