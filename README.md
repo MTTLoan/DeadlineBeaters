@@ -75,6 +75,7 @@ Note: Tài khoản admin mặc định: `admin/123456`
 Đóng góp là điều làm cho cộng đồng mã nguồn mở trở thành một nơi tuyệt vời để học hỏi, truyền cảm hứng và sáng tạo. Mọi đóng góp của bạn đều được **đánh giá cao**.
 
 Nếu bạn có gợi ý nào có thể làm cho dự án tốt hơn, hãy fork kho lưu trữ và tạo một pull request. Bạn cũng có thể đơn giản là mở một vấn đề với thẻ “enhancement”.
+
 Đừng quên đánh dấu sao cho dự án! Cảm ơn bạn một lần nữa!
 
 1. Fork the Project
@@ -100,4 +101,4 @@ Project Link: [https://github.com/MTTLoan/DeadlineBeaters](https://github.com/MT
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[product-screenshot]: [assets/DemoFlows.mp4](https://github.com/MTTLoan/DeadlineBeaters/blob/main/assets/DemoFlows.mp4)
+[product-screenshot]: <video controls src="https://github.com/MTTLoan/DeadlineBeaters/blob/main/assets/DemoFlows.mp4" title="assets/DemoFlows.mp4"></video><video controls src="https://github.com/MTTLoan/DeadlineBeaters/blob/main/assets/DemoFlows.mp4" title="assets/DemoFlows.mp4"></video>
