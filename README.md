@@ -28,7 +28,7 @@
 ## Thông tin nhóm
 - Nhóm trưởng: Mai Thị Thanh Loan - 22520782 - [Github](https://github.com/MTTLoan)
 - Nhóm phó: Lê Hồng Ngọc Linh - 22520761
-- Thành viên: Hoang Ho Quoc Bao - 22520102
+- Thành viên: Hoàng Hồ Quốc Bảo - 22520102
 - Thành viên: Lê Thiên Kim - 22520728
 - **Giáo viên hướng dẫn: Tạ Việt Phương**
 
