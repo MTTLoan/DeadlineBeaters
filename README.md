@@ -100,4 +100,4 @@ Project Link: [https://github.com/MTTLoan/DeadlineBeaters](https://github.com/MT
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[product-screenshot]: assets/DemoFlows.mp4
+[product-screenshot]: [assets/DemoFlows.mp4](https://github.com/MTTLoan/DeadlineBeaters/blob/main/assets/DemoFlows.mp4)
