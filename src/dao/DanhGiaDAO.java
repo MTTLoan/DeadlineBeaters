@@ -120,4 +120,29 @@ public class DanhGiaDAO implements DAOInterface<DanhGia> {
         }
         return ketQua;
     }
+    
+    public ArrayList<DanhGia> selectByMaHD(String t) {
+        ArrayList<DanhGia> ketQua = new ArrayList<>();
+        try {
+            Connection con = JDBCUtil.getConnection();
+            String sql = "SELECT * FROM DANHGIA WHERE MaHD=?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int MaDG = rs.getInt("MaDG");
+                int SoDiem = rs.getInt("SoDiem");
+                String NoiDung = rs.getString("NoiDung");
+                int MaHD = rs.getInt("MaHD");
+
+                DanhGia dg = new DanhGia(MaDG, SoDiem, NoiDung, MaHD);
+                ketQua.add(dg);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ketQua;
+    }
+
 }

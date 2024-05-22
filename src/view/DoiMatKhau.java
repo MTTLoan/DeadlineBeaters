@@ -11,6 +11,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
     public DoiMatKhau() {
         initComponents();
         setLocationRelativeTo(null);
+        
     }
     
     public DoiMatKhau(TaiKhoan t) {
@@ -33,6 +34,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
         jbDoiMK = new javax.swing.JButton();
         jtMKMoi = new javax.swing.JPasswordField();
         jtXacNhanMK = new javax.swing.JPasswordField();
+        jButton_Thoat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("GoGo Wheels");
@@ -68,7 +70,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 344, 10));
 
         jbDoiMK.setBackground(new java.awt.Color(27, 121, 30));
-        jbDoiMK.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jbDoiMK.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbDoiMK.setForeground(new java.awt.Color(255, 255, 255));
         jbDoiMK.setText("Lưu");
         jbDoiMK.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -78,7 +80,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
                 jbDoiMKActionPerformed(evt);
             }
         });
-        jPanel1.add(jbDoiMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 150, 40));
+        jPanel1.add(jbDoiMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 460, 120, 40));
 
         jtMKMoi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtMKMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +97,19 @@ public class DoiMatKhau extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jtXacNhanMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 344, 41));
+
+        jButton_Thoat.setBackground(new java.awt.Color(153, 0, 0));
+        jButton_Thoat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton_Thoat.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_Thoat.setText("Thoát");
+        jButton_Thoat.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton_Thoat.setBorderPainted(false);
+        jButton_Thoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ThoatActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton_Thoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 120, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 560));
 
@@ -129,16 +144,18 @@ public class DoiMatKhau extends javax.swing.JFrame {
         boolean result = taiKhoanDAO.doiMatKhau(currentAcc.getTenTK(), matKhauCu, matKhauMoi);
 
         if (result) {
+            this.dispose();
             JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-           
-        //Xóa dữ liệu sau khi cập nhật thành công    
-            jtMKCu.setText("");
-            jtMKMoi.setText("");
-            jtXacNhanMK.setText("");
+         
         } else {
             JOptionPane.showMessageDialog(this, "Đổi mật khẩu thất bại. Vui lòng kiểm tra lại thông tin", "Thông báo", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbDoiMKActionPerformed
+
+    private void jButton_ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThoatActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton_ThoatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,6 +194,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Thoat;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

@@ -143,6 +143,11 @@ public class ThemCTHDPhat extends javax.swing.JFrame {
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 170, 30));
 
         jTextField_MaHD.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTextField_MaHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_MaHDActionPerformed(evt);
+            }
+        });
         jTextField_MaHD.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField_MaHDKeyReleased(evt);
@@ -151,6 +156,11 @@ public class ThemCTHDPhat extends javax.swing.JFrame {
         jPanel1.add(jTextField_MaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 240, 30));
 
         jComboBox_MaXe.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jComboBox_MaXe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_MaXeActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox_MaXe, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 240, 30));
 
         jButton_ChonHinh.setBackground(new java.awt.Color(204, 204, 204));
@@ -198,9 +208,8 @@ public class ThemCTHDPhat extends javax.swing.JFrame {
             }else{
                 int MaHDP = HDPhatDAO.getInstance().selectMaHDPByMaHD(Integer.parseInt(MaHD));
                 if(MaHDP == 0 ){
-                    MaHDP = HDPhatDAO.getInstance().selectMaHDPMax() + 1;
-                    System.out.println(MaHDP);
-                    HDPhat hdp = new HDPhat(MaHDP, LocalDate.now(), 0, "Chua thanh toán", Integer.parseInt(MaHD));
+                    HDPhat hdp = new HDPhat(0, LocalDate.now(), 0, "Đã thanh toán", Integer.parseInt(MaHD));
+                    MaHDP = HDPhatDAO.getInstance().selectMaHDPMax();
                     HDPhatDAO.getInstance().insert(hdp);
                 }
                 ChiTietHDPhat cthdp = new ChiTietHDPhat(MaHDP, Integer.parseInt(MaXe), LoaiPhat, Integer.parseInt(SoTien), null, ChuThich);
@@ -212,7 +221,7 @@ public class ThemCTHDPhat extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Thêm thành công!");
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Mã không hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Số tiền không hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ThemCTHDPhat.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -247,6 +256,14 @@ public class ThemCTHDPhat extends javax.swing.JFrame {
             System.out.println("No File Selected");
         }
     }//GEN-LAST:event_jButton_ChonHinhActionPerformed
+
+    private void jComboBox_MaXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_MaXeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_MaXeActionPerformed
+
+    private void jTextField_MaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_MaHDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_MaHDActionPerformed
     
     public ImageIcon ResizeImage(String imagePath, byte[] pic)
     {

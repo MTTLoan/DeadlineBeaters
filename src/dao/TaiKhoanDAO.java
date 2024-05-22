@@ -21,18 +21,17 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "INSERT INTO TaiKhoan ( TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO TaiKhoan ( TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, t.getMaNV());
-            pst.setString(2, t.getTenTK());
-            pst.setString(3, t.getMatKhau());
-            pst.setString(4, t.getHoTen());
-            pst.setString(5, t.getGioiTinh());
-            pst.setDate(6, java.sql.Date.valueOf(t.getNgaySinh()));
-            pst.setString(7, t.getChucVu());
-            pst.setInt(8, t.getLuong());
-            pst.setDate(9, java.sql.Date.valueOf(t.getNgayVaoLam()));
-            pst.setInt(10, t.getMaQL());
+            pst.setString(1, t.getTenTK());
+            pst.setString(2, t.getMatKhau());
+            pst.setString(3, t.getHoTen());
+            pst.setString(4, t.getGioiTinh());
+            pst.setDate(5, java.sql.Date.valueOf(t.getNgaySinh()));
+            pst.setString(6, t.getChucVu());
+            pst.setInt(7, t.getLuong());
+            pst.setDate(8, java.sql.Date.valueOf(t.getNgayVaoLam()));
+            pst.setInt(9, t.getMaQL());
             
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
@@ -48,9 +47,9 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE TaiKhoan SET MaNV=?, MatKhau=?, HoTen=?, GioiTinh=?, NgaySinh=?, ChucVu=?, Luong=?, NgayVaoLam=?, MaQL=? WHERE TenTK=?";
+            String sql = "UPDATE TaiKhoan SET TenTK=?, MatKhau=?, HoTen=?, GioiTinh=?, NgaySinh=?, ChucVu=?, Luong=?, NgayVaoLam=?, MaQL=? WHERE MaNV=?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, t.getMaNV());
+            pst.setString(1, t.getTenTK());
             pst.setString(2, t.getMatKhau());
             pst.setString(3, t.getHoTen());
             pst.setString(4, t.getGioiTinh());
@@ -59,7 +58,7 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
             pst.setInt(7, t.getLuong());
             pst.setDate(8, java.sql.Date.valueOf(t.getNgayVaoLam()));
             pst.setInt(9, t.getMaQL());
-            pst.setString(10, t.getTenTK());
+            pst.setInt(10, t.getMaNV());
 
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);

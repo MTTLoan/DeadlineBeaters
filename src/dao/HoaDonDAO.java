@@ -166,11 +166,11 @@ public class HoaDonDAO implements DAOInterface<HoaDon>{
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT HOADON_SEQ.CURRVAL FROM dual";
+            String sql = "SELECT NVL(MAX(MaHD),0) AS MaHD_lastest FROM HOADON";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                ketQua = rs.getInt("CURRVAL");
+                ketQua = rs.getInt("MaHD_lastest");
             }
             JDBCUtil.closeConnection(con);
 

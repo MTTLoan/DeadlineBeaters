@@ -102,6 +102,7 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         jLabel_MaNV = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel_TGCapNhat = new javax.swing.JLabel();
+        jButton_Thoat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -161,7 +162,7 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable_ChiTietHD);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 701, 270));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 701, 250));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel11.setText("Tổng tiền thuê:");
@@ -225,10 +226,28 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         jLabel_TGCapNhat.setText("jLabel9");
         jPanel1.add(jLabel_TGCapNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 150, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 710));
+        jButton_Thoat.setBackground(new java.awt.Color(153, 0, 0));
+        jButton_Thoat.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jButton_Thoat.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_Thoat.setText("Thoát");
+        jButton_Thoat.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton_Thoat.setBorderPainted(false);
+        jButton_Thoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ThoatActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton_Thoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 670, 137, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThoatActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton_ThoatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,6 +288,7 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Thoat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

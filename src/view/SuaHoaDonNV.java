@@ -299,10 +299,10 @@ public class SuaHoaDonNV extends javax.swing.JFrame {
                 hd.setChuThich(chuthich);
                 HoaDonDAO.getInstance().update(hd);
                 this.dispose();
-                JOptionPane.showMessageDialog(this, "Sửa sản phẩm thành công !");
+                JOptionPane.showMessageDialog(this, "Sửa thành công !");
                 loadDataToTable_CTHD();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Sửa sản phẩm thất bại !");
+                JOptionPane.showMessageDialog(this, "Sửa thất bại !");
                 e.printStackTrace();
             }
         }

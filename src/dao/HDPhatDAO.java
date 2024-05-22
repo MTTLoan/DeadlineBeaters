@@ -145,6 +145,31 @@ public class HDPhatDAO implements DAOInterface<HDPhat>{
         return ketQua;
     }
     
+    public ArrayList<HDPhat> selectByMaHD(String t) {
+        ArrayList<HDPhat> ketQua = new ArrayList<>();
+        try {
+            Connection con = JDBCUtil.getConnection();
+            String sql = "SELECT * FROM HDPHAT WHERE MaHD=?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int MaHDP = rs.getInt("MaHDP");
+                LocalDate TGTao = rs.getDate("TGTao").toLocalDate();
+                int TongTienPhat = rs.getInt("TongTienPhat");
+                String TinhTrang = rs.getString("TinhTrang");
+                int MaHD = rs.getInt("MaHD");
+
+                HDPhat hdp = new HDPhat(MaHDP, TGTao, TongTienPhat, TinhTrang, MaHD);
+                ketQua.add(hdp);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ketQua;
+    }
+    
     public int selectMaHDPByMaHD(int t) {
         int ketQua = 0;
         try {
@@ -167,11 +192,11 @@ public class HDPhatDAO implements DAOInterface<HDPhat>{
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT HDPHAT_SEQ.CURRVAL FROM dual";
+            String sql = "SELECT NVL(MAX(MaHDP),0) AS MaHD_lastest FROM HDPHAT";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                ketQua = rs.getInt("CURRVAL");
+                ketQua = rs.getInt("MaHD_lastest");
             }
             JDBCUtil.closeConnection(con);
 

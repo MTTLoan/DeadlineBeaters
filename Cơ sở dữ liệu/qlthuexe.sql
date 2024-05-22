@@ -585,3 +585,5 @@ INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Công ty cung cấp cá
 INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (9, 'Tôi đã nhận được sự hỗ trợ tận tình và chuyên nghiệp từ nhân viên khi gặp phải vấn đề hoặc câu hỏi liên quan đến việc thuê xe, giúp tôi cảm thấy an tâm và tin tưởng.', 5019);
 INSERT INTO DANHGIA (SoDiem, NoiDung, MaHD)  VALUES (10, 'Tôi đã được nhận một chiếc xe sạch sẽ và đảm bảo an toàn khi nhận xe, tạo sự yên tâm và tin tưởng trong suốt thời gian thuê xe.', 5020);
 //====================================
+
+SELECT NVL(MAX(MaHD),0) AS MaHD_lastest FROM HOADON

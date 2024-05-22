@@ -6,10 +6,9 @@ package view;
 
 import java.util.ArrayList;
 import javax.swing.UIManager;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import model.TaiKhoan;
-import controller.TimKiemTaiKhoan;
+import controller.TaiKhoancontroller;
 import dao.TaiKhoanDAO;
 import java.awt.Desktop;
 import java.io.File;
@@ -20,7 +19,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import javax.swing.JFrame;
 
 /**
  *
@@ -37,12 +35,14 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
     
     public TaiKhoanForm() {
         initComponents();
-        UIManager.put("Table.showVerticalLines", true);
+        //khởi tạo bảng
         tblAccount.setDefaultEditor(Object.class, null);
+        tblAccount.getTableHeader().setFont(tblAccount.getFont().deriveFont(16));
         initTable();
         loadDataToTable(taikhoans);
     }
     
+    // Phương thức khởi tạo bảng
     public final void initTable() {
         tblModel = new DefaultTableModel();
         String[] headerTbl = new String[]{"Họ và tên", "Tên tài khoản", "Mã số nhân viên", "Chức vụ", "Giới tính", "Ngày sinh"};
@@ -50,6 +50,7 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
         tblAccount.setModel(tblModel);
     }
     
+    // Phương thức tải dữ liệu vào bảng
     public void loadDataToTable(ArrayList<TaiKhoan> tk){
         try{
             tblModel.setRowCount(0);
@@ -63,6 +64,7 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
         catch(Exception e ){}
     }
     
+    // Phương thức lấy phần tử đã chọn từ bảng
     public TaiKhoan getTaiKhoanSelect(){
         int i_row = tblAccount.getSelectedRow();
         TaiKhoan tk = TaiKhoanDAO.getInstance().selectAll().get(i_row);
@@ -140,44 +142,19 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
         jPanel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cbxLuachon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbxLuachon.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cbxLuachon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Họ và tên", "Tên tài khoản", "Chức vụ", "Mã số nhân viên", "Giới tính", "Ngày sinh" }));
-        cbxLuachon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxLuachonActionPerformed(evt);
-            }
-        });
         jPanel3.add(cbxLuachon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 130, 40));
 
-        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearch.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtSearchInputMethodTextChanged(evt);
-            }
-        });
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
-        txtSearch.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtSearchPropertyChange(evt);
-            }
-        });
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSearchKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchKeyReleased(evt);
             }
         });
         jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 300, 40));
 
-        btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_search.png"))); // NOI18N
+        btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_refresh.png"))); // NOI18N
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefreshActionPerformed(evt);
@@ -238,61 +215,52 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxLuachonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLuachonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxLuachonActionPerformed
-
-    private void txtSearchInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtSearchInputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchInputMethodTextChanged
-
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
-
-    private void txtSearchPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtSearchPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchPropertyChange
-
-    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchKeyPressed
-
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         // TODO add your handling code here:
+        // Lấy lựa chọn từ combo box và văn bản tìm kiếm
         String luachon = (String) cbxLuachon.getSelectedItem();
         String searchContent = txtSearch.getText();
+        // Thực hiện tìm kiếm dựa trên lựa chọn
         ArrayList<TaiKhoan> result = new ArrayList<>();
         switch (luachon) {
-            case "Tất cả" -> result = TimKiemTaiKhoan.getInstance().tkTatCa(searchContent);
-            case "Họ và tên" -> result = TimKiemTaiKhoan.getInstance().tkHoTen(searchContent);
-            case "Tên tài khoản" -> result = TimKiemTaiKhoan.getInstance().tkTenTK(searchContent);
-            case "Chức vụ" -> result = TimKiemTaiKhoan.getInstance().tkChucVu(searchContent);
-            case "Mã số nhân viên" -> result = TimKiemTaiKhoan.getInstance().tkMaNV(searchContent);
+            case "Tất cả" -> result = TaiKhoancontroller.getInstance().tkTatCa(searchContent);
+            case "Họ và tên" -> result = TaiKhoancontroller.getInstance().tkHoTen(searchContent);
+            case "Tên tài khoản" -> result = TaiKhoancontroller.getInstance().tkTenTK(searchContent);
+            case "Chức vụ" -> result = TaiKhoancontroller.getInstance().tkChucVu(searchContent);
+            case "Mã số nhân viên" -> result = TaiKhoancontroller.getInstance().tkMaNV(searchContent);
+            case "Giới tính" -> result = TaiKhoancontroller.getInstance().tkGioiTinh(searchContent);
+            case "Ngày sinh" -> result = TaiKhoancontroller.getInstance().tkNgaySinh(searchContent);
         }
         loadDataToTable(result);
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        // Tạo form ThemTaiKhoan mới
         ThemTaiKhoan a = new ThemTaiKhoan();
         a.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         // TODO add your handling code here:
-                if (tblAccount.getSelectedRow() == -1) {
+        // Tạo form ThemDanhGia mới
+        if (tblAccount.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn tài khoản cần xoá !");
         } else {
+            // Lấy tài khoản được chọn
             TaiKhoan select = getTaiKhoanSelect();
+            // Kiểm tra nếu tài khoản là admin
             if (getTaiKhoanSelect().getChucVu().equals("Admin")) {
                 JOptionPane.showMessageDialog(this, "Không thể xóa tài khoản admin !");
             } else {
                 int checkVl = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa tài khoản này ?", "Xác nhận xóa tài khoản", JOptionPane.YES_NO_OPTION);
+                // Nếu người dùng xác nhận xóa
                 if (checkVl == JOptionPane.YES_OPTION) {
                     try {
+                        // Xóa tài khoản
                         TaiKhoanDAO.getInstance().delete(select);
                         JOptionPane.showMessageDialog(this, "Xoá thành công tài khoản !");
+                        // Tải lại dữ liệu vào bảng
                         loadDataToTable(TaiKhoanDAO.getInstance().selectAll());
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, "Xoá thất bại !");
@@ -304,12 +272,15 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-                if (tblAccount.getSelectedRow() == -1) {
+        // Kiểm tra nếu chưa chọn tài khoản nào
+        if (tblAccount.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn tài khoản cần chỉnh sửa !");
         } else {
+            // Kiểm tra nếu tài khoản là admin
             if (getTaiKhoanSelect().getChucVu().equals("Admin")) {
                 JOptionPane.showMessageDialog(this, "Không thể sửa tài khoản admin tại đây !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             } else {
+                // Tạo cửa sổ sửa tài khoản
                 SuaTaiKhoan u = new SuaTaiKhoan(getTaiKhoanSelect());
                 u.setVisible(true);
             }
@@ -364,25 +335,31 @@ public final class TaiKhoanForm extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        // Lấy lựa chọn từ combo box và văn bản tìm kiếm
         String luachon = (String) cbxLuachon.getSelectedItem();
         String searchContent = txtSearch.getText();
+        // Thực hiện tìm kiếm dựa trên lựa chọn
         ArrayList<TaiKhoan> result = new ArrayList<>();
         switch (luachon) {
-            case "Tất cả" -> result = TimKiemTaiKhoan.getInstance().tkTatCa(searchContent);
-            case "Họ và tên" -> result = TimKiemTaiKhoan.getInstance().tkHoTen(searchContent);
-            case "Tên tài khoản" -> result = TimKiemTaiKhoan.getInstance().tkTenTK(searchContent);
-            case "Chức vụ" -> result = TimKiemTaiKhoan.getInstance().tkChucVu(searchContent);
-            case "Mã số nhân viên" -> result = TimKiemTaiKhoan.getInstance().tkMaNV(searchContent);
+            case "Tất cả" -> result = TaiKhoancontroller.getInstance().tkTatCa(searchContent);
+            case "Họ và tên" -> result = TaiKhoancontroller.getInstance().tkHoTen(searchContent);
+            case "Tên tài khoản" -> result = TaiKhoancontroller.getInstance().tkTenTK(searchContent);
+            case "Chức vụ" -> result = TaiKhoancontroller.getInstance().tkChucVu(searchContent);
+            case "Mã số nhân viên" -> result = TaiKhoancontroller.getInstance().tkMaNV(searchContent);
         }
+        // Tải kết quả tìm kiếm vào bảng
         loadDataToTable(result);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
+        // Làm mói lựa chọn, tìm kiếm, bảng
         txtSearch.setText("");
         cbxLuachon.setSelectedIndex(0);
         loadDataToTable(TaiKhoanDAO.getInstance().selectAll());
     }//GEN-LAST:event_btnRefreshActionPerformed
+    
+    // Phương thức mở một file
     public void openFile(String file) {
         try {
             File path = new File(file);

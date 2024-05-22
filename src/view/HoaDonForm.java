@@ -9,13 +9,20 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.HoaDon;
-import controller.TimKiemHoaDon;
+import controller.HoaDoncontroller;
+import dao.ChiTietHDDAO;
+import dao.DanhGiaDAO;
+import dao.HDPhatDAO;
 import java.awt.Desktop;
+import java.awt.HeadlessException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JFileChooser;
+import model.ChiTietHD;
+import model.DanhGia;
+import model.HDPhat;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -39,6 +46,7 @@ public final class HoaDonForm extends javax.swing.JPanel {
     public HoaDonForm() {
         initComponents();
         jTable_HoaDon.setDefaultEditor(Object.class, null);
+        jTable_HoaDon.getTableHeader().setFont(jTable_HoaDon.getFont().deriveFont(16));
         initTable();
         ds = HoaDonDAO.getInstance().selectAll();
         loadDataToTable(ds);
@@ -205,6 +213,7 @@ public final class HoaDonForm extends javax.swing.JPanel {
         });
         jPanel_HoaDon.add(jButton_XoaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 170, 41));
 
+        jTable_HoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable_HoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -229,7 +238,6 @@ public final class HoaDonForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn xem chi tiết");
         } else {
             ChiTietHoaDon cthd = new ChiTietHoaDon(getHoaDonSelect());
-//            cthd.setVisible(true);
         }
     }//GEN-LAST:event_jButton_CTHDMouseClicked
 
@@ -239,10 +247,38 @@ public final class HoaDonForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn xoá");
         } else {
             int output = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xoá hóa đơn", "Xác nhận xoá hóa đơn", JOptionPane.YES_NO_OPTION);
+            
             if (output == JOptionPane.YES_OPTION) {
-                HoaDonDAO.getInstance().delete(getHoaDonSelect());
-                JOptionPane.showMessageDialog(this, "Xóa thành công hóa đơn "+getHoaDonSelect().getMaHD()+"!");
-                loadDataToTable(HoaDonDAO.getInstance().selectAll());
+                try {
+                    HoaDon hd = getHoaDonSelect();
+                    
+                    // Xóa chi tiết hóa đơn
+                    ArrayList<ChiTietHD> dscthd = ChiTietHDDAO.getInstance().selectByMaHD(Integer.toString(hd.getMaHD()));
+                    for(ChiTietHD i : dscthd){
+                        ChiTietHDDAO.getInstance().delete(i);
+                    }
+
+                    // Xóa đánh giá
+                    ArrayList<DanhGia> dsdg = DanhGiaDAO.getInstance().selectByMaHD(Integer.toString(hd.getMaHD()));
+                    for(DanhGia i : dsdg){
+                        DanhGiaDAO.getInstance().delete(i);
+                    }
+
+                    // Xóa hóa đơn phạt
+                    ArrayList<HDPhat> dshdp = HDPhatDAO.getInstance().selectByMaHD(Integer.toString(hd.getMaHD()));
+                    for(HDPhat i : dshdp){
+                        HDPhatDAO.getInstance().delete(i);
+                    }
+
+                    // Xóa hóa đơn
+                    HoaDonDAO.getInstance().delete(getHoaDonSelect());
+
+                    // Hiện thông báo xóa thành công
+                    JOptionPane.showMessageDialog(this, "Xóa thành công hóa đơn!");
+                    loadDataToTable(HoaDonDAO.getInstance().selectAll());
+                } catch (HeadlessException e) {
+                    JOptionPane.showMessageDialog(this, "Xóa hóa đơn thất bại");
+                }
             }
         }
     }//GEN-LAST:event_jButton_XoaHDActionPerformed
@@ -263,16 +299,16 @@ public final class HoaDonForm extends javax.swing.JPanel {
         String text = txtSearch.getText();
         ArrayList<HoaDon> result = new ArrayList<>();
         switch (luachon) {
-            case "Tất cả" -> result = TimKiemHoaDon.getInstance().tkTatCa(text);
-            case "Mã hóa đơn" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
-            case "Thời gian tạo" -> result = TimKiemHoaDon.getInstance().tkTGTao(text);
-            case "Tổng tiền thuê" -> result = TimKiemHoaDon.getInstance().tkTongTienThue(text);
-            case "Thời gian nhận" -> result = TimKiemHoaDon.getInstance().tkTGNhan(text);
-            case "Thời gian trả" -> result = TimKiemHoaDon.getInstance().tkTGTra(text);
-            case "Tổng tiền cọc" -> result = TimKiemHoaDon.getInstance().tkTongTienCoc(text);
-            case "Tình trạng" -> result = TimKiemHoaDon.getInstance().tkTinhTrang(text);
-            case "Mã khách hàng" -> result = TimKiemHoaDon.getInstance().tkMaKH(text);
-            case "Mã nhân viên" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
+            case "Tất cả" -> result = HoaDoncontroller.getInstance().tkTatCa(text);
+            case "Mã hóa đơn" -> result = HoaDoncontroller.getInstance().tkMaHD(text);
+            case "Thời gian tạo" -> result = HoaDoncontroller.getInstance().tkTGTao(text);
+            case "Tổng tiền thuê" -> result = HoaDoncontroller.getInstance().tkTongTienThue(text);
+            case "Thời gian nhận" -> result = HoaDoncontroller.getInstance().tkTGNhan(text);
+            case "Thời gian trả" -> result = HoaDoncontroller.getInstance().tkTGTra(text);
+            case "Tổng tiền cọc" -> result = HoaDoncontroller.getInstance().tkTongTienCoc(text);
+            case "Tình trạng" -> result = HoaDoncontroller.getInstance().tkTinhTrang(text);
+            case "Mã khách hàng" -> result = HoaDoncontroller.getInstance().tkMaKH(text);
+            case "Mã nhân viên" -> result = HoaDoncontroller.getInstance().tkMaHD(text);
         }
         loadDataToTable(result);
     }//GEN-LAST:event_txtSearchKeyReleased
@@ -283,16 +319,16 @@ public final class HoaDonForm extends javax.swing.JPanel {
         String text = txtSearch.getText();
         ArrayList<HoaDon> result = new ArrayList<>();
         switch (luachon) {
-            case "Tất cả" -> result = TimKiemHoaDon.getInstance().tkTatCa(text);
-            case "Mã hóa đơn" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
-            case "Thời gian tạo" -> result = TimKiemHoaDon.getInstance().tkTGTao(text);
-            case "Tổng tiền thuê" -> result = TimKiemHoaDon.getInstance().tkTongTienThue(text);
-            case "Thời gian nhận" -> result = TimKiemHoaDon.getInstance().tkTGNhan(text);
-            case "Thời gian trả" -> result = TimKiemHoaDon.getInstance().tkTGTra(text);
-            case "Tổng tiền cọc" -> result = TimKiemHoaDon.getInstance().tkTongTienCoc(text);
-            case "Tình trạng" -> result = TimKiemHoaDon.getInstance().tkTinhTrang(text);
-            case "Mã khách hàng" -> result = TimKiemHoaDon.getInstance().tkMaKH(text);
-            case "Mã nhân viên" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
+            case "Tất cả" -> result = HoaDoncontroller.getInstance().tkTatCa(text);
+            case "Mã hóa đơn" -> result = HoaDoncontroller.getInstance().tkMaHD(text);
+            case "Thời gian tạo" -> result = HoaDoncontroller.getInstance().tkTGTao(text);
+            case "Tổng tiền thuê" -> result = HoaDoncontroller.getInstance().tkTongTienThue(text);
+            case "Thời gian nhận" -> result = HoaDoncontroller.getInstance().tkTGNhan(text);
+            case "Thời gian trả" -> result = HoaDoncontroller.getInstance().tkTGTra(text);
+            case "Tổng tiền cọc" -> result = HoaDoncontroller.getInstance().tkTongTienCoc(text);
+            case "Tình trạng" -> result = HoaDoncontroller.getInstance().tkTinhTrang(text);
+            case "Mã khách hàng" -> result = HoaDoncontroller.getInstance().tkMaKH(text);
+            case "Mã nhân viên" -> result = HoaDoncontroller.getInstance().tkMaHD(text);
         }
         loadDataToTable(result);
     }//GEN-LAST:event_jButton_TimKiemHDMouseClicked

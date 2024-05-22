@@ -214,7 +214,7 @@ public final class SuaCTHDPhat extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Sửa thành công!");
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Mã không hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Số tiền không hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ThemCTHDPhat.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -240,6 +240,7 @@ public final class SuaCTHDPhat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_ChonHinhActionPerformed
 
+    // hàm chỉnh kích thước hình ảnh theo chiều dài và chiều rộng của jLabel_Hinh
     public ImageIcon ResizeImage(String imagePath, byte[] pic)
     {
         ImageIcon myImage = null;

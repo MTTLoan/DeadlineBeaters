@@ -4,7 +4,7 @@
  */
 package view;
 
-import controller.TimKiemCTHDP;
+import controller.CTHDPcontroller;
 import dao.ChiTietHDPhatDAO;
 import model.ChiTietHDPhat;
 import java.awt.Desktop;
@@ -294,11 +294,11 @@ public class HoaDonPhatForm extends javax.swing.JPanel {
         String text = txtSearch.getText();
         ArrayList<ChiTietHDPhat> result = new ArrayList<>();
         switch (luachon) {
-            case "Tất cả" -> result = TimKiemCTHDP.getInstance().tkTatCa(text);
-            case "Mã hóa đơn phạt" -> result = TimKiemCTHDP.getInstance().tkMaHDP(text);
-            case "Mã xe" -> result = TimKiemCTHDP.getInstance().tkMaXe(text);
-            case "Loại phạt" -> result = TimKiemCTHDP.getInstance().tkLoaiPhat(text);
-            case "Chú thích" -> result = TimKiemCTHDP.getInstance().tkChuThich(text);
+            case "Tất cả" -> result = CTHDPcontroller.getInstance().tkTatCa(text);
+            case "Mã hóa đơn phạt" -> result = CTHDPcontroller.getInstance().tkMaHDP(text);
+            case "Mã xe" -> result = CTHDPcontroller.getInstance().tkMaXe(text);
+            case "Loại phạt" -> result = CTHDPcontroller.getInstance().tkLoaiPhat(text);
+            case "Chú thích" -> result = CTHDPcontroller.getInstance().tkChuThich(text);
         }
         loadDataToTable(result);
     }//GEN-LAST:event_txtSearchKeyReleased
@@ -309,11 +309,11 @@ public class HoaDonPhatForm extends javax.swing.JPanel {
         String text = txtSearch.getText();
         ArrayList<ChiTietHDPhat> result = new ArrayList<>();
         switch (luachon) {
-            case "Tất cả" -> result = TimKiemCTHDP.getInstance().tkTatCa(text);
-            case "Mã hóa đơn phạt" -> result = TimKiemCTHDP.getInstance().tkMaHDP(text);
-            case "Mã xe" -> result = TimKiemCTHDP.getInstance().tkMaXe(text);
-            case "Loại phạt" -> result = TimKiemCTHDP.getInstance().tkLoaiPhat(text);
-            case "Chú thích" -> result = TimKiemCTHDP.getInstance().tkChuThich(text);
+            case "Tất cả" -> result = CTHDPcontroller.getInstance().tkTatCa(text);
+            case "Mã hóa đơn phạt" -> result = CTHDPcontroller.getInstance().tkMaHDP(text);
+            case "Mã xe" -> result = CTHDPcontroller.getInstance().tkMaXe(text);
+            case "Loại phạt" -> result = CTHDPcontroller.getInstance().tkLoaiPhat(text);
+            case "Chú thích" -> result = CTHDPcontroller.getInstance().tkChuThich(text);
         }
         loadDataToTable(result);
     }//GEN-LAST:event_jButton_TimKiemActionPerformed

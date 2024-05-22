@@ -4,9 +4,9 @@
  */
 package view;
 
-import controller.TimKiemCTHDP;
-import dao.HDPhatDAO;
-import dao.HoaDonDAO;
+import controller.CTHDPcontroller;
+import dao.ChiTietHDPhatDAO;
+import model.ChiTietHDPhat;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.HDPhat;
-import model.HoaDon;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -34,30 +32,30 @@ public class HoaDonPhatNVForm extends javax.swing.JPanel {
      * Creates new form HoaDonPhatForm
      */
     private DefaultTableModel tblModel; //sử dụng để quản lý dữ liệu cho JTable
-    private static ArrayList<HDPhat> ds;
+    private static ArrayList<ChiTietHDPhat> ds;
     
     public HoaDonPhatNVForm() {
         initComponents();
         jTable_CTHDPhat.setDefaultEditor(Object.class, null);
         initTable();
-        ds = HDPhatDAO.getInstance().selectAll();
+        ds = ChiTietHDPhatDAO.getInstance().selectAll();
         loadDataToTable(ds);
     }
     
     public final void initTable() {
         tblModel = new DefaultTableModel();
-        String[] headerTbl = new String[]{"Mã hóa đơn phạt", "Thời gian tạo", "Tổng tiền phạt", "Tình trạng", "Mã hóa đơn"};
+        String[] headerTbl = new String[]{"Mã hóa đơn phạt", "Mã xe", "Loại phạt", "Số tiền", "Chú thích"};
         tblModel.setColumnIdentifiers(headerTbl);
         jTable_CTHDPhat.setModel(tblModel);
     }
 
-    public void loadDataToTable(ArrayList<HDPhat> hd) {
+    public void loadDataToTable(ArrayList<ChiTietHDPhat> hd) {
         try {
             tblModel.setRowCount(0);
-            for (HDPhat i : hd) {
+            for (ChiTietHDPhat i : hd) {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 tblModel.addRow(new Object[]{
-                    i.getMaHDP(), i.getTGTao().format(dtf), i.getTongTienPhat(), i.getTinhTrang(), i.getMaHD()
+                    i.getMaHDP(), i.getMaXe(), i.getLoaiPhat(), i.getSoTien(), i.getChuThich()
                 });
             }
         } catch (Exception e) {
@@ -65,9 +63,9 @@ public class HoaDonPhatNVForm extends javax.swing.JPanel {
         }
     }
 
-    public HoaDon getHDPhatSelect() {
+    public ChiTietHDPhat getCTHDPhatSelect() {
         int i_row = jTable_CTHDPhat.getSelectedRow();
-        HoaDon hd = HoaDonDAO.getInstance().selectAll().get(i_row);
+        ChiTietHDPhat hd = ChiTietHDPhatDAO.getInstance().selectAll().get(i_row);
         return hd;
     }
 
@@ -132,30 +130,20 @@ public class HoaDonPhatNVForm extends javax.swing.JPanel {
 
         cbxLuachon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbxLuachon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã hóa đơn phạt", "Mã xe", "Loại phạt", "Chú thích" }));
+        cbxLuachon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxLuachonActionPerformed(evt);
+            }
+        });
         jPanel3.add(cbxLuachon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 150, 40));
 
         txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearch.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtSearchInputMethodTextChanged(evt);
-            }
-        });
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
         txtSearch.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 txtSearchPropertyChange(evt);
             }
         });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSearchKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchKeyReleased(evt);
             }
@@ -180,6 +168,7 @@ public class HoaDonPhatNVForm extends javax.swing.JPanel {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 570, 90));
 
+        jTable_CTHDPhat.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jTable_CTHDPhat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -211,6 +200,11 @@ public class HoaDonPhatNVForm extends javax.swing.JPanel {
         jButton_ThemHDP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton_ThemHDPMouseClicked(evt);
+            }
+        });
+        jButton_ThemHDP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ThemHDPActionPerformed(evt);
             }
         });
         jPanel1.add(jButton_ThemHDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 160, 41));
@@ -263,38 +257,51 @@ public class HoaDonPhatNVForm extends javax.swing.JPanel {
         }
     }
     
-    private void txtSearchInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtSearchInputMethodTextChanged
+    private void cbxLuachonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLuachonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchInputMethodTextChanged
-
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
+    }//GEN-LAST:event_cbxLuachonActionPerformed
 
     private void txtSearchPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtSearchPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchPropertyChange
 
-    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchKeyPressed
-
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-
+        // TODO add your handling code here:
+        String luachon = (String) cbxLuachon.getSelectedItem();
+        String text = txtSearch.getText();
+        ArrayList<ChiTietHDPhat> result = new ArrayList<>();
+        switch (luachon) {
+            case "Tất cả" -> result = CTHDPcontroller.getInstance().tkTatCa(text);
+            case "Mã hóa đơn phạt" -> result = CTHDPcontroller.getInstance().tkMaHDP(text);
+            case "Mã xe" -> result = CTHDPcontroller.getInstance().tkMaXe(text);
+            case "Loại phạt" -> result = CTHDPcontroller.getInstance().tkLoaiPhat(text);
+            case "Chú thích" -> result = CTHDPcontroller.getInstance().tkChuThich(text);
+        }
+        loadDataToTable(result);
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void jButton_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TimKiemActionPerformed
         // TODO add your handling code here:
-        
+        String luachon = (String) cbxLuachon.getSelectedItem();
+        String text = txtSearch.getText();
+        ArrayList<ChiTietHDPhat> result = new ArrayList<>();
+        switch (luachon) {
+            case "Tất cả" -> result = CTHDPcontroller.getInstance().tkTatCa(text);
+            case "Mã hóa đơn phạt" -> result = CTHDPcontroller.getInstance().tkMaHDP(text);
+            case "Mã xe" -> result = CTHDPcontroller.getInstance().tkMaXe(text);
+            case "Loại phạt" -> result = CTHDPcontroller.getInstance().tkLoaiPhat(text);
+            case "Chú thích" -> result = CTHDPcontroller.getInstance().tkChuThich(text);
+        }
+        loadDataToTable(result);
     }//GEN-LAST:event_jButton_TimKiemActionPerformed
 
     private void jButton_CTHDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CTHDPActionPerformed
         // TODO add your handling code here:
         if (jTable_CTHDPhat.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn xem chi tiết");
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn chi tiết hóa đơn phạt muốn xem chi tiết");
         } else {
-            ChiTietHoaDon cthd = new ChiTietHoaDon(getHDPhatSelect());
-            cthd.setVisible(true);
+            ChiTietCTHDPhat cthdp = new ChiTietCTHDPhat(getCTHDPhatSelect());
+            cthdp.setVisible(true);
         }
     }//GEN-LAST:event_jButton_CTHDPActionPerformed
 
@@ -306,8 +313,14 @@ public class HoaDonPhatNVForm extends javax.swing.JPanel {
         // TODO add your handling code here:
         txtSearch.setText("");
         cbxLuachon.setSelectedIndex(0);
-        loadDataToTable(HDPhatDAO.getInstance().selectAll());
+        loadDataToTable(ChiTietHDPhatDAO.getInstance().selectAll());
     }//GEN-LAST:event_jButton_LamMoiActionPerformed
+
+    private void jButton_ThemHDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemHDPActionPerformed
+        // TODO add your handling code here:
+        ThemCTHDPhat a = new ThemCTHDPhat();
+        a.setVisible(true);
+    }//GEN-LAST:event_jButton_ThemHDPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

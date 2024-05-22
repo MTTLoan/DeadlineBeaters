@@ -11,7 +11,7 @@ package view;
 import model.TaiKhoan;
 import dao.TaiKhoanDAO;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.time.ZoneId;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -56,9 +56,9 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
         txtTenTK = new javax.swing.JTextField();
         txtMatKhau = new javax.swing.JTextField();
         txtHoTen = new javax.swing.JTextField();
-        txtNgaySinh = new javax.swing.JTextField();
-        txtNgayVaoLam = new javax.swing.JTextField();
         cbxChucVu = new javax.swing.JComboBox<>();
+        jDateChooser_NgaySinh = new com.toedter.calendar.JDateChooser();
+        jDateChooser_NgayVaoLam = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(460, 650));
@@ -111,11 +111,6 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
                 btnThemMouseClicked(evt);
             }
         });
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
-            }
-        });
         jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 560, 142, 30));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -136,11 +131,11 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel18.setText("Lương:");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 121, -1));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 121, 30));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel19.setText("Ngày vào làm:");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, 30));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel20.setText("Mã quản lý:");
@@ -157,11 +152,6 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
         jPanel1.add(txtLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 228, 29));
 
         txtTenTK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTenTK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenTKActionPerformed(evt);
-            }
-        });
         jPanel1.add(txtTenTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 228, 29));
 
         txtMatKhau.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -170,15 +160,15 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
         txtHoTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 228, 29));
 
-        txtNgaySinh.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(txtNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 228, 29));
-
-        txtNgayVaoLam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(txtNgayVaoLam, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 228, 29));
-
         cbxChucVu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cbxChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Quản Lý", "Admin" }));
         jPanel1.add(cbxChucVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 228, -1));
+
+        jDateChooser_NgaySinh.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.add(jDateChooser_NgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 230, 30));
+
+        jDateChooser_NgayVaoLam.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.add(jDateChooser_NgayVaoLam, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 230, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 650));
 
@@ -190,51 +180,31 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnThemActionPerformed
-
-    private void txtTenTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenTKActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTenTKActionPerformed
-
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         // TODO add your handling code here:
-        // Lấy dữ liệu từ các trường nhập liệu
-        String tenTK = txtTenTK.getText();
-        String matKhau = txtMatKhau.getText();
-        String hoTen = txtHoTen.getText();
-        String gioiTinh = (String) cbxGioiTinh.getSelectedItem();
-        LocalDate ngaySinh;
-        try {
-            ngaySinh = LocalDate.parse(txtNgaySinh.getText());
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ! Vui lòng nhập theo định dạng yyyy-MM-dd.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        String chucVu = (String) cbxChucVu.getSelectedItem();
-        int luong;
-        try {
-            luong = Integer.parseInt(txtLuong.getText());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Lương không hợp lệ! Vui lòng nhập số.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        LocalDate ngayVaoLam;
-        try {
-            ngayVaoLam = LocalDate.parse(txtNgayVaoLam.getText());
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(this, "Ngày vào làm không hợp lệ! Vui lòng nhập theo định dạng yyyy-MM-dd.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        int maQL = Integer.parseInt(txtMaQL.getText());
-
         // Kiểm tra tính đầy đủ và hợp lệ của dữ liệu
-        if (tenTK.isEmpty() || matKhau.isEmpty() || hoTen.isEmpty() || gioiTinh.isEmpty() || 
-            chucVu.isEmpty() || txtLuong.getText().isEmpty() || txtNgaySinh.getText().isEmpty() || 
-            txtNgayVaoLam.getText().isEmpty() || txtMaQL.getText().isEmpty()) {
+        if (txtTenTK.getText().isEmpty() || txtMatKhau.getText().isEmpty() || txtHoTen.getText().isEmpty() || ((String) cbxGioiTinh.getSelectedItem()).isEmpty() || 
+            ((String) cbxChucVu.getSelectedItem()).isEmpty() || txtLuong.getText().isEmpty() || jDateChooser_NgaySinh.getDate() == null || 
+            jDateChooser_NgayVaoLam.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
+            // Lấy dữ liệu từ các trường nhập liệu
+            String tenTK = txtTenTK.getText();
+            String matKhau = txtMatKhau.getText();
+            String hoTen = txtHoTen.getText();
+            String gioiTinh = (String) cbxGioiTinh.getSelectedItem();
+            LocalDate ngaySinh = jDateChooser_NgaySinh.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            String chucVu = (String) cbxChucVu.getSelectedItem();
+            int luong;
+            try {
+                luong = Integer.parseInt(txtLuong.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Lương không hợp lệ! Vui lòng nhập số.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            LocalDate ngayVaoLam = jDateChooser_NgayVaoLam.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            int maQL = Integer.parseInt(txtMaQL.getText());
+
             // Kiểm tra sự tồn tại của tài khoản và thêm vào cơ sở dữ liệu
             if (TaiKhoanDAO.getInstance().selectById(tenTK) == null) {
                 TaiKhoan taiKhoan = new TaiKhoan(0, tenTK, matKhau, hoTen, gioiTinh, ngaySinh, chucVu, luong, ngayVaoLam, maQL);
@@ -290,6 +260,8 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JButton btnThoat;
     private javax.swing.JComboBox<String> cbxChucVu;
     private javax.swing.JComboBox<String> cbxGioiTinh;
+    private com.toedter.calendar.JDateChooser jDateChooser_NgaySinh;
+    private com.toedter.calendar.JDateChooser jDateChooser_NgayVaoLam;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -306,8 +278,6 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JTextField txtLuong;
     private javax.swing.JTextField txtMaQL;
     private javax.swing.JTextField txtMatKhau;
-    private javax.swing.JTextField txtNgaySinh;
-    private javax.swing.JTextField txtNgayVaoLam;
     private javax.swing.JTextField txtTenTK;
     // End of variables declaration//GEN-END:variables
 }

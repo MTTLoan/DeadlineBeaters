@@ -4,7 +4,8 @@
  */
 package view;
 
-import controller.TimKiemXe;
+import controller.XuatPDF;
+import controller.DatXecontroller;
 import dao.ChiTietHDDAO;
 import dao.HoaDonDAO;
 import dao.XeDAO;
@@ -42,7 +43,7 @@ public class DatXeForm extends javax.swing.JPanel {
     
     public DatXeForm(TaiKhoan tk) {
         initComponents();
-        jTextField_NgTao.setText(Integer.toString(tk.getMaNV()));
+        jTextField_NguoiTao.setText(Integer.toString(tk.getMaNV()));
         jTable_Xe.setDefaultEditor(Object.class, null);
         initTable();
         dsXe = XeDAO.getInstance().selectAll();
@@ -99,6 +100,7 @@ public class DatXeForm extends javax.swing.JPanel {
         return false;
     }
     
+    // Kiểm tra xem xe đã tồn tại trong chi tiết hóa đơn chưa
     public void loadDataToTableCTHD() {
         try {
             DefaultTableModel tblCTHDModel = (DefaultTableModel) jTable_CTHD.getModel();
@@ -147,7 +149,7 @@ public class DatXeForm extends javax.swing.JPanel {
         jLabel_TongTienCoc = new javax.swing.JLabel();
         jButton_ThanhToan = new javax.swing.JButton();
         jButton_ThemXe = new javax.swing.JButton();
-        jTextField_NgTao = new javax.swing.JTextField();
+        jTextField_NguoiTao = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea_ChuThich = new javax.swing.JTextArea();
         jTextField_MaKH = new javax.swing.JTextField();
@@ -287,11 +289,12 @@ public class DatXeForm extends javax.swing.JPanel {
         });
         add(jButton_ThemXe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 730, 130, 40));
 
-        jTextField_NgTao.setEditable(false);
-        jTextField_NgTao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        add(jTextField_NgTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 320, 30));
+        jTextField_NguoiTao.setEditable(false);
+        jTextField_NguoiTao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        add(jTextField_NguoiTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 320, 30));
 
         jTextArea_ChuThich.setColumns(20);
+        jTextArea_ChuThich.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea_ChuThich.setRows(5);
         jScrollPane3.setViewportView(jTextArea_ChuThich);
 
@@ -319,16 +322,18 @@ public class DatXeForm extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (dsCTHD.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn xe !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        } if (jTextField_MaKH.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             int check = JOptionPane.showConfirmDialog(this, "Thanh toán thành công hay không?", "Xác nhận thanh toán", JOptionPane.YES_NO_OPTION);
             if (check == JOptionPane.YES_OPTION) {
                 // Lấy thời gian hiện tại
                 LocalDate TGTao = LocalDate.now();
-                // Lấy dữ liệu chuyển thành localdate
+                // Lấy dữ liệu ở jDateChooser chuyển thành localdate
                 LocalDate TGNhan = jDateChooser_TGNhan.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate TGTra = jDateChooser_TGTra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 // Tạo đối tượng hóa đơn
-                HoaDon hd = new HoaDon(0, TGTao, tinhTongTienThue(), TGNhan, TGTra, tinhTongTienCoc(), TGTao, "Đã đặt xe", jTextArea_ChuThich.getText(), Integer.parseInt(jTextField_MaKH.getText()), Integer.parseInt(jTextField_NgTao.getText()));
+                HoaDon hd = new HoaDon(0, TGTao, tinhTongTienThue(), TGNhan, TGTra, tinhTongTienCoc(), TGTao, "Đã đặt xe", jTextArea_ChuThich.getText(), Integer.parseInt(jTextField_MaKH.getText()), Integer.parseInt(jTextField_NguoiTao.getText()));
                 
                 try {
                     // Thêm vào csdl
@@ -337,12 +342,18 @@ public class DatXeForm extends javax.swing.JPanel {
                         i.setMaHD(HoaDonDAO.getInstance().selectMaHDMax());
                         ChiTietHDDAO.getInstance().insert(i);
                     }
+                    
+                    // Thông báo thành công
                     JOptionPane.showMessageDialog(this, "Tạo hóa đơn thành công !");
-//                    int res = JOptionPane.showConfirmDialog(this, "Bạn có muốn xuất file pdf ?","",JOptionPane.YES_NO_OPTION);
-//                    if (res == JOptionPane.YES_OPTION) {
-//                        WritePDF writepdf = new WritePDF();
-//                        writepdf.writePhieuNhap(MaPhieu);
-//                    }
+                    
+                    // Xuất pdf
+                    int res = JOptionPane.showConfirmDialog(this, "Bạn có muốn xuất file pdf ?","",JOptionPane.YES_NO_OPTION);
+                    if (res == JOptionPane.YES_OPTION) {
+                        int MaHD = HoaDonDAO.getInstance().selectMaHDMax();
+                        XuatPDF writepdf = new XuatPDF();
+                        writepdf.writeHoaDon(Integer.toString(MaHD));
+                    }
+
                     // reset
                     ArrayList<Xe> xe = XeDAO.getInstance().selectAll();
                     loadDataToTableXe(xe);
@@ -357,6 +368,7 @@ public class DatXeForm extends javax.swing.JPanel {
                     jTextArea_ChuThich.setText(null);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi !");
+                    e.printStackTrace();
                 }
             }
         }
@@ -387,16 +399,18 @@ public class DatXeForm extends javax.swing.JPanel {
         } else if (ktraTonTaiCTHD(Integer.parseInt(jTable_Xe.getValueAt(i_row, 0).toString()))){
             JOptionPane.showMessageDialog(this, "Xe đã tồn tại trong hóa đơn!");
         } else {
+            // Lấy dữ liệu từ giao diện
             int MaXe = Integer.parseInt(jTable_Xe.getValueAt(i_row, 0).toString());
             int DonGia = Integer.parseInt(jTable_Xe.getValueAt(i_row, 3).toString());
-            //lấy dữ liệu và chuyển thành LocalDate
             LocalDate TGNhan = jDateChooser_TGNhan.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate TGTra = jDateChooser_TGTra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            int SoNgay = (int) ChronoUnit.DAYS.between(TGNhan,TGTra);
+            int SoNgay = (int) ChronoUnit.DAYS.between(TGNhan,TGTra) + 1;
             int SoTien = SoNgay*DonGia;
-            //tạo cthd mới
+            
+            // Tạo cthd mới
             ChiTietHD cthd = new ChiTietHD(0, MaXe, SoNgay, SoTien, 0);
-            //thêm vào danh sách
+            
+            // Thêm vào danh sách
             dsCTHD.add(cthd);
             loadDataToTableCTHD();
             jLabel_TongTienCoc.setText(tinhTongTienCoc() + "đ");
@@ -416,15 +430,17 @@ public class DatXeForm extends javax.swing.JPanel {
             String text = txtSearch.getText().toLowerCase();
             ArrayList<Xe> ds = new ArrayList<>();
 
+            // Tìm kiếm xe còn trống
             LocalDate TGNhan = jDateChooser_TGNhan.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate TGTra = jDateChooser_TGTra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            ds = TimKiemXe.getInstance().tkTG(TGNhan, TGTra);
+            ds = DatXecontroller.getInstance().tkTG(TGNhan, TGTra);
             
+            // Tìm kiếm theo lưa chọn'
             switch (luachon) {
-                case "Mã xe" -> ds = TimKiemXe.getInstance().tkMaXe(ds, text);
-                case "Tên xe" -> ds = TimKiemXe.getInstance().tkTenXe(ds, text);
-                case "Loại xe" -> ds = TimKiemXe.getInstance().tkLoaiXe(ds, text);
-                case "Đơn giá" -> ds = TimKiemXe.getInstance().tkDonGia(ds, text);
+                case "Mã xe" -> ds = DatXecontroller.getInstance().tkMaXe(ds, text);
+                case "Tên xe" -> ds = DatXecontroller.getInstance().tkTenXe(ds, text);
+                case "Loại xe" -> ds = DatXecontroller.getInstance().tkLoaiXe(ds, text);
+                case "Đơn giá" -> ds = DatXecontroller.getInstance().tkDonGia(ds, text);
             }
             loadDataToTableXe(ds);
         }
@@ -458,7 +474,7 @@ public class DatXeForm extends javax.swing.JPanel {
     private javax.swing.JTable jTable_Xe;
     private javax.swing.JTextArea jTextArea_ChuThich;
     private javax.swing.JTextField jTextField_MaKH;
-    private javax.swing.JTextField jTextField_NgTao;
+    private javax.swing.JTextField jTextField_NguoiTao;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

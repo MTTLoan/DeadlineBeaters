@@ -43,13 +43,7 @@ public class SuaHoaDon extends javax.swing.JFrame {
         jTextField_MaNV.setText(Integer.toString(hd.getMaNV()));
         jTextField_TongTienThue.setText(hd.getTongTienThue() + "đ");
         jTextField_TongTienCoc.setText(hd.getTongTienCoc() + "đ");
-        if(hd.getTinhTrang().equals("Đã đặt xe")){
-            jComboBox_TinhTrang.setSelectedIndex(0);
-        } else if(hd.getTinhTrang().equals("Đã nhận xe")){
-            jComboBox_TinhTrang.setSelectedIndex(1);
-        } else {
-            jComboBox_TinhTrang.setSelectedIndex(2);
-        }
+        jComboBox_TinhTrang.setSelectedItem(hd.getTinhTrang());
         jTextArea_ChuThich.setText(hd.getChuThich());
         jTable_ChiTietHD.setDefaultEditor(Object.class, null);
         loadDataToTable_CTHD();
@@ -147,7 +141,7 @@ public class SuaHoaDon extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 120, 30));
 
         jTextField_MaNV.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jPanel1.add(jTextField_MaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 190, 33));
+        jPanel1.add(jTextField_MaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 190, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel6.setText("Thời gian trả:");
@@ -261,7 +255,7 @@ public class SuaHoaDon extends javax.swing.JFrame {
         jPanel1.add(jTextField_TongTienCoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 190, 30));
 
         jTextField_MaKH.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jPanel1.add(jTextField_MaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 190, 33));
+        jPanel1.add(jTextField_MaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 190, 30));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel13.setText("Tình trạng:");
@@ -304,10 +298,10 @@ public class SuaHoaDon extends javax.swing.JFrame {
                 hd.setChuThich(chuthich);
                 HoaDonDAO.getInstance().update(hd);
                 this.dispose();
-                JOptionPane.showMessageDialog(this, "Sửa sản phẩm thành công !");
+                JOptionPane.showMessageDialog(this, "Sửa thành công !");
                 loadDataToTable_CTHD();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Sửa sản phẩm thất bại !");
+                JOptionPane.showMessageDialog(this, "Sửa thất bại !");
                 e.printStackTrace();
             }
         }

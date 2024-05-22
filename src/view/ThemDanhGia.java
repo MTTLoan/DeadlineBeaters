@@ -10,6 +10,7 @@ package view;
  */
 import model.DanhGia;
 import dao.DanhGiaDAO;
+import dao.HoaDonDAO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -20,8 +21,8 @@ public class ThemDanhGia extends javax.swing.JFrame {
      */
     public ThemDanhGia() {
         initComponents();
-        setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null); // Đặt vị trí cửa sổ ở giữa màn hình
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Đặt hành động mặc định khi đóng cửa sổ là chỉ đóng cửa sổ này
     }
 
     /**
@@ -110,6 +111,7 @@ public class ThemDanhGia extends javax.swing.JFrame {
         jTextField_MaHD.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jTextArea_NoiDung.setColumns(20);
+        jTextArea_NoiDung.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextArea_NoiDung.setRows(5);
         jScrollPane1.setViewportView(jTextArea_NoiDung);
 
@@ -175,6 +177,7 @@ public class ThemDanhGia extends javax.swing.JFrame {
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
+        // Đóng cửa sổ này
         this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
@@ -188,21 +191,29 @@ public class ThemDanhGia extends javax.swing.JFrame {
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         // TODO add your handling code here:
+        // Lấy nội dung từ các thành phần giao diện
         String NoiDung = jTextArea_NoiDung.getText();
         String MaHD = jTextField_MaHD.getText();
         String SoDiem = (String) jComboBox1_SoDiem.getSelectedItem();
         try {
-            int diem = Integer.parseInt(SoDiem);
+            // Kiểm tra nếu các trường dữ liệu trống
             if( NoiDung.isEmpty() || MaHD.isEmpty()|| SoDiem.isEmpty()){
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-            }else{
-                DanhGia DanhGia = new DanhGia(0, diem, NoiDung, Integer.parseInt(MaHD));
+            } if (HoaDonDAO.getInstance().selectById(MaHD) == null){
+                JOptionPane.showMessageDialog(this, "Mã hóa đơn không tồn tại!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                // Thêm đối tượng DanhGia vào cơ sở dữ liệu
+                DanhGia DanhGia = new DanhGia(0, Integer.parseInt(SoDiem), NoiDung, Integer.parseInt(MaHD));
                 DanhGiaDAO.getInstance().insert(DanhGia);
+                // Đóng cửa sổ
                 this.dispose();
+                // Hiển thị thông báo thêm thành công
                 JOptionPane.showMessageDialog(this, "Thêm thành công!");
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Điểm không hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            // Hiển thị thông báo lỗi nếu điểm không hợp lệ
+            JOptionPane.showMessageDialog(this, "Mã không hợp lệ!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnThemMouseClicked
 

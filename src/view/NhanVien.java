@@ -36,14 +36,28 @@ public class NhanVien extends javax.swing.JFrame {
     }
     
     public NhanVien(TaiKhoan t) {
+        initComponents();
+        this.currentAcc = t;
+        setLocationRelativeTo(null);
+        
         //tạo đường kẻ cho JTable
         UIManager.put("Table.showVerticalLines", true);
         UIManager.put("Table.showHorizontalLines", true);
-        initComponents();
-        setLocationRelativeTo(null);
-        this.currentAcc = t;
+        
         DefaultColor = new Color(152, 0, 0);
         ClickedColor = new Color(27,121, 30);
+        DatXe.setBackground(ClickedColor);
+        HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
+        DanhGia.setBackground(DefaultColor);
+        ThongTin.setBackground(DefaultColor);
+        DangXuat.setBackground(DefaultColor);
+        
+        MainContent.removeAll();
+        DatXeForm dx = new DatXeForm(currentAcc);
+        MainContent.setLayout(new BorderLayout());
+        MainContent.add(dx).setVisible(true);
+        
         MainContent.validate();
         MainContent.repaint();
     }
@@ -140,9 +154,6 @@ public class NhanVien extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DatXeMouseClicked(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                DatXeMousePressed(evt);
-            }
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
@@ -175,9 +186,6 @@ public class NhanVien extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DangXuatMouseClicked(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                DangXuatMousePressed(evt);
-            }
         });
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
@@ -209,9 +217,6 @@ public class NhanVien extends javax.swing.JFrame {
         ThongTin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ThongTinMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                ThongTinMousePressed(evt);
             }
         });
 
@@ -246,9 +251,6 @@ public class NhanVien extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 HoaDonMouseClicked(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                HoaDonMousePressed(evt);
-            }
         });
 
         jLabel13.setBackground(new java.awt.Color(152, 0, 0));
@@ -282,9 +284,6 @@ public class NhanVien extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DanhGiaMouseClicked(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                DanhGiaMousePressed(evt);
-            }
         });
 
         jLabel15.setBackground(new java.awt.Color(153, 153, 255));
@@ -317,9 +316,6 @@ public class NhanVien extends javax.swing.JFrame {
         HoaDonPhat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 HoaDonPhatMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                HoaDonPhatMousePressed(evt);
             }
         });
 
@@ -369,7 +365,7 @@ public class NhanVien extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DatXeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DatXeMousePressed
+    private void DatXeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DatXeMouseClicked
         // TODO add your handling code here:
         DatXe.setBackground(ClickedColor);
         HoaDon.setBackground(DefaultColor);
@@ -377,45 +373,7 @@ public class NhanVien extends javax.swing.JFrame {
         DanhGia.setBackground(DefaultColor);
         ThongTin.setBackground(DefaultColor);
         DangXuat.setBackground(DefaultColor);
-    }//GEN-LAST:event_DatXeMousePressed
-
-    private void HoaDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonMousePressed
-        // TODO add your handling code here:
-        DatXe.setBackground(DefaultColor);
-        HoaDon.setBackground(ClickedColor);
-        HoaDonPhat.setBackground(DefaultColor);
-        DanhGia.setBackground(DefaultColor);
-        ThongTin.setBackground(DefaultColor);
-        DangXuat.setBackground(DefaultColor);
-    }//GEN-LAST:event_HoaDonMousePressed
-
-    private void DanhGiaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DanhGiaMousePressed
-        // TODO add your handling code here:
-        DatXe.setBackground(DefaultColor);
-        HoaDon.setBackground(DefaultColor);
-        HoaDonPhat.setBackground(DefaultColor);
-        DanhGia.setBackground(ClickedColor);
-        ThongTin.setBackground(DefaultColor);
-        DangXuat.setBackground(DefaultColor);
-    }//GEN-LAST:event_DanhGiaMousePressed
-
-    private void ThongTinMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThongTinMousePressed
-        // TODO add your handling code here:
-        DatXe.setBackground(DefaultColor);
-        HoaDon.setBackground(DefaultColor);
-        HoaDonPhat.setBackground(DefaultColor);
-        DanhGia.setBackground(DefaultColor);
-        ThongTin.setBackground(ClickedColor);
-        DangXuat.setBackground(DefaultColor);
-    }//GEN-LAST:event_ThongTinMousePressed
-
-    private void DangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DangXuatMousePressed
-        // TODO add your handling code here:
         
-    }//GEN-LAST:event_DangXuatMousePressed
-
-    private void DatXeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DatXeMouseClicked
-        // TODO add your handling code here:
         MainContent.removeAll();
         DatXeForm dx = new DatXeForm(currentAcc);
         MainContent.setLayout(new BorderLayout());
@@ -426,6 +384,13 @@ public class NhanVien extends javax.swing.JFrame {
 
     private void HoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonMouseClicked
         // TODO add your handling code here:
+        DatXe.setBackground(DefaultColor);
+        HoaDon.setBackground(ClickedColor);
+        HoaDonPhat.setBackground(DefaultColor);
+        DanhGia.setBackground(DefaultColor);
+        ThongTin.setBackground(DefaultColor);
+        DangXuat.setBackground(DefaultColor);
+        
         MainContent.removeAll();
         HoaDonNVForm hd = new HoaDonNVForm();
         MainContent.setLayout(new BorderLayout());
@@ -436,6 +401,13 @@ public class NhanVien extends javax.swing.JFrame {
 
     private void DanhGiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DanhGiaMouseClicked
         // TODO add your handling code here:
+        DatXe.setBackground(DefaultColor);
+        HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
+        DanhGia.setBackground(ClickedColor);
+        ThongTin.setBackground(DefaultColor);
+        DangXuat.setBackground(DefaultColor);
+        
         MainContent.removeAll();
         DanhGiaForm dg = new DanhGiaForm();
         MainContent.setLayout(new BorderLayout());
@@ -446,6 +418,13 @@ public class NhanVien extends javax.swing.JFrame {
 
     private void ThongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThongTinMouseClicked
         // TODO add your handling code here:
+        DatXe.setBackground(DefaultColor);
+        HoaDon.setBackground(DefaultColor);
+        HoaDonPhat.setBackground(DefaultColor);
+        DanhGia.setBackground(DefaultColor);
+        ThongTin.setBackground(ClickedColor);
+        DangXuat.setBackground(DefaultColor);
+        
         MainContent.removeAll();
         ThongTinTKForm tt = new ThongTinTKForm(currentAcc);
         MainContent.setLayout(new BorderLayout());
@@ -474,7 +453,7 @@ public class NhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
         int resp = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn thoát ?", "Exit?", JOptionPane.YES_NO_OPTION);
         if (resp == JOptionPane.YES_OPTION) {
-            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         } else {
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         }
@@ -482,23 +461,20 @@ public class NhanVien extends javax.swing.JFrame {
 
     private void HoaDonPhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonPhatMouseClicked
         // TODO add your handling code here:
-        MainContent.removeAll();
-        HoaDonPhatForm hdp  = new HoaDonPhatForm();
-        MainContent.setLayout(new BorderLayout());
-        MainContent.add(hdp).setVisible(true);
-        MainContent.validate();
-        MainContent.repaint();
-    }//GEN-LAST:event_HoaDonPhatMouseClicked
-
-    private void HoaDonPhatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonPhatMousePressed
-        // TODO add your handling code here:
         DatXe.setBackground(DefaultColor);
         HoaDon.setBackground(DefaultColor);
         HoaDonPhat.setBackground(ClickedColor);
         DanhGia.setBackground(DefaultColor);
         ThongTin.setBackground(DefaultColor);
         DangXuat.setBackground(DefaultColor);
-    }//GEN-LAST:event_HoaDonPhatMousePressed
+        
+        MainContent.removeAll();
+        HoaDonPhatNVForm hdp  = new HoaDonPhatNVForm();
+        MainContent.setLayout(new BorderLayout());
+        MainContent.add(hdp).setVisible(true);
+        MainContent.validate();
+        MainContent.repaint();
+    }//GEN-LAST:event_HoaDonPhatMouseClicked
 
     /**
      * @param args the command line arguments

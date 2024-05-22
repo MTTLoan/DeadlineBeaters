@@ -2,6 +2,7 @@ package view;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dao.TaiKhoanDAO;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import model.TaiKhoan;
@@ -11,6 +12,7 @@ public class DangNhapForm extends javax.swing.JFrame {
     public DangNhapForm() {
         initComponents();
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     @SuppressWarnings("unchecked")

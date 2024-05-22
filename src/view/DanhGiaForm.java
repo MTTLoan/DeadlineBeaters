@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import model.DanhGia;
 import dao.DanhGiaDAO;
-import controller.TimKiemDanhGia;
+import controller.DanhGiacontroller;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,7 +24,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class DanhGiaForm extends javax.swing.JPanel {
+public final class DanhGiaForm extends javax.swing.JPanel {
 
     /**
      * Creates new form DanhGiaForm
@@ -35,11 +35,14 @@ public class DanhGiaForm extends javax.swing.JPanel {
     public DanhGiaForm() {
         initComponents();
         tblDanhGia.setDefaultEditor(Object.class, null);
+        tblDanhGia.getTableHeader().setFont(tblDanhGia.getFont().deriveFont(16));
         initTable();
         ds = DanhGiaDAO.getInstance().selectAll();
         loadDataToTable(ds);
+        tblDanhGia.getColumnModel().getColumn(2).setPreferredWidth(700);
     }
 
+    // Phương thức khởi tạo bảng
     public final void initTable() {
         tblModel = new DefaultTableModel();
         String[] headerTbl = new String[]{"Mã đánh giá", "Số điểm", "Nội dung", "Mã hóa đơn"};
@@ -47,9 +50,12 @@ public class DanhGiaForm extends javax.swing.JPanel {
         tblDanhGia.setModel(tblModel);
     }
     
+    // Phương thức tải dữ liệu vào bảng
     public void loadDataToTable(ArrayList<DanhGia> dg) {
         try {
+            // Xóa các hàng hiện có
             tblModel.setRowCount(0);
+            // Thêm từng phần tử trong danh sách DanhGia vào bảng dưới dạng một hàng mới
             for (DanhGia i : dg) {
                     tblModel.addRow(new Object[]{
                     i.getMaDG(), i.getSoDiem(), i.getNoiDung(), i.getMaHD()
@@ -60,6 +66,7 @@ public class DanhGiaForm extends javax.swing.JPanel {
         }
     }
     
+    // Phương thức lấy DanhGia đã chọn từ bảng
     public DanhGia getDanhGiaSelect(){
         int i_row = tblDanhGia.getSelectedRow();
         DanhGia dg = DanhGiaDAO.getInstance().selectAll().get(i_row);
@@ -110,7 +117,7 @@ public class DanhGiaForm extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblDanhGia);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 1010, 530));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 1010, 530));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
@@ -119,35 +126,10 @@ public class DanhGiaForm extends javax.swing.JPanel {
 
         cbxLuachon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbxLuachon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã đánh giá", "Số điểm", "Nội dung", "Mã hóa đơn" }));
-        cbxLuachon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxLuachonActionPerformed(evt);
-            }
-        });
         jPanel3.add(cbxLuachon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 130, 40));
 
         txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearch.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtSearchInputMethodTextChanged(evt);
-            }
-        });
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
-        txtSearch.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtSearchPropertyChange(evt);
-            }
-        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSearchKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchKeyReleased(evt);
             }
@@ -209,77 +191,72 @@ public class DanhGiaForm extends javax.swing.JPanel {
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxLuachonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLuachonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxLuachonActionPerformed
-
-    private void txtSearchInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtSearchInputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchInputMethodTextChanged
-
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
-
-    private void txtSearchPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtSearchPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchPropertyChange
-
-    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchKeyPressed
-
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // Lấy lựa chọn từ combo box và văn bản tìm kiếm
         String luachon = (String) cbxLuachon.getSelectedItem();
         String text = txtSearch.getText();
+        
+        // Thực hiện tìm kiếm dựa trên lựa chọn
         ArrayList<DanhGia> result = new ArrayList<>();
         switch (luachon) {
-            case "Tất cả" -> result = TimKiemDanhGia.getInstance().tkTatCa(text);
-            case "Mã đánh giá" -> result = TimKiemDanhGia.getInstance().tkMaDG(text);
-            case "Số điểm" -> result = TimKiemDanhGia.getInstance().tkSoDiem(text);
-            case "Nội dung" -> result = TimKiemDanhGia.getInstance().tkNoiDung(text);
-            case "Mã hóa đơn" -> result = TimKiemDanhGia.getInstance().tkMaHD(text);
+            case "Tất cả" -> result = DanhGiacontroller.getInstance().tkTatCa(text);
+            case "Mã đánh giá" -> result = DanhGiacontroller.getInstance().tkMaDG(text);
+            case "Số điểm" -> result = DanhGiacontroller.getInstance().tkSoDiem(text);
+            case "Nội dung" -> result = DanhGiacontroller.getInstance().tkNoiDung(text);
+            case "Mã hóa đơn" -> result = DanhGiacontroller.getInstance().tkMaHD(text);
         }
+        
+        // Tải kết quả tìm kiếm vào bảng
         loadDataToTable(result);
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+        // Lấy lựa chọn từ combo box và văn bản tìm kiếm
         String luachon = (String) cbxLuachon.getSelectedItem();
         String text = txtSearch.getText();
         ArrayList<DanhGia> result = new ArrayList<>();
+        
+        // Thực hiện tìm kiếm dựa trên lựa chọn
         switch (luachon) {
-            case "Tất cả" -> result = TimKiemDanhGia.getInstance().tkTatCa(text);
-            case "Mã đánh giá" -> result = TimKiemDanhGia.getInstance().tkMaDG(text);
-            case "Số điểm" -> result = TimKiemDanhGia.getInstance().tkSoDiem(text);
-            case "Nội dung" -> result = TimKiemDanhGia.getInstance().tkNoiDung(text);
-            case "Mã hóa đơn" -> result = TimKiemDanhGia.getInstance().tkMaHD(text);
+            case "Tất cả" -> result = DanhGiacontroller.getInstance().tkTatCa(text);
+            case "Mã đánh giá" -> result = DanhGiacontroller.getInstance().tkMaDG(text);
+            case "Số điểm" -> result = DanhGiacontroller.getInstance().tkSoDiem(text);
+            case "Nội dung" -> result = DanhGiacontroller.getInstance().tkNoiDung(text);
+            case "Mã hóa đơn" -> result = DanhGiacontroller.getInstance().tkMaHD(text);
         }
+        
+        // Tải kết quả tìm kiếm vào bảng
         loadDataToTable(result);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
+        // Tạo form ThemDanhGia mới
         ThemDanhGia a = new ThemDanhGia();
         a.setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        // TODO add your handling code here:
+        // Làm mói lựa chọn, tìm kiếm, bảng
         txtSearch.setText("");
         cbxLuachon.setSelectedIndex(0);
         loadDataToTable(DanhGiaDAO.getInstance().selectAll());
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    private void btnXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void btnXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatExcelActionPerformed
         // TODO add your handling code here:
         try {
             JFileChooser jFileChooser = new JFileChooser();
+            // Hiển thị cửa sổ lưu file
             jFileChooser.showSaveDialog(this);
             File saveFile = jFileChooser.getSelectedFile();
             if (saveFile != null) {
+                // Thêm phần mở rộng .xlsx vào file
                 saveFile = new File(saveFile.toString() + ".xlsx");
+                
+                // Tạo workbook mới
                 Workbook wb = new XSSFWorkbook();
+                
+                // Tạo sheet mới
                 Sheet sheet = wb.createSheet("DanhGia");
 
                 Row rowCol = sheet.createRow(0);
@@ -287,7 +264,7 @@ public class DanhGiaForm extends javax.swing.JPanel {
                     Cell cell = rowCol.createCell(i);
                     cell.setCellValue(tblDanhGia.getColumnName(i));
                 }
-
+ 
                 for (int j = 0; j < tblDanhGia.getRowCount(); j++) {
                     Row row = sheet.createRow(j + 1);
                     for (int k = 0; k < tblDanhGia.getColumnCount(); k++) {
@@ -298,8 +275,12 @@ public class DanhGiaForm extends javax.swing.JPanel {
 
                     }
                 }
+                
+                // Ghi workbook vào file
                 FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
                 wb.write(out);
+                
+                // Đóng workbook, mở file
                 wb.close();
                 out.close();
                 openFile(saveFile.toString());
@@ -307,8 +288,10 @@ public class DanhGiaForm extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }                                               
+    }//GEN-LAST:event_btnXuatExcelActionPerformed
+                                         
 
+    // Phương thức mở một file
     private void openFile(String file) {
         try {
             File path = new File(file);

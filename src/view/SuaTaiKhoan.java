@@ -6,7 +6,10 @@ package view;
 
 import dao.TaiKhoanDAO;
 import java.time.LocalDate;
+import java.util.Date;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.TaiKhoan;
@@ -38,12 +41,12 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
         jTextField_TenTK.setText(tk.getTenTK());
         jTextField_MatKhau.setText(tk.getMatKhau());
         jTextField_HoTen.setText(tk.getHoTen());
-        jTextField_GioiTinh.setText(tk.getGioiTinh());
-        jTextField_NgaySinh.setText(tk.getNgaySinh().format(dtf));
+        jComboBox_ChucVu.setSelectedItem(tk.getGioiTinh());
+        jDateChooser_NgaySinh.setDate(java.sql.Date.valueOf(tk.getNgaySinh()));
         jTextField_Luong.setText(Integer.toString(tk.getLuong()));
-        jTextField_NgayVaoLam.setText(tk.getNgayVaoLam().format(dtf));
+        jDateChooser_NgayVaoLam.setDate(java.sql.Date.valueOf(tk.getNgayVaoLam()));
         jTextField_MaQL.setText(Integer.toString(tk.getMaQL()));
-        jTextField_ChucVu.setText(tk.getChucVu());
+        jComboBox_ChucVu.setSelectedItem(tk.getChucVu());
     }
 
     /**
@@ -76,10 +79,10 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
         jTextField_TenTK = new javax.swing.JTextField();
         jTextField_MatKhau = new javax.swing.JTextField();
         jTextField_HoTen = new javax.swing.JTextField();
-        jTextField_GioiTinh = new javax.swing.JTextField();
-        jTextField_NgaySinh = new javax.swing.JTextField();
-        jTextField_NgayVaoLam = new javax.swing.JTextField();
-        jTextField_ChucVu = new javax.swing.JTextField();
+        jDateChooser_NgayVaoLam = new com.toedter.calendar.JDateChooser();
+        jDateChooser_NgaySinh = new com.toedter.calendar.JDateChooser();
+        jComboBox_ChucVu = new javax.swing.JComboBox<>();
+        jComboBox_GioiTinh = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -193,22 +196,19 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
         jTextField_HoTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(jTextField_HoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 230, 30));
 
-        jTextField_GioiTinh.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField_GioiTinh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_GioiTinhActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField_GioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 230, 29));
+        jDateChooser_NgayVaoLam.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.add(jDateChooser_NgayVaoLam, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 480, 230, 30));
 
-        jTextField_NgaySinh.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jTextField_NgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, 230, -1));
+        jDateChooser_NgaySinh.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.add(jDateChooser_NgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, 230, 30));
 
-        jTextField_NgayVaoLam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jTextField_NgayVaoLam, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 480, 228, 29));
+        jComboBox_ChucVu.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jComboBox_ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên", "Quản lý", "Admin" }));
+        jPanel1.add(jComboBox_ChucVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 230, 30));
 
-        jTextField_ChucVu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jTextField_ChucVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 228, 29));
+        jComboBox_GioiTinh.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jComboBox_GioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        jPanel1.add(jComboBox_GioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 230, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 630));
 
@@ -222,20 +222,25 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        int MaNV = Integer.parseInt(jTextField_MaNV.getText());
-        String TenTK = jTextField_TenTK.getText();
-        String MatKhau = jTextField_MatKhau.getText();
-        String HoTen = jTextField_HoTen.getText();
-        String GioiTinh = jTextField_GioiTinh.getText();
-        LocalDate NgaySinh = LocalDate.parse(jTextField_NgaySinh.getText());
-        String ChucVu = jTextField_ChucVu.getText();
-        int Luong = Integer.parseInt(jTextField_Luong.getText());
-        LocalDate NgayVaoLam = LocalDate.parse(jTextField_NgayVaoLam.getText());
-        int MaQL = Integer.parseInt(jTextField_MaQL.getText());
-        // Tạo một đối tượng TaiKhoan với các giá trị đã nhập
-        TaiKhoan tk = new TaiKhoan(MaNV, TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL);
-
         try {
+            int MaNV = Integer.parseInt(jTextField_MaNV.getText());
+            String TenTK = jTextField_TenTK.getText();
+            String MatKhau = jTextField_MatKhau.getText();
+            String HoTen = jTextField_HoTen.getText();
+            String GioiTinh = (String) jComboBox_GioiTinh.getSelectedItem();
+            LocalDate NgaySinh = jDateChooser_NgaySinh.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            String ChucVu = (String) jComboBox_ChucVu.getSelectedItem();
+            int Luong;
+            try {
+                Luong = Integer.parseInt(jTextField_Luong.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Lương không hợp lệ! Vui lòng nhập số.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            LocalDate NgayVaoLam = jDateChooser_NgayVaoLam.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            int MaQL = Integer.parseInt(jTextField_MaQL.getText());
+            // Tạo một đối tượng TaiKhoan với các giá trị đã nhập
+            TaiKhoan tk = new TaiKhoan(MaNV, TenTK, MatKhau, HoTen, GioiTinh, NgaySinh, ChucVu, Luong, NgayVaoLam, MaQL);
             // Thực hiện cập nhật thông tin tài khoản
             TaiKhoanDAO.getInstance().update(tk);
             this.dispose();
@@ -250,10 +255,6 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
     private void jTextField_TenTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_TenTKActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_TenTKActionPerformed
-
-    private void jTextField_GioiTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_GioiTinhActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_GioiTinhActionPerformed
 
     private void jTextField_MaQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_MaQLActionPerformed
         // TODO add your handling code here:
@@ -298,6 +299,10 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThoat;
+    private javax.swing.JComboBox<String> jComboBox_ChucVu;
+    private javax.swing.JComboBox<String> jComboBox_GioiTinh;
+    private com.toedter.calendar.JDateChooser jDateChooser_NgaySinh;
+    private com.toedter.calendar.JDateChooser jDateChooser_NgayVaoLam;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -311,15 +316,11 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField_ChucVu;
-    private javax.swing.JTextField jTextField_GioiTinh;
     private javax.swing.JTextField jTextField_HoTen;
     private javax.swing.JTextField jTextField_Luong;
     private javax.swing.JTextField jTextField_MaNV;
     private javax.swing.JTextField jTextField_MaQL;
     private javax.swing.JTextField jTextField_MatKhau;
-    private javax.swing.JTextField jTextField_NgaySinh;
-    private javax.swing.JTextField jTextField_NgayVaoLam;
     private javax.swing.JTextField jTextField_TenTK;
     // End of variables declaration//GEN-END:variables
 

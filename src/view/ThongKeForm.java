@@ -12,6 +12,7 @@ import dao.HoaDonDAO;
 import dao.XeDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
@@ -29,8 +30,10 @@ public class ThongKeForm extends javax.swing.JPanel {
      */
     public ThongKeForm() {
         initComponents();
-        int month = Integer.parseInt(jComboBox_Thang.getSelectedItem().toString());
-        int year = Integer.parseInt(jComboBox_Nam.getSelectedItem().toString());
+        int month = LocalDate.now().getMonthValue();
+        int year = LocalDate.now().getYear();
+        jComboBox_Thang.setSelectedItem(Integer.toString(month));
+        jComboBox_Nam.setSelectedItem(Integer.toString(year));
         updateStatistics(month, year);
     }
     private void updateStatistics(int month, int year) {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.HoaDon;
-import controller.TimKiemHoaDon;
+import controller.HoaDoncontroller;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,6 +39,7 @@ public final class HoaDonNVForm extends javax.swing.JPanel {
     public HoaDonNVForm() {
         initComponents();
         jTable_HoaDon.setDefaultEditor(Object.class, null);
+        jTable_HoaDon.getTableHeader().setFont(jTable_HoaDon.getFont().deriveFont(16));
         initTable();
         ds = HoaDonDAO.getInstance().selectAll();
         loadDataToTable(ds);
@@ -184,6 +185,7 @@ public final class HoaDonNVForm extends javax.swing.JPanel {
         });
         jPanel_HoaDon.add(jButton_SuaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 170, 41));
 
+        jTable_HoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable_HoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -228,16 +230,16 @@ public final class HoaDonNVForm extends javax.swing.JPanel {
         String text = txtSearch.getText();
         ArrayList<HoaDon> result = new ArrayList<>();
         switch (luachon) {
-            case "Tất cả" -> result = TimKiemHoaDon.getInstance().tkTatCa(text);
-            case "Mã hóa đơn" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
-            case "Thời gian tạo" -> result = TimKiemHoaDon.getInstance().tkTGTao(text);
-            case "Tổng tiền thuê" -> result = TimKiemHoaDon.getInstance().tkTongTienThue(text);
-            case "Thời gian nhận" -> result = TimKiemHoaDon.getInstance().tkTGNhan(text);
-            case "Thời gian trả" -> result = TimKiemHoaDon.getInstance().tkTGTra(text);
-            case "Tổng tiền cọc" -> result = TimKiemHoaDon.getInstance().tkTongTienCoc(text);
-            case "Tình trạng" -> result = TimKiemHoaDon.getInstance().tkTinhTrang(text);
-            case "Mã khách hàng" -> result = TimKiemHoaDon.getInstance().tkMaKH(text);
-            case "Mã nhân viên" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
+            case "Tất cả" -> result = HoaDoncontroller.getInstance().tkTatCa(text);
+            case "Mã hóa đơn" -> result = HoaDoncontroller.getInstance().tkMaHD(text);
+            case "Thời gian tạo" -> result = HoaDoncontroller.getInstance().tkTGTao(text);
+            case "Tổng tiền thuê" -> result = HoaDoncontroller.getInstance().tkTongTienThue(text);
+            case "Thời gian nhận" -> result = HoaDoncontroller.getInstance().tkTGNhan(text);
+            case "Thời gian trả" -> result = HoaDoncontroller.getInstance().tkTGTra(text);
+            case "Tổng tiền cọc" -> result = HoaDoncontroller.getInstance().tkTongTienCoc(text);
+            case "Tình trạng" -> result = HoaDoncontroller.getInstance().tkTinhTrang(text);
+            case "Mã khách hàng" -> result = HoaDoncontroller.getInstance().tkMaKH(text);
+            case "Mã nhân viên" -> result = HoaDoncontroller.getInstance().tkMaHD(text);
         }
         loadDataToTable(result);
     }//GEN-LAST:event_txtSearchKeyReleased
@@ -248,16 +250,16 @@ public final class HoaDonNVForm extends javax.swing.JPanel {
         String text = txtSearch.getText();
         ArrayList<HoaDon> result = new ArrayList<>();
         switch (luachon) {
-            case "Tất cả" -> result = TimKiemHoaDon.getInstance().tkTatCa(text);
-            case "Mã hóa đơn" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
-            case "Thời gian tạo" -> result = TimKiemHoaDon.getInstance().tkTGTao(text);
-            case "Tổng tiền thuê" -> result = TimKiemHoaDon.getInstance().tkTongTienThue(text);
-            case "Thời gian nhận" -> result = TimKiemHoaDon.getInstance().tkTGNhan(text);
-            case "Thời gian trả" -> result = TimKiemHoaDon.getInstance().tkTGTra(text);
-            case "Tổng tiền cọc" -> result = TimKiemHoaDon.getInstance().tkTongTienCoc(text);
-            case "Tình trạng" -> result = TimKiemHoaDon.getInstance().tkTinhTrang(text);
-            case "Mã khách hàng" -> result = TimKiemHoaDon.getInstance().tkMaKH(text);
-            case "Mã nhân viên" -> result = TimKiemHoaDon.getInstance().tkMaHD(text);
+            case "Tất cả" -> result = HoaDoncontroller.getInstance().tkTatCa(text);
+            case "Mã hóa đơn" -> result = HoaDoncontroller.getInstance().tkMaHD(text);
+            case "Thời gian tạo" -> result = HoaDoncontroller.getInstance().tkTGTao(text);
+            case "Tổng tiền thuê" -> result = HoaDoncontroller.getInstance().tkTongTienThue(text);
+            case "Thời gian nhận" -> result = HoaDoncontroller.getInstance().tkTGNhan(text);
+            case "Thời gian trả" -> result = HoaDoncontroller.getInstance().tkTGTra(text);
+            case "Tổng tiền cọc" -> result = HoaDoncontroller.getInstance().tkTongTienCoc(text);
+            case "Tình trạng" -> result = HoaDoncontroller.getInstance().tkTinhTrang(text);
+            case "Mã khách hàng" -> result = HoaDoncontroller.getInstance().tkMaKH(text);
+            case "Mã nhân viên" -> result = HoaDoncontroller.getInstance().tkMaHD(text);
         }
         loadDataToTable(result);
     }//GEN-LAST:event_jButton_TimKiemHDMouseClicked
