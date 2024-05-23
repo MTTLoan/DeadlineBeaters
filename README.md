@@ -15,7 +15,7 @@
     <a href="https://sites.google.com/view/deadlinebeaters/trang-ch%E1%BB%A7?authuser=0"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/MTTLoan/DeadlineBeaters/assets">View Demo</a>
+    <a href="https://github.com/MTTLoan/DeadlineBeaters">View Demo</a>
     ·
     <a href="https://github.com/MTTLoan/DeadlineBeaters/issues">Report Bug</a>
     ·
