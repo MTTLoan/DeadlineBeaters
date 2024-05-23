@@ -185,7 +185,7 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
         // Kiểm tra tính đầy đủ và hợp lệ của dữ liệu
         if (txtTenTK.getText().isEmpty() || txtMatKhau.getText().isEmpty() || txtHoTen.getText().isEmpty() || ((String) cbxGioiTinh.getSelectedItem()).isEmpty() || 
             ((String) cbxChucVu.getSelectedItem()).isEmpty() || txtLuong.getText().isEmpty() || jDateChooser_NgaySinh.getDate() == null || 
-            jDateChooser_NgayVaoLam.getDate() == null) {
+            jDateChooser_NgayVaoLam.getDate() == null || txtMaQL.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             // Lấy dữ liệu từ các trường nhập liệu

@@ -32,6 +32,11 @@ public class TaiKhoanDAO implements DAOInterface<TaiKhoan> {
             pst.setInt(7, t.getLuong());
             pst.setDate(8, java.sql.Date.valueOf(t.getNgayVaoLam()));
             pst.setInt(9, t.getMaQL());
+            if(t.getMaQL() != 0){
+                pst.setInt(9, t.getMaQL());
+            }else{
+                pst.setString(9, null);
+            }
             
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
